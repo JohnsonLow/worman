@@ -10,3 +10,5 @@
 <meta http-equiv="expires" content="0">    
 <meta http-equiv="keywords" content="工作任务分配 新浪微博">
 <meta http-equiv="description" content="基于新浪微博的企业工作任务分配">
+<link rel="stylesheet" type="text/css" href="static/css/themes/default/easyui.css"/>
+<link rel="stylesheet" type="text/css" href="static/css/themes/icon.css"/>
