@@ -110,7 +110,7 @@ function getSysLoginValidator() {
         "date" : date
     }, function(data) {
         if (data == "1") {
-            location.href="internal/index.do";
+            location.href="../internal/index.do";
         } else if (data == '-1') {
             $(".i-tip").eq(2).show();
             $(".i-tip").eq(2).find("p").html("验证码错误！");

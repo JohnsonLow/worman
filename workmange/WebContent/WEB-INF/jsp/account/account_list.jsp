@@ -11,8 +11,36 @@
     	<div class="frame_title"><p>操作员管理  &gt; 帐号管理</p></div>
     	<div class="cl"></div>
         <div id="lgdiv" style="display:block;" class="frame_cont">
+        	<div class="frame_cont_list_input">
+		      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		        <tr>
+		          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		              <tr>
+		                <th>权限类别：</th>
+		                <td><select id="level" style="width:100px;">
+		                    <option>1</option>
+		                  </select>
+		                </td>
+		              </tr>
+		            </table></td>
+		          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		              <tr>
+		                <th>所在部门：</th>
+		                <td><input id="dep"/></td>
+		              </tr>
+		            </table></td>
+	          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+	              <tr>
+	                <th align="center">姓名：</th>
+	                <td><input id="name"/></td>
+	              </tr>
+	            </table></td>
+	          <td width="40%" class="frame_button"><input id="search" type="button" value="搜索"/></td>
+	        </tr>
+	      </table>
+	    </div>
         	<div style="background:none;" class="frame_title">
-            	<span style="float:left;">帐号列表</span>
+            	
 	            <span style="float:right; margin-right:10px;"><a href="javascript:;" onclick="goAccountInfo(1);">添加新账号</a></span>
             	<span id="selectDiv" style="float:right;">
 	            	<span><a href="javascript:void(0)" onclick="checkAll()">全选</a></span>
@@ -24,10 +52,12 @@
            		<div class="cl"></div>
            		<table id="userList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
-           				<th>选中</th><th>账号</th><th>姓名</th><th>所在部门</th><th>联系电话</th><th>管理</th>
+           				<tr>
+           					<th>选中</th><th>账号</th><th>姓名</th><th>权限</th><th>所在部门</th><th>联系电话</th><th>微博账号</th><th>管理</th>
+           				</tr>
            			</thead>
            			<tbody>
-           				<tr><td colspan="6">暂无数据</td></tr>
+           				<tr><td colspan="8">暂无数据</td></tr>
            			</tbody>
             	</table>
             </div>
