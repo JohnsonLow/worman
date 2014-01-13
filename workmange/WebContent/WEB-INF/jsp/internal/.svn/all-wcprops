@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/selfservice/!svn/ver/602/trunk/selfservice/WebContent/WEB-INF/jsp/internal
+END
+bottom.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/selfservice/!svn/ver/837/trunk/selfservice/WebContent/WEB-INF/jsp/internal/bottom.jsp
+END
+selfwelcome.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/selfservice/!svn/ver/620/trunk/selfservice/WebContent/WEB-INF/jsp/internal/selfwelcome.jsp
+END
+index.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/selfservice/!svn/ver/806/trunk/selfservice/WebContent/WEB-INF/jsp/internal/index.jsp
+END
+login.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/selfservice/!svn/ver/837/trunk/selfservice/WebContent/WEB-INF/jsp/internal/login.jsp
+END
+4slogin.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/selfservice/!svn/ver/837/trunk/selfservice/WebContent/WEB-INF/jsp/internal/4slogin.jsp
+END
+companyLeft.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/selfservice/!svn/ver/796/trunk/selfservice/WebContent/WEB-INF/jsp/internal/companyLeft.jsp
+END
+top.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/selfservice/!svn/ver/790/trunk/selfservice/WebContent/WEB-INF/jsp/internal/top.jsp
+END
+4swelcome.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/selfservice/!svn/ver/614/trunk/selfservice/WebContent/WEB-INF/jsp/internal/4swelcome.jsp
+END
+infoModify.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/selfservice/!svn/ver/18/trunk/selfservice/WebContent/WEB-INF/jsp/internal/infoModify.jsp
+END
