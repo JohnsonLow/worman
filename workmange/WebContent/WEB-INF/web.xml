@@ -5,15 +5,11 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<listener>
-		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<filter>
 		<filter-name>encodingFilter</filter-name>
-		<filter-class>
-				org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -23,24 +19,16 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-<!-- 
-	<filter>
-		<filter-name>authSessionFilter</filter-name>
-		<filter-class>com.workass.filter.AuthSessionFilter</filter-class>
-		<init-param>
-			<param-name>validityUrl</param-name>
-			<param-value>/login.do</param-value>
-		</init-param>
-	</filter> -->
+	<!-- <filter> <filter-name>authSessionFilter</filter-name> <filter-class>com.workass.filter.AuthSessionFilter</filter-class> 
+		<init-param> <param-name>validityUrl</param-name> <param-value>/login.do</param-value> 
+		</init-param> </filter> -->
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
-		<servlet-class>
-			org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
@@ -55,6 +43,30 @@
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
-      
+
 	</welcome-file-list>
+	<servlet>
+		<servlet-name>validateCodeServlet</servlet-name>
+		<servlet-class>com.workman.permission.servlet.ValidateCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>validateCodeServlet</servlet-name>
+		<url-pattern>/validateCodeServlet</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/404error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/404error.jsp</location>
+	</error-page>
 </web-app>

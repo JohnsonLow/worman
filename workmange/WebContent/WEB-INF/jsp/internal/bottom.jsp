@@ -1,16 +1,14 @@
 <%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+<jsp:include page="/WEB-INF/jsp/meta.jsp"></jsp:include>
 <script type="text/javascript">
 	/* 设为首页 */
 	function setMyHome() {  
 		  if (document.all) {  
 		    document.body.style.behavior='url(#default#homepage)';  
-		    document.body.setHomePage('http://www.yesway.cn/partner/internal/enterprise.do');  
+		    document.body.setHomePage('http://workman.duapp.com');  
 		  } else if (window.sidebar) {  
 		    if(window.netscape) {  
 		        try {
@@ -20,15 +18,15 @@
 		        }
 		    }   
 		    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components. interfaces.nsIPrefBranch);  
-		    prefs.setCharPref('browser.startup.homepage','http://www.yesway.cn/partner/internal/enterprise.do');
+		    prefs.setCharPref('browser.startup.homepage','http://workman.duapp.com');
 		  }
 	}  
 	/* 添加收藏  */  
 	function addCookie() {  
 	    if (document.all) {  
-	        window.external.addFavorite('http://www.yesway.cn/partner/internal/enterprise.do', '智驾网企业信息管理系统');  
+	        window.external.addFavorite('http://workman.duapp.com', '微博任务管理系统');  
 	    } else if (window.sidebar) {  
-	        window.sidebar.addPanel('智驾网企业信息管理系统', 'http://www.yesway.cn/partner/internal/enterprise.do', "");  
+	        window.sidebar.addPanel('微博任务管理系统', 'http://workman.duapp.com', "");  
 	    }  
 	} 
 </script>
@@ -37,7 +35,7 @@
 <body>
 
 <div class="bottom">
-    <p>北京九五智驾信息技术股份有限公司  © 版权所有 Version: V1.1.6</p>
+    <p> 刘雨薇© 版权所有 Version: V1.0 | <a href="mailto::272462809@qq.com" style="color: #0079CA;text-decoration: none;">联系我</a></p>
 </div>
 </body>
 </html>

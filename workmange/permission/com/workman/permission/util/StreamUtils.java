@@ -1,4 +1,4 @@
-package com.workman.uitl;
+package com.workman.permission.util;
 
 import java.io.Closeable;
 import java.io.IOException;

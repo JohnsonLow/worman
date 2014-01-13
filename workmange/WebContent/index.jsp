@@ -3,10 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>hello</title>
-	<jsp:include page="/WEB-INF/jsp/meta.jsp"></jsp:include>
+	<title>微博任务管理系统</title>
 </head>
 <body>
-	Welcome
+	<script type="text/javascript">
+		window.location.href="internal/index.do";
+	</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.workman.filter;
+package com.workman.permission.filter;
 
 import java.io.IOException;
 import java.util.Map;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.workman.uitl.CookieUtil;
-import com.workman.uitl.JSONUtils;
-import com.workman.uitl.SysLogUtils;
+import com.workman.permission.util.CookieUtil;
+import com.workman.permission.util.JSONUtils;
+import com.workman.permission.util.SysLogUtils;
 
 /**
  * Servlet Filter implementation class AuthFilter

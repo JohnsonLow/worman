@@ -3,13 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>欢迎页</title>
-<link href="../static/css/style.css" rel="stylesheet" type="text/css" />
-<link href="../static/css/elements.css"rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../static/js/Calendar.js"></script>
+<jsp:include page="/WEB-INF/jsp/meta.jsp"></jsp:include>
+<script type="text/javascript" src="static/js/Calendar.js"></script>
 </head>
-<body style="overflow:hidden;background:url(../static/images/login_welcome.jpg) no-repeat;">
     <p style="padding-left:465px;padding-top:415px;line-height:20px;color:#777777;">登录时间：<script type="text/javascript">document.write(datetime.getNowDate());</script></p>
-
 </body>
 </html>
 

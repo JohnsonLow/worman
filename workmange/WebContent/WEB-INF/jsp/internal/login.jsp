@@ -1,14 +1,12 @@
 <%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>智驾自服务系统</title>
-<link href="../static/css/elements.css" rel="stylesheet" type="text/css" />
-<link href="../static/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../static/js/jquery-1.4.2.js"></script>
-<script type="text/javascript" src="../static/js/sha-1.js"></script>
-<script type="text/javascript" src="../static/js/internal/internal.js"></script>
+<title>微博任务管理系统</title>
+<jsp:include page="/WEB-INF/jsp/meta.jsp"></jsp:include>
+<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="static/js/sha-1.js"></script>
+<script type="text/javascript" src="static/js/internal/internal.js"></script>
 <!--[if IE 6]>
         <script type="text/javascript" src="http://www.techweb.com.cn/img/newsite/DD_belatedPNG.js" ></script>
         <script type="text/javascript">
@@ -16,22 +14,6 @@
             </script>
             <![endif]-->
 <script language="javascript" type="text/javascript">
-$(function(){
-     $("#logform-2").click(function(){
-     	getSysLoginValidator();
-     });
-
-});
-function loginSubmit(jumpurl){
-    if('${returnUrl}'){
-		location.href='${returnUrl}';
-    }else
-    {
-        location.href=jumpurl;
-    }
-   
-    	
-}
 </script>
 <script type="text/javascript">
 	
@@ -62,10 +44,10 @@ function loginSubmit(jumpurl){
 	</p>
   	<p>
   		<input name="" id="txt-lg-3" type="text" class="input_text270 fc" value="验证码"/> 
-	  <a href="javascript:;"> <img  align="absmiddle" id="verificationCodeImg" style="border:0px;" src="../validateCodeServlet?code=enterprise" onclick="this.src='../validateCodeServlet?code=enterprise&yys='+new Date().getTime()"></a>
+	  <a href="javascript:;"> <img  align="absmiddle" id="verificationCodeImg" style="border:0px;" src="validateCodeServlet?code=enterprise" onclick="this.src='validateCodeServlet?code=enterprise&yys='+new Date().getTime()"></a>
 	</p>
   	<p class="btn_login" id="logform-2"><a href="javascript:;"></a></p>
 </div>
-	<p class="footer130819">北京九五智驾信息技术股份有限公司  ©版权所有 Version: V1.1.6</p>
+	<p class="footer130819"> ©版权所有 <a href="mailto::272462809@qq.com">@刘雨薇</a></p>
 </body>
 </html>
