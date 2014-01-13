@@ -2,7 +2,7 @@
  * Copyright (c) 2008-2011 by LeadingSoft. 
  * All rights reserved. 
  */
-package com.workman.permission.util;
+package com.workman.commons.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

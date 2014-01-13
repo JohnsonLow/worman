@@ -6,7 +6,9 @@
 <jsp:include page="/WEB-INF/jsp/meta.jsp"></jsp:include>
 </head>
 <frameset rows="63,*,30" cols="*" frameborder="0" border="0" framespacing="0">
-  <frame src="internal/top.do" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" />
+  <frame src="internal/top.do" name="topFrame" scrolling="no" noresize="noresize" id="topFrame">
+  	<div align="center" style="position: absolute; width: 100px; height: 100px; z-index: 1; left:158px; top:17px" id="load">
+  </frame>
   <frameset rows="*" cols="200,*" framespacing="0" frameborder="0" border="0">
     <frame  src="internal/left.do" name="leftFrame" scrolling="auto" noresize="noresize" id="leftFrame" />
     <frame src="internal/main.do" name="mainFrame" scrolling="auto" id="mainFrame" />

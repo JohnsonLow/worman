@@ -10,6 +10,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.workman.commons.util.StringUtility;
 
 public class AuthSessionFilter implements Filter {
 	private String pageUrl; 
@@ -27,9 +30,10 @@ public class AuthSessionFilter implements Filter {
 		String contentURL = req.getContextPath();
 		String currentURL = req.getRequestURI(); 
 		String shortURL = currentURL.replace(contentURL, "");
-		String ajaxHeader= req.getHeader("x-requested-with");	
-		if(req.getSession().getAttribute("intCompanyUser")==null){
-			if(ajaxHeader!=null&&!ajaxHeader.equals("")){			
+		String ajaxHeader= req.getHeader("x-requested-with");
+		HttpSession session = req.getSession();
+		if(session.getAttribute("intUser")==null){
+			if(StringUtility.isNotBlank(ajaxHeader)){			
 				if(pageUrl.indexOf(shortURL)>-1){
 					chain.doFilter(request, response);
 				}else{
@@ -44,7 +48,7 @@ public class AuthSessionFilter implements Filter {
 				}else{
 					res.setCharacterEncoding("utf-8");
 					res.setContentType("text/html; charset=UTF-8");
-					res.getWriter().print("<script type=\"text/javascript\">alert('您还未登录或登录已过期,请重新登录!');window.parent.location.href='"+req.getContextPath()+"/login.do';</script>");	
+					res.getWriter().print("<script type=\"text/javascript\">alert('您还未登录或登录已过期,请重新登录!');window.parent.location.href='../internal/login.do';</script>");	
 					
 					return;
 				}

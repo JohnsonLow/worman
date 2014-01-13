@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.workman.permission.util.CookieUtil;
-import com.workman.permission.util.JSONUtils;
-import com.workman.permission.util.SysLogUtils;
+import com.workman.commons.util.CookieUtil;
+import com.workman.commons.util.JSONUtils;
+import com.workman.commons.util.SysLogUtils;
 
 /**
  * Servlet Filter implementation class AuthFilter

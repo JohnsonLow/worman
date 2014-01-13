@@ -19,9 +19,18 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	<!-- <filter> <filter-name>authSessionFilter</filter-name> <filter-class>com.workass.filter.AuthSessionFilter</filter-class> 
-		<init-param> <param-name>validityUrl</param-name> <param-value>/login.do</param-value> 
-		</init-param> </filter> -->
+	<filter>
+		<filter-name>authSessionFilter</filter-name>
+		<filter-class>com.workman.permission.filter.AuthSessionFilter</filter-class>
+		<init-param>
+			<param-name>validityUrl</param-name>
+			<param-value>/internal/login.do,/internal/sysLoginValidator.do</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>authSessionFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>

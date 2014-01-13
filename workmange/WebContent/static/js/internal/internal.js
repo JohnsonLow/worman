@@ -77,14 +77,16 @@ function getSysLoginValidator() {
     if (userName == null || userName == "" || userName == "用户名") {
         $(".i-tip").eq(0).show();
         $(".i-tip").eq(0).find("p").html("请输入用户名！");
-        $("#txt-lg-1").val("");
+        $("#txt-lg-1").addClass("fc");
+        $("#txt-lg-1").val("用户名");
         text = false;
     }
 
     if (passWord == null || passWord == "" || passWord == "密码") {
         $(".i-tip").eq(1).show();
         $(".i-tip").eq(1).find("p").html("请输入密码！");
-        $("#txt-lg-2").val("");
+        $("#txt-lg-2").addClass("fc");
+        $("#txt-lg-2").val("密码");
         text = false;
     }
 
@@ -92,7 +94,8 @@ function getSysLoginValidator() {
 
         $(".i-tip").eq(2).show();
         $(".i-tip").eq(2).find("p").html("请输入验证码！");
-        $("#txt-lg-3").val("");
+        $("#txt-lg-3").addClass("fc");
+        $("#txt-lg-3").val("验证码");
         text = false;
     }
     if (!text) {

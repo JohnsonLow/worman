@@ -1,11 +1,13 @@
-package com.workman.permission.util;
+package com.workman.commons.util;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
 
+
 import org.codehaus.jackson.map.ObjectMapper;
+
 
 public class JSONUtils {
 	private static ObjectMapper mapper = new ObjectMapper();

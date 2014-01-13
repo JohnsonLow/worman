@@ -40,10 +40,10 @@ function showList(obj,index){
         	</div>
         	<div class="dlist" style="display: none;"> 
           		<div class="d3">
-                    <a href="javascript:void(0)" target="mainFrame"><div class="ds1">权限设置</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='auth/goAuthPage.do'"><div class="ds1">权限管理</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='OperatorManagement/goAccountManagePage.do'"><div class="ds1">帐号管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='account/goAccountPage.do'"><div class="ds1">帐号管理</div></a>
                 </div>
             </div>
        </div>  

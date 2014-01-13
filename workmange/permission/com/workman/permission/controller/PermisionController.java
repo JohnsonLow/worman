@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+
+import com.workman.commons.util.StringUtility;
+
 import weibo4j.Oauth;
 import weibo4j.model.WeiboException;
 
@@ -53,6 +56,7 @@ public class PermisionController {
 		}else{
 			//TODO 权限认证
 			data = "1";
+			session.setAttribute("intUser","xxx");
 		}
 		return data;
 	}
@@ -69,7 +73,11 @@ public class PermisionController {
 		return "internal/top";
 	}
 	@RequestMapping("main.do")
-	public String goMainPage(){
+	public String goMainPage(HttpServletRequest req){
+		Object url = req.getSession().getAttribute("intMainFrameSrc");
+		if(url != null && StringUtility.isNotBlank(url.toString())){
+			return "redirect:"+url.toString();
+		}
 		return "internal/welcome";
 	}
 	@RequestMapping("logout.do")

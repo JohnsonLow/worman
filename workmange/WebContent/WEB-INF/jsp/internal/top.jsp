@@ -22,8 +22,8 @@
 <script type="text/javascript" language="javascript">
   function inExitCompanyUser(){
   	if(confirm("确定要退出系统吗?")){
-        $.post('inernlan/logout.do',function(data){
-			window.parent.location='internal/index.do';
+        $.post('internal/logout.do',function(data){
+			window.parent.location='internal/login.do';
 		});
         return true;
     }

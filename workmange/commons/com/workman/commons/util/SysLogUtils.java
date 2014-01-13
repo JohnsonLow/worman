@@ -1,4 +1,4 @@
-package com.workman.permission.util;
+package com.workman.commons.util;
 
 import org.apache.log4j.Logger;
 

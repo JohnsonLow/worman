@@ -4,6 +4,8 @@
 	<classpathentry kind="src" path="weibo"/>
 	<classpathentry kind="src" path="resource"/>
 	<classpathentry kind="src" path="operation"/>
+	<classpathentry kind="src" path="account"/>
+	<classpathentry kind="src" path="commons"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/servlet"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
