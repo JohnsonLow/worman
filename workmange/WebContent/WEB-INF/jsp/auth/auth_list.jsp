@@ -22,9 +22,9 @@
             </div>
             <div class=frame_table>
            		<div class="cl"></div>
-           		<table id="userList" width="60%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
+           		<table id="userList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
-           				<th>选中</th><th>权限id</th><th>描述</th><th>管理</th>
+           				<th>选中</th><th>权限等级</th><th>权限描述</th><th>管理</th>
            			</thead>
            			<tbody>
            				<tr><td colspan="6">暂无数据</td></tr>

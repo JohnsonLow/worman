@@ -8,6 +8,10 @@ import java.io.Serializable;
  *
  */
 public class AuthLevel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1445975809227089855L;
 	private int id;
 	private String description;
 	public int getId() {

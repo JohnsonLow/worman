@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 	@RequestMapping("goAuthPage.do")
 	public String goAuthPage(HttpServletRequest req){
-		req.getSession().setAttribute("intMainFrameSrc", "/auth/goAccountPage.do");
+		req.getSession().setAttribute("intMainFrameSrc", "/auth/goAuthPage.do");
 		return "auth/auth_list";
 	}
 	@RequestMapping("goAuthInfoPage.do")
