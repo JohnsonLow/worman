@@ -36,14 +36,14 @@ function showList(obj,index){
      <div class="d1">
      	<div class="d2">
      		<div class="dv2" onclick="showList(this)">
-            	<img align="absmiddle" src="static/images/news/menu_icon1.gif"/>账户管理</div>
+            	<img align="absmiddle" src="static/images/news/menu_icon1.gif"/>个人信息</div>
         	</div>
         	<div class="dlist" style="display: none;"> 
-          		<div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/auth/goAuthPage.do'"><div class="ds1">权限管理</div></a>
+        		<div class="d3">
+                   <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goPwdModifyPage.do'"><div class="ds1">密码修改</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">帐号管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goInfoModifyPage.do'"><div class="ds1">资料修改</div></a>
                 </div>
             </div>
        </div>  
@@ -68,10 +68,16 @@ function showList(obj,index){
             </div>
             <div class="dlist" style="display: none;"> 
                 <div class="d3">
-                   <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goPwdModifyPage.do'"><div class="ds1">密码修改</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/auth/goAuthPage.do'"><div class="ds1">权限管理</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goInfoModifyPage.do'"><div class="ds1">资料修改</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">部门管理</div></a>
+                </div>
+                <div class="d3">
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">职位管理</div></a>
+                </div>
+                <div class="d3">
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">帐号管理</div></a>
                 </div>
             </div>
         </div>
