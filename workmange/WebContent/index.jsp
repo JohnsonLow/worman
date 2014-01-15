@@ -7,7 +7,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		window.location.href="internal/index.do";
+		window.location.href="internal/login.do";
 	</script>
 </body>
 </html>

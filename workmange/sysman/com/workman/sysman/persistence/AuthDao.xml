@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.sysman.persistence.AuthMapper">
+
+  <cache />
+  
+  <select id="getAuthInfo" parameterType="string" resultType="AuthModel">
+    SELECT
+      LEVEL,
+      NAME,
+      DESCRIPTION
+    FROM CATEGORY
+    WHERE LEVEL = #{level}
+  </select>
+
+  <select id="getAuthList" resultType="AuthModel">
+	    SELECT
+	      LEVEL,
+	      NAME,
+	      DESCRIPTION
+	    FROM AUTH
+  </select>
+
+</mapper>

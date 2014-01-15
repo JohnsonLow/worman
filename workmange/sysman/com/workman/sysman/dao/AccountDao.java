@@ -1,4 +1,4 @@
-package com.workman.account.dao;
+package com.workman.sysman.dao;
 
 import com.workman.commons.po.ResponseModel;
 

@@ -8,13 +8,21 @@ public class ResponseModel implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5899889648273073715L;
-	public int count;
-	public List<?> data;
-	public int getCount() {
-		return count;
+	private int rowCount;
+	private int pageCount;
+	private List<?> data;
+	
+	public int getRowCount() {
+		return rowCount;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setRowCount(int rowCount) {
+		this.rowCount = rowCount;
+	}
+	public int getPageCount() {
+		return pageCount;
+	}
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
 	}
 	public List<?> getData() {
 		return data;

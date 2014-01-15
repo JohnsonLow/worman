@@ -3,7 +3,7 @@ package com.workman.mission.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.workman.account.model.AccountModel;
+import com.workman.sysman.model.AccountModel;
 /**
  * 任务处理记录
  *

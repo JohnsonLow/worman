@@ -59,6 +59,9 @@ function showList(obj,index){
                 <div class="d3">
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">任务分配</div></a>
                 </div>
+                <div class="d3">
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">任务处理类型</div></a>
+                </div>
             </div>
        	</div>
        	<div class="d1">
@@ -68,13 +71,13 @@ function showList(obj,index){
             </div>
             <div class="dlist" style="display: none;"> 
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/auth/goAuthPage.do'"><div class="ds1">权限管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/sysMan/goAuthPage.do'"><div class="ds1">权限管理</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">部门管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/sysMan/goDepartmentPage.do'"><div class="ds1">部门管理</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">职位管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/sysMan/goPositionPage.do'"><div class="ds1">职位管理</div></a>
                 </div>
                 <div class="d3">
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">帐号管理</div></a>

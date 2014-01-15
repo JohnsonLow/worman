@@ -1,4 +1,4 @@
-package com.workman.account.model;
+package com.workman.sysman.model;
 /**
  * 权限
  * @author
