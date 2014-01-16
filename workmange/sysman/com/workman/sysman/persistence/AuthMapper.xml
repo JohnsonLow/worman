@@ -6,7 +6,7 @@
 
   <cache />
   
-  <select id="getAuthInfo" parameterType="string" resultType="AuthModel">
+  <select id="getAuthInfo" parameterType="string" resultType="com.workman.sysman.model.AuthModel">
     SELECT
       LEVEL,
       NAME,
@@ -15,7 +15,7 @@
     WHERE LEVEL = #{level}
   </select>
 
-  <select id="getAuthList" resultType="AuthModel">
+  <select id="getAuthList" resultType="com.workman.sysman.model.AuthModel">
 	    SELECT
 	      LEVEL,
 	      NAME,

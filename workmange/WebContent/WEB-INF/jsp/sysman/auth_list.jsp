@@ -22,14 +22,14 @@
             </div>
             <div class=frame_table>
            		<div class="cl"></div>
-           		<table id="userList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
+           		<table id="authList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
            				<tr>
            				<th>选中</th><th>权限等级</th><th>权限描述</th><th>管理</th>
            				</tr>
            			</thead>
            			<tbody>
-           				<tr><td colspan="6">暂无数据</td></tr>
+           				<tr><td colspan="4">暂无数据</td></tr>
            			</tbody>
             	</table>
             </div>
@@ -39,11 +39,10 @@
 	</div>
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
 	<%pageContext.include("/WEB-INF/jsp/inc/pager/pagination.jsp?skin=go&number=5");%>
-	<script type="text/javascript" src="static/js/account/account-list.js"></script>
+	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
+	<script type="text/javascript" src="static/js/sysman/auth.js"></script>
 	<script type="text/javascript" src="static/js/common/json/json2.js"></script>
 	<script type="text/javascript" language="javascript">
-		var userList = '${userList}';
-		var unionCode = "${unionCode}";
 		function showDiv(){
 			document.getElementById('lgdiv').style.display='block';
 		}

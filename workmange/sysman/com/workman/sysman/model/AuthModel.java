@@ -1,11 +1,18 @@
 package com.workman.sysman.model;
+
+import java.io.Serializable;
+
 /**
  * 权限
  * @author
  *
  */
-public class AuthModel {
+public class AuthModel implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1965504758321248993L;
 	private int level;
 	private String name;
 	private String description;
