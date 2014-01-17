@@ -7,14 +7,35 @@
 </head>
 
 <body> 
+<div id="insertDiv" class="out" style=" height:210px; background:#22879E; display:none">
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#cccccc">
+  <tr>
+    <th style="text-align:right">权限名称：</th>
+    <td style="text-align:left"><input class="out_input" id="name"/></td>
+    </tr>
+    <tr>
+    <th style="text-align:right">权限描述：</th>
+    <td style="text-align:left"><textarea rows="5" cols="40" id="desc"></textarea></td>
+    </tr>
+  <tr>
+    <td colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="46%" class="frame_button" style="text-align:right"><input id="addAuthBtn" name="button2" type="button" value="确定"/></td>
+        <td width="8%" class="frame_button">&nbsp;</td>
+        <td width="46%" class="frame_button" style="text-align:left"><input name="button22" type="button" value="取消" id="out_close" onclick="closeAddDiv();"/></td>
+      </tr>
+    </table></td>
+    </tr>
+</table>
+</div>
 <div class="frame" style="position: absolute;">
     	<div class="frame_title"><p>操作员管理  &gt; 权限管理</p></div>
     	<div class="cl"></div>
         <div id="lgdiv" style="display:block;" class="frame_cont">
         	<div style="background:none;" class="frame_title">
             	<span style="float:left;">帐号列表</span>
-	            <span style="float:right; margin-right:10px;"><a href="javascript:;" onclick="goAccountInfo(1);">添加权限</a></span>
-            	<span id="selectDiv" style="float:right;">
+	            <span style="float:right; margin-right:10px;"><a href="javascript:;" onclick="$('#insertDiv').mypop();">添加权限</a></span>
+            	<span id="selectDiv" style="float:right;display:none;">
 	            	<span><a href="javascript:void(0)" onclick="checkAll()">全选</a></span>
                     <span style="margin-left: 10px;"><a href="javascript:;" onclick="delSysUser()">删除</a></span>
 	            	<span style="color:#404040; margin:0 10px;"><a href="javascript:;">|</a></span>
@@ -25,11 +46,11 @@
            		<table id="authList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
            				<tr>
-           				<th>选中</th><th>权限等级</th><th>权限描述</th><th>管理</th>
+           				<th>选中</th><th>权限等级</th><th>权限名称</th><th>权限描述</th><th>管理</th>
            				</tr>
            			</thead>
            			<tbody>
-           				<tr><td colspan="4">暂无数据</td></tr>
+           				<tr><td colspan="5">暂无数据</td></tr>
            			</tbody>
             	</table>
             </div>

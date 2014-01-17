@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- STRUTSCX LOG4J CONFIGURATION - XML style -->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- 控制台 -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p -  %m%n" />
+		</layout>
+	</appender>
+
+	<!-- 文件输出日志  -->
+	<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Append" value="true" />
+		<param name="File" value="../logs/workman_" />
+		<!--<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="30" />-->
+		<param name="DatePattern" value="yyyy-MM-dd'.log'" /> 
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p -  %m%n" />
+		</layout>
+	</appender>
+
+	
+    <root>
+		<level value="INFO" />
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="FILE" />
+	</root>
+</log4j:configuration>

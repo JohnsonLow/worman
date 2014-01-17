@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.sysman.persistence.PositionMapper">
+
+  <cache />
+  
+  <select id="getPositionList" resultType="com.workman.sysman.model.PositionModel">
+	    SELECT
+	      CODE,
+	      NAME,
+	      DESCRIPTION
+	    FROM POSITION
+  </select>
+  
+   <insert id="insertPosition" parameterType="com.workman.sysman.model.PositionModel">
+    INSERT INTO POSITION
+      (NAME, DESCRIPTION)
+    VALUES
+      (#{name}, #{description})
+  </insert>
+  <update id="updatePosition" parameterType="com.workman.sysman.model.PositionModel">
+    UPDATE POSITION SET
+      NAME = #{name},
+      DESCRIPTION = #{description}
+    WHERE CODE = #{code}
+  </update>
+
+</mapper>

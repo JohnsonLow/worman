@@ -11,7 +11,7 @@
       LEVEL,
       NAME,
       DESCRIPTION
-    FROM CATEGORY
+    FROM AUTH
     WHERE LEVEL = #{level}
   </select>
 
@@ -22,5 +22,17 @@
 	      DESCRIPTION
 	    FROM AUTH
   </select>
+  <insert id="insertAuth" parameterType="com.workman.sysman.model.AuthModel">
+    INSERT INTO AUTH
+      (NAME, DESCRIPTION)
+    VALUES
+      (#{name}, #{description})
+  </insert>
+  <update id="updateAuth" parameterType="com.workman.sysman.model.AuthModel">
+    UPDATE AUTH SET
+      NAME = #{name},
+      DESCRIPTION = #{description}
+    WHERE CODE = #{code}
+  </update>
 
 </mapper>

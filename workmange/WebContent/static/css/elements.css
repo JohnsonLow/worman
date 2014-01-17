@@ -5,7 +5,7 @@
 .frame{ width:98%; height:auto; line-height:24px; color:#3333333}
 .frame a { color: #0079CA;text-decoration: none;}
 .frame input,.out_input{ border:1px solid #8398ac; padding:3px 0 3px 3px}
-.frame_title{ width:100%; background:url(../images/news/bg_title.gif) repeat-x;line-height:30px;padding:0px 10px;}
+.frame_title{ width:auto; background:url(../images/news/bg_title.gif) repeat-x;line-height:30px;padding:0px 10px;}
 .frame_cont{ width:100%;margin:0 0 10px 0; padding:5px 10px;}
 .frame th{ text-align:right; border:0; font-weight:200; padding:4px 0 4px 0}
 .frame td{ border:0; text-align:left;}

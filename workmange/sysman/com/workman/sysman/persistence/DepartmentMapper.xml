@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.sysman.persistence.DepartmentMapper">
+
+  <cache />
+  
+  <select id="getDepartmentList" resultType="com.workman.sysman.model.DepartmentModel">
+	    SELECT
+	      CODE,
+	      NAME,
+	      DESCRIPTION
+	    FROM DEPARTMENT
+  </select>
+  
+   <insert id="insertDepartment" parameterType="com.workman.sysman.model.DepartmentModel">
+    INSERT INTO DEPARTMENT
+      (NAME, DESCRIPTION)
+    VALUES
+      (#{name}, #{description})
+  </insert>
+  <update id="updateDepartment" parameterType="com.workman.sysman.model.DepartmentModel">
+    UPDATE DEPARTMENT SET
+      NAME = #{name},
+      DESCRIPTION = #{description}
+    WHERE CODE = #{code}
+  </update>
+
+</mapper>

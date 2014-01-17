@@ -7,11 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.workman.commons.util.SysLogUtils;
+import com.workman.sysman.dao.SysmanDao;
 import com.workman.sysman.model.AuthModel;
-import com.workman.sysman.persistence.AuthMapper;
+import com.workman.sysman.model.DepartmentModel;
+import com.workman.sysman.model.PositionModel;
+
 /**
  * 系统管理
  *
@@ -20,7 +25,7 @@ import com.workman.sysman.persistence.AuthMapper;
 @RequestMapping("/sysMan/*")
 public class SysmanController {
 	@Autowired
-	private AuthMapper authMapper;
+	private SysmanDao sysDao;
 	@RequestMapping("goAuthPage.do")
 	public String goAuthPage(HttpServletRequest req,
 			ModelMap model){
@@ -30,7 +35,19 @@ public class SysmanController {
 	@RequestMapping("getAuthList.do")
 	@ResponseBody
 	public List<AuthModel> getAuthList(){
-		return authMapper.getAuthList();
+		List<AuthModel> result = null;
+		try {
+			result = sysDao.getAuthList();
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "查询权限信息出错");
+		}
+		return result;
+	}
+	@RequestMapping("insertAuth.do")
+	@ResponseBody
+	public boolean insertAuth(@RequestBody AuthModel auth){
+		sysDao.insertAuth(auth);
+		return true;
 	}
 	@RequestMapping("goAuthInfoPage.do")
 	public String goAuthInfoPage(HttpServletRequest req){
@@ -43,10 +60,32 @@ public class SysmanController {
 		req.getSession().setAttribute("intMainFrameSrc", "/sysMan/goDepartmentPage.do");
 		return "sysman/department";
 	}
+	@RequestMapping("getDepartmentList.do")
+	@ResponseBody
+	public List<DepartmentModel> getDepartmentList(){
+		List<DepartmentModel> result = null;
+		try {
+			result = sysDao.getDepartmentList();
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "查询部门信息出错");
+		}
+		return result;
+	}
 	@RequestMapping("goPositionPage.do")
 	public String goPositionPage(HttpServletRequest req){
 		req.getSession().setAttribute("intMainFrameSrc", "/sysMan/goDepartmentPage.do");
 		return "sysman/position";
+	}
+	@RequestMapping("getPositionList.do")
+	@ResponseBody
+	public List<PositionModel> getPositionList(){
+		List<PositionModel> result = null;
+		try {
+			result = sysDao.getPositionList();
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "查询职位信息出错");
+		}
+		return result;
 	}
 
 }
