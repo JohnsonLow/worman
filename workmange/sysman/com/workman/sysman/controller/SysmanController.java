@@ -43,16 +43,27 @@ public class SysmanController {
 		}
 		return result;
 	}
-	@RequestMapping("insertAuth.do")
+	@RequestMapping("addOrUpdateAuth.do")
 	@ResponseBody
 	public boolean insertAuth(@RequestBody AuthModel auth){
-		sysDao.insertAuth(auth);
-		return true;
+		try {
+			sysDao.addOrUpdateAuth(auth);
+			return true;
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "更改权限信息出错");
+			return false;
+		}
 	}
-	@RequestMapping("goAuthInfoPage.do")
-	public String goAuthInfoPage(HttpServletRequest req){
-		req.getSession().setAttribute("intMainFrameSrc", "/sysMan/goAuthInfoPage.do");
-		return "sysman/auth_list";
+	@RequestMapping("delAuth.do")
+	@ResponseBody
+	public boolean delAuth(@RequestBody String[] ids){
+		try {
+			sysDao.deleteAuth(ids);
+			return true;
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "删除权限信息出错");
+			return false;
+		}
 	}
 	
 	@RequestMapping("goDepartmentPage.do")

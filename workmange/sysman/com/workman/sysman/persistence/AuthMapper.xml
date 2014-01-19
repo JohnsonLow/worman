@@ -32,7 +32,16 @@
     UPDATE AUTH SET
       NAME = #{name},
       DESCRIPTION = #{description}
-    WHERE CODE = #{code}
+    WHERE LEVEL = #{level}
   </update>
+  <delete id="batchDelAuth">
+  	DELETE FROM AUTH WHERE LEVEL IN 
+  	<foreach item="levelItem" collection="array" open="(" separator="," close=")">
+  		#{levelItem}
+  	</foreach>
+  </delete>
+  <delete id="deleteAuth">
+  	DELETE FROM AUTH WHERE LEVEL=#{level}
+  </delete>
 
 </mapper>

@@ -35,9 +35,13 @@ public class SysmanDaoImpl implements SysmanDao{
 	}
 
 	@Override
-	public boolean insertAuth(AuthModel auth) {
+	public boolean addOrUpdateAuth(AuthModel auth) {
 		try {
-			authMapper.insertAuth(auth);
+			if(auth.getLevel() != 0){
+				authMapper.updateAuth(auth);
+			}else{
+				authMapper.insertAuth(auth);
+			}
 			return true;
 		} catch (Exception e) {
 			SysLogUtils.error(SysmanDaoImpl.class, e, "插入权限信息出错");
@@ -74,6 +78,18 @@ public class SysmanDaoImpl implements SysmanDao{
 		} catch (Exception e) {
 			SysLogUtils.error(SysmanDaoImpl.class, e, "插入职位信息出错");
 			return false;
+		}
+	}
+
+	@Override
+	public void deleteAuth(String[] ids) {
+		if(ids != null && ids.length > 0){
+			if(ids.length == 1){
+				authMapper.deleteAuth(ids[0]);
+			}else{
+				authMapper.batchDelAuth(ids);
+			}
+			
 		}
 	}
 

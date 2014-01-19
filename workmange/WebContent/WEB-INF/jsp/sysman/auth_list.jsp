@@ -33,11 +33,12 @@
     	<div class="cl"></div>
         <div id="lgdiv" style="display:block;" class="frame_cont">
         	<div style="background:none;" class="frame_title">
+        		<input type="hidden" id="level"/>
             	<span style="float:left;">帐号列表</span>
 	            <span style="float:right; margin-right:10px;"><a href="javascript:;" onclick="$('#insertDiv').mypop();">添加权限</a></span>
             	<span id="selectDiv" style="float:right;display:none;">
 	            	<span><a href="javascript:void(0)" onclick="checkAll()">全选</a></span>
-                    <span style="margin-left: 10px;"><a href="javascript:;" onclick="delSysUser()">删除</a></span>
+                    <span style="margin-left: 10px;"><a href="javascript:;" onclick="delSysAuth();">删除</a></span>
 	            	<span style="color:#404040; margin:0 10px;"><a href="javascript:;">|</a></span>
 	             </span>
             </div>

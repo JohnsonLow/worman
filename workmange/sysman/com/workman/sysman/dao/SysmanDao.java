@@ -10,11 +10,12 @@ public interface SysmanDao {
 	
 	List<AuthModel> getAuthList();
 	AuthModel getAuthInfo(int level);
-	boolean insertAuth(AuthModel auth);
+	boolean addOrUpdateAuth(AuthModel auth);
 	
 	List<DepartmentModel> getDepartmentList();
 	boolean insertDepartment(DepartmentModel dep);
 	
 	List<PositionModel> getPositionList();
 	boolean insertPosition(PositionModel pos);
+	void deleteAuth(String[] ids);
 }
