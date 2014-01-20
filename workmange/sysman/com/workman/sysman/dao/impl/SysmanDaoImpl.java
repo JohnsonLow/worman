@@ -54,16 +54,6 @@ public class SysmanDaoImpl implements SysmanDao{
 		return depMapper.getDepartmentList();
 	}
 
-	@Override
-	public boolean insertDepartment(DepartmentModel dep) {
-		try {
-			depMapper.insertDepartment(dep);
-			return true;
-		} catch (Exception e) {
-			SysLogUtils.error(SysmanDaoImpl.class, e, "插入部门信息出错");
-			return false;
-		}
-	}
 
 	@Override
 	public List<PositionModel> getPositionList() {
@@ -71,26 +61,59 @@ public class SysmanDaoImpl implements SysmanDao{
 	}
 
 	@Override
-	public boolean insertPosition(PositionModel pos) {
-		try {
-			posMapper.insertPosition(pos);
-			return true;
-		} catch (Exception e) {
-			SysLogUtils.error(SysmanDaoImpl.class, e, "插入职位信息出错");
-			return false;
+	public void deleteAuth(String[] codes) {
+		if(codes != null && codes.length > 0){
+			if(codes.length == 1){
+				authMapper.deleteAuth(codes[0]);
+			}else{
+				authMapper.batchDelAuth(codes);
+			}
+			
 		}
 	}
 
 	@Override
-	public void deleteAuth(String[] ids) {
+	public void addOrUpdateDep(DepartmentModel dep) {
+		if(dep.getCode() != 0){
+			depMapper.update(dep);
+		}else{
+			depMapper.insert(dep);
+		}
+		
+	}
+
+	@Override
+	public void deleteDep(String[] ids) {
 		if(ids != null && ids.length > 0){
 			if(ids.length == 1){
-				authMapper.deleteAuth(ids[0]);
+				depMapper.delete(ids[0]);
 			}else{
-				authMapper.batchDelAuth(ids);
+				depMapper.batchDelete(ids);
 			}
-			
 		}
+		
+	}
+
+	@Override
+	public void addOrUpdatePos(PositionModel pos) {
+		if(pos.getCode() == 0){
+			posMapper.insert(pos);
+		}else{
+			posMapper.update(pos);
+		}
+		
+	}
+
+	@Override
+	public void deletePos(String[] codes) {
+		if(codes != null && codes.length > 0){
+			if(codes.length == 1){
+				posMapper.delete(codes[0]);
+			}else{
+				posMapper.batchDelete(codes);
+			}
+		}
+		
 	}
 
 }

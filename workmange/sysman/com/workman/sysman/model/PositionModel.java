@@ -14,7 +14,7 @@ public class PositionModel implements Serializable {
 	private static final long serialVersionUID = -5293967145685871475L;
 	private int code;
 	private String name;
-	private String descrition;
+	private String description;
 	/**
 	 * 职位代码
 	 * @return
@@ -39,10 +39,10 @@ public class PositionModel implements Serializable {
 	 * 职位描述
 	 * @return
 	 */
-	public String getDescrition() {
-		return descrition;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescrition(String descrition) {
-		this.descrition = descrition;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

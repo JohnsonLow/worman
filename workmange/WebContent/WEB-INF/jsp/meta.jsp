@@ -12,5 +12,9 @@
 <link href="static/css/elements.css" rel="stylesheet" type="text/css" />
 <link href="static/css/style.css" rel="stylesheet" type="text/css" />
 <script>
-	var contextPath = '<%=request.getContextPath()%>';
+	var contextPath = '<%=path%>';
+	function goLoginPage(){
+		 alert("您还未登录或登录已过期,请重新登录!");
+         window.parent.location.href = contextPath + "/internal/login.do";
+	}
 </script>

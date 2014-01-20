@@ -82,9 +82,31 @@ public class SysmanController {
 		}
 		return result;
 	}
+	@RequestMapping("addOrUpdateDep.do")
+	@ResponseBody
+	public boolean insertDep(@RequestBody DepartmentModel dep){
+		try {
+			sysDao.addOrUpdateDep(dep);
+			return true;
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "更改部门信息出错");
+			return false;
+		}
+	}
+	@RequestMapping("delDep.do")
+	@ResponseBody
+	public boolean delDep(@RequestBody String[] codes){
+		try {
+			sysDao.deleteDep(codes);
+			return true;
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "删除部门信息出错");
+			return false;
+		}
+	}
 	@RequestMapping("goPositionPage.do")
 	public String goPositionPage(HttpServletRequest req){
-		req.getSession().setAttribute("intMainFrameSrc", "/sysMan/goDepartmentPage.do");
+		req.getSession().setAttribute("intMainFrameSrc", "/sysMan/goPositionPage.do");
 		return "sysman/position";
 	}
 	@RequestMapping("getPositionList.do")
@@ -97,6 +119,28 @@ public class SysmanController {
 			SysLogUtils.error(SysmanController.class, e, "查询职位信息出错");
 		}
 		return result;
+	}
+	@RequestMapping("addOrUpdatePos.do")
+	@ResponseBody
+	public boolean addOrUpdatePos(@RequestBody PositionModel pos){
+		try {
+			sysDao.addOrUpdatePos(pos);
+			return true;
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "更改职位信息出错");
+			return false;
+		}
+	}
+	@RequestMapping("delPos.do")
+	@ResponseBody
+	public boolean delPos(@RequestBody String[] codes){
+		try {
+			sysDao.deletePos(codes);
+			return true;
+		} catch (Exception e) {
+			SysLogUtils.error(SysmanController.class, e, "删除职位信息出错");
+			return false;
+		}
 	}
 
 }

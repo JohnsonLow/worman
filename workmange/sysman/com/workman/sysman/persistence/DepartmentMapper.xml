@@ -14,17 +14,26 @@
 	    FROM DEPARTMENT
   </select>
   
-   <insert id="insertDepartment" parameterType="com.workman.sysman.model.DepartmentModel">
+   <insert id="insert" parameterType="com.workman.sysman.model.DepartmentModel">
     INSERT INTO DEPARTMENT
       (NAME, DESCRIPTION)
     VALUES
       (#{name}, #{description})
   </insert>
-  <update id="updateDepartment" parameterType="com.workman.sysman.model.DepartmentModel">
+  <update id="update" parameterType="com.workman.sysman.model.DepartmentModel">
     UPDATE DEPARTMENT SET
       NAME = #{name},
       DESCRIPTION = #{description}
     WHERE CODE = #{code}
   </update>
+   <delete id="batchDelete">
+  	DELETE FROM DEPARTMENT WHERE CODE IN 
+  	<foreach item="levelItem" collection="array" open="(" separator="," close=")">
+  		#{levelItem}
+  	</foreach>
+  </delete>
+  <delete id="delete">
+  	DELETE FROM DEPARTMENT WHERE CODE=#{code}
+  </delete>
 
 </mapper>

@@ -24,7 +24,7 @@
 	</p>
   	<p class="btn_login" id="logform-2"><a href="javascript:;"></a></p>
 </div>
-	<p class="footer130819">刘雨薇© 版权所有 Version: V1.0 | <a href="mailto::272462809@qq.com" style="color: #0079CA;text-decoration: none;">联系我</a></p>
+	<p class="footer130819">刘雨薇© 版权所有 Version: V1.0 | <a href="mailto::237728565@qq.com" style="color: #0079CA;text-decoration: none;">联系我</a></p>
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="static/js/sha-1.js"></script>
 <script type="text/javascript" src="static/js/internal/internal.js"></script>

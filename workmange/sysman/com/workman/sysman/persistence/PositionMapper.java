@@ -6,5 +6,8 @@ import com.workman.sysman.model.PositionModel;
 
 public interface PositionMapper {
 	List<PositionModel> getPositionList();
-	void insertPosition(PositionModel pos);
+	void insert(PositionModel pos);
+	void update(PositionModel pos);
+	void delete(String code);
+	void batchDelete(String[] codes);
 }

@@ -11,6 +11,10 @@ $(function() {
         if(level){
             auth.level = level;
         }
+         if(!auth.name || !auth.description){
+            alert("名称和描述不可为空！");
+            return;
+        }
         $.ajax({
             url : 'sysMan/addOrUpdateAuth.do',
             type : 'post',
@@ -22,6 +26,8 @@ $(function() {
                     alert("保存成功！");
                     closeAddDiv();
                     initInfos();
+                } else if(data == '401'){
+                    goLoginPage();
                 } else {
                     alert("保存失败");
                 }
@@ -35,17 +41,18 @@ function initInfos() {
         $("#authList").find("tbody").empty();
         if (data && data.length > 0) {
             if (data != '401') {
+                $("#selectDiv").show();
                 authList = data;
                 $("#selectDiv").show();
                 for (var i = 0, len = data.length; i < len; i++) {
                     var dt = data[i];
                     var man = '<a href="javascript:;" onclick="modifyInfo('+i+')">修 改</a><a href="javascript:;" style="margin: 0 10px;">/</a><a href="javascript:;" onclick="delInfo(\''+dt.level+'\')">删 除</a>';
-                    var res = '<tr><td><input name="cbox" type="checkbox" value="'+dt.level+'"/></td><td>' + dt.level + '</td><td>' + 
+                    var res = '<tr><td><input name="cbox" style="border:0px;" type="checkbox" value="'+dt.level+'"/></td><td>' + dt.level + '</td><td>' + 
                     dt.name + '</td><td>' + dt.description + '</td><td>'+man+'</td></tr>';
                     $("#authList").find("tbody").append(res);
                 }
             } else {
-                window.parent.location.href = contextPath + "/internal/login.do";
+                goLoginPage();
             }
         } else {
             $("#authList").find("tbody").append('<tr><td colspan="5">暂无数据</td></tr>');
@@ -97,8 +104,12 @@ function delInfo(ids){
         data : JSON.stringify(idArr),
         success : function(data){
             if(data){
-                alert("删除成功！");
-                initInfos();
+                if(data == '401'){
+                    goLoginPage();
+                }else{
+                    alert("删除成功！");
+                    initInfos();
+                }
             }else{
                 alert("删除失败！");
             }

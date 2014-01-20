@@ -14,17 +14,27 @@
 	    FROM POSITION
   </select>
   
-   <insert id="insertPosition" parameterType="com.workman.sysman.model.PositionModel">
+   <insert id="insert" parameterType="com.workman.sysman.model.PositionModel">
     INSERT INTO POSITION
       (NAME, DESCRIPTION)
     VALUES
       (#{name}, #{description})
   </insert>
-  <update id="updatePosition" parameterType="com.workman.sysman.model.PositionModel">
+  <update id="update" parameterType="com.workman.sysman.model.PositionModel">
     UPDATE POSITION SET
       NAME = #{name},
       DESCRIPTION = #{description}
     WHERE CODE = #{code}
   </update>
+  
+  <delete id="batchDelete">
+  	DELETE FROM POSITION WHERE CODE IN 
+  	<foreach item="levelItem" collection="array" open="(" separator="," close=")">
+  		#{levelItem}
+  	</foreach>
+  </delete>
+  <delete id="delete">
+  	DELETE FROM POSITION WHERE CODE=#{code}
+  </delete>
 
 </mapper>

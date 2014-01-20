@@ -35,7 +35,7 @@
 <body>
 
 <div class="bottom">
-    <p> 刘雨薇© 版权所有 Version: V1.0 | <a href="mailto::272462809@qq.com" style="color: #0079CA;text-decoration: none;">联系我</a></p>
+    <p> 刘雨薇© 版权所有 Version: V1.0 | <a href="mailto::237728565@qq.com" style="color: #0079CA;text-decoration: none;">联系我</a></p>
 </div>
 </body>
 </html>

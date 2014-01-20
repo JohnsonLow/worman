@@ -104,7 +104,7 @@ margin-top:-93px!important;/*FF IE7 该值为本身高的一半*/margin-top:0px;
 .bd{ width:100%; _height:100%; position:absolute; top:82px; left:0px; bottom:44px; right:0px; background:url(../images/bd_di.gif) repeat-x 0 100%; _background:url(../images/bd_di.gif) repeat-x 0 84%;}
 .left{ width:200px; height:auto; position:absolute; top:0px; left:0px; bottom:0px; _height:100%; overflow-x:hidden; overflow-y:auto;}
 .main{ position:absolute; _position:static; top:0px; right:0px; bottom:0px; left:200px; overflow:auto; _overflow:hidden; _height:100%; _margin-left:200px;}
-.bottom{width:100%;height:64px;bottom:0px;left:0px;position:absolute;background:#464646; overflow:hidden;}
+.bottom{width:100%;height:64px;bottom:0px;left:0px;position:absolute;background:#777777; overflow:hidden;}
 /*top*/
 //*.top{ width:100%; height:82px; position:absolute; top:0px; left:0px; right:0px; background:url(../images/top_di.gif) repeat-y; overflow:hidden;}*/
 .top .up{ width:100%; height:46px; float:left;}

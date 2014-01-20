@@ -8,6 +8,12 @@ public interface DepartmentMapper {
 	
 	List<DepartmentModel> getDepartmentList();
 	
-	void insertDepartment(DepartmentModel department);
+	void insert(DepartmentModel department);
+
+	void update(DepartmentModel dep);
+
+	void delete(String code);
+
+	void batchDelete(String[] codes);
 
 }
