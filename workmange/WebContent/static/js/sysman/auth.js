@@ -65,7 +65,7 @@ function modifyInfo(index){
     $("#level").val(authList[index].level);
     $("#name").val(authList[index].name);
     $("#desc").val(authList[index].description);
-    $('#insertDiv').show();
+    $('#insertDiv').mypop();
 }
 function closeAddDiv(){
     $('#insertDiv').mypopClose();

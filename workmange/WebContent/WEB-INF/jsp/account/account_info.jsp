@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,6 +15,7 @@
 	.frame_button input{padding:0px 10px;margin-left:72px; background:url(static/images/news/bg_btn1.gif) repeat-x; border:1px solid #8398ac;color:#333;height:28px;line-height:28px;}
 	.box355{float:left;width:355px;background:url(static/images/news/linebg.gif) repeat-y right;}
 	.box_right{float:left;padding-left:22px; color:#787878;}
+	.select{height: 29px;line-height: 29px;width: 240px;}
 </style>
 </head>
 <body> 
@@ -50,7 +52,11 @@
 			  </tr>
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
-			  	<td><input id="dep" type="text" value="${userInfo.userName }" class="input_text240"/>
+			  	<td><select id="depSel" class="select-company select">
+			  		<c:forEach var="dep" items="${depList }">
+			  			<option value="${dep.code }">${ dep.name}</option>
+			  		</c:forEach>
+			  	</select>
 		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
@@ -60,7 +66,11 @@
 			  </tr>
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>权限类别：</th>
-			  	<td><input id="authLevel" type="text" value="${userInfo.userName }" class="input_text240"/>
+			  	<td><select id="authSel" class="select-company select">
+			  		<c:forEach var="auth" items="${authList }">
+			  			<option value="${auth.level }">${ auth.name}</option>
+			  		</c:forEach>
+			  	</select>
 		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
