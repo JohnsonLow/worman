@@ -1,9 +1,16 @@
 <%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>帐号管理</title>
 <jsp:include page="/WEB-INF/jsp/meta.jsp"></jsp:include>
+<style>
+	.btn{
+		cursor:pointer;
+	}
+</style>
 </head>
 
 <body> 
@@ -17,16 +24,24 @@
 		          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 		              <tr>
 		                <th>权限类别：</th>
-		                <td><select id="level" style="width:100px;">
-		                    <option>1</option>
-		                  </select>
+		                <td><select id="authSel" style="width:100px;">
+		                		<option value="">--请选择--</option>
+						  		<c:forEach var="auth" items="${authList }">
+						  			<option value="${auth.level }">${ auth.name}</option>
+						  		</c:forEach>
+						  	</select>
 		                </td>
 		              </tr>
 		            </table></td>
 		          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 		              <tr>
 		                <th>所在部门：</th>
-		                <td><input id="dep"/></td>
+		                <td><select id="depSel" style="width:100px;">
+		                		<option value="">--请选择--</option>
+						  		<c:forEach var="dep" items="${depList }">
+						  			<option value="${dep.code }">${ dep.name}</option>
+						  		</c:forEach>
+						  	</select></td>
 		              </tr>
 		            </table></td>
 	          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -35,7 +50,7 @@
 	                <td><input id="name"/></td>
 	              </tr>
 	            </table></td>
-	          <td width="40%" class="frame_button"><input id="search" type="button" value="搜索"/></td>
+	          <td width="40%" class="frame_button"><input id="search" type="button" value="搜索" class="btn"/></td>
 	        </tr>
 	      </table>
 	    </div>

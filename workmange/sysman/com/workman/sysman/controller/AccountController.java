@@ -23,6 +23,8 @@ public class AccountController {
 	@RequestMapping("goAccountPage.do")
 	public String goAccountPage(HttpServletRequest req,ModelMap model){
 		req.getSession().setAttribute("intMainFrameSrc", "/account/goAccountPage.do");
+		model.addAttribute("authList",sysDao.getAuthList());
+		model.addAttribute("depList",sysDao.getDepartmentList());
 		return "account/account_list";
 	}
 	

@@ -1,20 +1,8 @@
 /**
  * 添加或修改二级账号
  */
-var intReg = new RegExp(/^[0-9]{3}$/);
 var mobileReg = /^(13[0-9]|15[0-9]|18[0|2|3|5|6|7|8|9])\d{8}$/;
 $(function(){
-	if(uid){
-		$("#titleSpan").text("修改账号信息");
-		$("#addUidInfo").hide();
-		$("#uidSpan").css("width","160px");
-		$("#uidSpan").text(uid);
-	} else{
-		$("#titleSpan").text("增加新帐号");
-		$("#uidSpan").text(unionCode);
-		$("#createTime").hide();
-		$("#updateTime").hide();
-	}
 });
 function defaultPwd(){
 	$("#pwd").val("000000");
@@ -23,19 +11,12 @@ function defaultPwd(){
 function addOrUpdate(){
 	var pwd = $("#pwd").val();
 	var cpwd = $("#conPwd").val();
-	var newUid = uid;
-	var url = 'addAccountInfo.do';
-	if(!uid){//新增
-		var tmp = $("#uidInput").val();
-		if(tmp && intReg.test(tmp) && parseInt(tmp,10) > 0){
-			newUid = unionCode + tmp;
-			$("#uidMsgSpan").text("");
-		} else {
-			$("#uidMsgSpan").text("请输入正确的账号");
-			return;
-		}
+	var username = $("#username").val();
+	if(username && $.trim(username)){
+		$("#uidMsgSpan").text("");
 	} else {
-		url = 'updateAccountInfo.do';
+		$("#uidMsgSpan").text("请输入正确的账号");
+		return;
 	}
 	if(!pwd){
 		$("#pwdMsgSpan").text("请输入密码并确认");

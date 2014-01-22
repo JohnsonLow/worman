@@ -15,7 +15,7 @@
 	.frame_button input{padding:0px 10px;margin-left:72px; background:url(static/images/news/bg_btn1.gif) repeat-x; border:1px solid #8398ac;color:#333;height:28px;line-height:28px;}
 	.box355{float:left;width:355px;background:url(static/images/news/linebg.gif) repeat-y right;}
 	.box_right{float:left;padding-left:22px; color:#787878;}
-	.select{height: 29px;line-height: 29px;width: 240px;}
+	.select{height: 29px;line-height: 29px;width: 240px;align:center;}
 </style>
 </head>
 <body> 
@@ -28,7 +28,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			 <tr id="uidDiv">
 			    <th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>帐号：</th>
-			    <td> <input id="uidInput" type="text" class="input_text240" value="" maxlength="16"/>
+			    <td> <input id=username type="text" class="input_text240" value="" maxlength="16"/>
 		          	<span style="margin-left:5px;color: gray;">账号由数字、字母或下划线组成</span>
 		                 <span id="uidMsgSpan" style="margin-left:5px;color:red;"></span></td>
 			  </tr>
