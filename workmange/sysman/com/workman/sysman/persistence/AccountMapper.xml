@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.sysman.persistence.AccountMapper">
+
+	<cache />
+	<select id="getCount" resultType="int">
+		SELECT COUNT(ID) FROM ACCOUNT
+	</select>
+	<resultMap type="com.workman.sysman.model.AccountModel" id="accountMap">
+		<id column="id" property="id"/>
+		<result column="username" property="userName" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="weibo" property="weibo" />
+		<association property="auth" column="auth_level"
+			javaType="com.workman.sysman.model.AuthModel">
+			<result property="level" column="a_level" />
+			<result property="name" column="a_name" />
+		</association>
+		<association property="department" column="department_code"
+			javaType="com.workman.sysman.model.DepartmentModel">
+			<result property="code" column="d_code" />
+			<result property="name" column="d_name" />
+		</association>
+	</resultMap>
+	<select id="getAccountInfo" parameterType="int" resultMap="accountMap">
+		SELECT
+		AC.ID,
+		AC.NAME,
+		AC.USERNAME,
+		AC.PASSWORD,
+		AC.PHONE,
+		AC.WEIBO,
+		AU.LEVEL AS a_level,
+		AU.NAME AS a_name,
+		DE.CODE AS d_code,
+		DE.NAME AS d_name 
+		FROM ACCOUNT AC LEFT JOIN AUTH AU ON AC.AUTH_LEVEL = AU.LEVEL 
+		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
+		WHERE ID = #{id}
+	</select>
+	<select id="getList"  resultMap="accountMap"
+		parameterType="com.workman.sysman.persistence.wrapper.AccountWrapper">
+		SELECT
+		AC.ID,
+		AC.NAME,
+		AC.USERNAME,
+		AC.PASSWORD,
+		AC.PHONE,
+		AC.WEIBO,
+		AU.LEVEL AS a_level,
+		AU.NAME AS a_name,
+		DE.CODE AS d_code,
+		DE.NAME AS d_name
+		FROM ACCOUNT AC, AUTH AU , DEPARTMENT DE
+		WHERE AC.AUTH_LEVEL=AU.LEVEL AND DE.CODE=AC.DEPARTMENT_CODE 
+		LIMIT #{start},#{end}
+		
+	</select>
+	<insert id="insert" parameterType="com.workman.sysman.model.AccountModel">
+		INSERT INTO ACCOUNT
+		(USERNAME,NAME, PASSWORD,AUTH_LEVEL,DEPARTMENT_CODE,PHONE,WEIBO)VALUES(
+		#{userName},#{name},#{password},#{auth.level},#{department.code},#{phone},#{weibo}
+		)
+	</insert>
+	<update id="update" parameterType="com.workman.sysman.model.AuthModel">
+		UPDATE ACCOUNT SET
+		NAME = #{name},
+		PHONE = #{phone},
+		WEIBO = #{weibo},
+		PASSWORD = #{password},
+		AUTH_LEVEL = #{auth.level},
+		DEPARTMENT_CODE = #{department.code}
+		WHERE ID = #{id}
+	</update>
+</mapper>
