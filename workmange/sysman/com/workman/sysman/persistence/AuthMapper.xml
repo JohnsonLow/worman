@@ -6,7 +6,7 @@
 
   <cache />
   
-  <select id="getAuthInfo" parameterType="string" resultType="com.workman.sysman.model.AuthModel">
+  <select id="getAuthInfo" parameterType="int" resultType="com.workman.sysman.model.AuthModel">
     SELECT
       LEVEL,
       NAME,
@@ -40,7 +40,7 @@
   		#{levelItem}
   	</foreach>
   </delete>
-  <delete id="deleteAuth">
+  <delete id="deleteAuth" parameterType="int">
   	DELETE FROM AUTH WHERE LEVEL=#{level}
   </delete>
 

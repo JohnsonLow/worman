@@ -1,37 +1,48 @@
+var rowCount;
+var pageCount;
 $(function(){
-	if(userList){
-		userList = JSON.parse(userList);
-		initInfos();
-	} else {
-		$("#selectDiv").hide();
-	}
+	getInfo(1);
 });
 var checkFlag = true;
-function initInfos(){
-	if(userList.length == 0){
-		$("#selectDiv").hide();
-		$("#userList").empty();
-		$("#userList").append("<tr><th>暂无数据</th></tr>");
-	}
-	for(var i=0,len=userList.length;i<len;i++){
-		var user = userList[i];
-		var editUrl = '../OperatorManagement/goAccountInfoPage.do?uid='+user.uid+'&sysUnionCode='+unionCode;
-		var res = '<tr>'+
-                	'<td><input name="cbox" type="checkbox" style="margin-top:10px;border:0px;" value="'+user.uid+'"/></td>'+
-                   	'<td>'+user.username+'</td>'+
-                   	'<td>'+user.name+'&nbsp;</td>'+
-                   	'<td>'+user.level+'</td>'+
-                   	'<td>'+user.department+'</td>'+
-                   	'<td>'+user.phone+'</td>'+
-                   	'<td>'+user.weibo+'</td>'+
-                    '<td>'+
-                    	'<span><a href="'+editUrl+'">编辑</a></span><span style="margin:0 10px; cursor:auto;">/</span>'+
-                        '<span><a href="javascript:;" onclick="delUser(\''+user.uid+'\')">删除</a></span>'+
-                        '<span style="width:65px; height:10px;"></span>'+
-                    '</td>'+
-                '</tr>';
-         $("#userList").find('tbody').append(res);
-	}
+function getInfo(page){
+    $.get('account/getAccountList.do',param,function(data){
+        if(data){
+            if(data == '401'){
+                 window.location.href = contextPath + "/internal/login.do";
+            }else{
+                $("#userList").find("tbody").empty();
+                rowCount = data.rowCount;
+                pageCount = data.pageCount;
+                if(data.data && data.rowCount > 0){
+                    for(var i=0,len=data.data.length;i<len;i++){
+                        var user = data.data[i];
+                        var editUrl = 'account/goAccountInfoPage.do?id='+user.id;
+                        var res = '<tr>'+
+                                    '<td><input name="cbox" type="checkbox" style="margin-top:10px;border:0px;" value="'+user.uid+'"/></td>'+
+                                    '<td>'+user.userName+'</td>'+
+                                    '<td>'+user.name+'&nbsp;</td>'+
+                                    '<td>'+user.auth.level+'</td>'+
+                                    '<td>'+user.department.code+'</td>'+
+                                    '<td>'+user.phone+'</td>'+
+                                    '<td>'+user.weibo+'</td>'+
+                                    '<td>'+
+                                        '<span><a href="'+editUrl+'">编辑</a></span><span style="margin:0 10px; cursor:auto;">/</span>'+
+                                        '<span><a href="javascript:;" onclick="delUser(\''+user.uid+'\')">删除</a></span>'+
+                                        '<span style="width:65px; height:10px;"></span>'+
+                                    '</td></tr>';
+                         $("#userList").find('tbody').append(res);
+                    }
+                }else{
+                    $("#selectDiv").hide();
+                    $("#userList").find("tbody").empty();
+                    $("#userList").find("tbody").append("<tr><td  colspan='8'>暂无数据</td></tr>");
+                }
+            }
+        }else {
+            $("#selectDiv").hide();
+            $("#userList").find("tbody").append("<tr><td  colspan='8'>暂无数据</td></tr>");
+        }
+    });
 }
 function goAccountInfo(type) {
 	window.location = "account/goAccountInfoPage.do?type="+type;
@@ -84,3 +95,13 @@ function delSysUser() {
 		delUser(userIds);
 	}
 }
+function setPage(currIndex){
+    hPage = currIndex;
+    $("#pager1").pager({ pagenumber: hPage,
+    pagecount: hTotalPage,
+    datanumber:hTotalCount, 
+    buttonClickCallback: PageClick });
+}
+PageClick = function(pageclickednumber) {
+    getInfo(pageclickednumber);
+};

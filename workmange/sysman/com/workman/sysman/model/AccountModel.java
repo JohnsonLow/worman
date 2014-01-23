@@ -7,12 +7,22 @@ public class AccountModel implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4154305009097499409L;
-	private String username;
+	private static final long serialVersionUID = -7654521026852196295L;
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	private String userName;
 	private String password;
 	private String name;
 	private String phone;
 	private AuthModel auth;
+	private PositionModel postion;
+	private DepartmentModel department;
+	
 	public AuthModel getAuth() {
 		return auth;
 	}
@@ -25,15 +35,13 @@ public class AccountModel implements Serializable{
 	public void setPostion(PositionModel postion) {
 		this.postion = postion;
 	}
-	private PositionModel postion;
-	private String department;
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	private String weibo;
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	public String getPassword() {
 		return password;
 	}
@@ -52,10 +60,10 @@ public class AccountModel implements Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getDepartment() {
+	public DepartmentModel getDepartment() {
 		return department;
 	}
-	public void setDepartment(String department) {
+	public void setDepartment(DepartmentModel department) {
 		this.department = department;
 	}
 	public String getWeibo() {

@@ -34,7 +34,7 @@
 			  </tr>
 			  <tr>
 			    <th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>密码：</th>
-			    <td><input id="pwd" type="password" value="${userInfo.password }" class="input_text240"/>
+			    <td><input id="pwd" type="password" value="" class="input_text240"/>
 			    <span class="frame_button"  style="margin-left:-65px;color: gray;">
 				<input id="out_nav" type="button" value="初始密码" name="button" onclick="defaultPwd()" /> (初始为6个0)</span>
 			    <span id="pwdMsgSpan" style="margin-left:5px; color:red;"></span>
@@ -42,27 +42,8 @@
 			  </tr>
 			  <tr width="25%">
 			    <th><img align="absmiddle" src="static/images/news/icon_xing.gif"/>确认密码：</th>
-			    <td><input id="conPwd" type="password" value="${userInfo.password }" class="input_text240"/>
+			    <td><input id="conPwd" type="password" value="" class="input_text240"/>
 			     <span id="cpwdMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
-			  <tr>
-			  	<th width="25%">姓名：</th>
-			  	<td><input id="userName" type="text" value="${userInfo.userName }" class="input_text240"/>
-		           <span id="userNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
-			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
-			  	<td><select id="depSel" class="select-company select">
-			  		<c:forEach var="dep" items="${depList }">
-			  			<option value="${dep.code }">${ dep.name}</option>
-			  		</c:forEach>
-			  	</select>
-		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
-			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>联系电话：</th>
-			  	<td><input id="phone" type="text" value="${userInfo.userName }" class="input_text240"/>
-		           <span id="phoneNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>权限类别：</th>
@@ -74,9 +55,28 @@
 		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
+			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
+			  	<td><select id="depSel" class="select-company select">
+			  		<c:forEach var="dep" items="${depList }">
+			  			<option value="${dep.code }">${ dep.name}</option>
+			  		</c:forEach>
+			  	</select>
+		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  </tr>
+			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>微博账号：</th>
-			  	<td><input id="weibo" type="text" value="${userInfo.userName }" class="input_text240"/>
-		           <span id="weiboNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  	<td><input id="weibo" type="text" value="" class="input_text240"/>
+		           <span id="weiboMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  </tr>
+			  <tr>
+			  	<th width="25%">姓名：</th>
+			  	<td><input id="name" type="text" value="${userInfo.userName }" class="input_text240"/>
+		           <span id="userNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  </tr>
+			  <tr>
+			  	<th width="25%">联系电话：</th>
+			  	<td><input id="phone" type="text" value="${userInfo.userName }" class="input_text240"/>
+		           <span id="phoneNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr><th></th><td><div class="frame_button">
 				  <input id="saveAcc" type="button" value="保存账号" onclick="addOrUpdate()"/>
@@ -100,8 +100,6 @@ function showDiv(){
 document.getElementById('lgdiv').style.display='block';
 }
 var oldPwd = '${userInfo.password}';
-var uid = '${userInfo.uid }';
-var unionCode = '${unionCode}';
 </script>
 </body>
 </html>

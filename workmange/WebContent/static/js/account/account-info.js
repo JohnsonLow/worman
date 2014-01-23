@@ -1,8 +1,10 @@
 /**
- * 添加或修改二级账号
+ * 添加或修改账号
  */
-var mobileReg = /^(13[0-9]|15[0-9]|18[0|2|3|5|6|7|8|9])\d{8}$/;
+var type = 1;
+var userNameReg = /^[a-zA-z0-9-_]+$/;
 $(function(){
+    
 });
 function defaultPwd(){
 	$("#pwd").val("000000");
@@ -12,7 +14,7 @@ function addOrUpdate(){
 	var pwd = $("#pwd").val();
 	var cpwd = $("#conPwd").val();
 	var username = $("#username").val();
-	if(username && $.trim(username)){
+	if(username && $.trim(username) && userNameReg.test(username)){
 		$("#uidMsgSpan").text("");
 	} else {
 		$("#uidMsgSpan").text("请输入正确的账号");
@@ -38,43 +40,40 @@ function addOrUpdate(){
 	} else {
 		$("#cpwdMsgSpan").text("");
 	}
-	var userName = $("#userName").val();
+	var weibo = $("#weibo").val();
+	if(weibo && $.trim(weibo)){
+	    $("#weiboMsgSpan").text("");
+	}else{
+	    $("#weiboMsgSpan").text("微博账号不可为空");
+	    return;
+	}
 	var newInfos = {};
-	newInfos.uid = newUid;
-	if(oldPwd != pwd){
-		newInfos.password = SHA1(pwd);
-	} else {
-		newInfos.password = pwd;
+	if(pwd != oldPwd){
+	    pwd = SHA1(pwd);
 	}
 	var level = $("#level").val();
-	if(!level){
-		level = "2";
-	}
-	newInfos.userName = $.trim(userName);
-	newInfos.level = level;
-	newInfos.createTime = $("#createTime").val();
-	newInfos.updateTime = $("#updateTime").val();
-	newInfos.unionCode = unionCode;
-	var msg = "";
-	if(uid){
-		msg="修改账户";
-	} else {
-		msg="添加账户";
-	}
+	newInfos.userName = $.trim(username);
+	newInfos.password = pwd;
+	newInfos.auth = {'level':parseInt($("#authSel").val(),10)};
+	newInfos.department = {'code':parseInt($("#depSel").val(),10)};
+	newInfos.phone = $("#phone").val();
+	newInfos.name = $("#name").val();
+	newInfos.weibo = weibo;
+	alert(JSON.stringify(newInfos));
 	$.ajax({ cache:false,
 			type : 'post',
-			url : url,
+			url : 'account/addOrUpdateAccount.do?type='+type,
 			contentType:"application/json",
 			data:   JSON.stringify(newInfos),
 		    success:function(data){
 		    	if(data == '-1'){
-		    		alert(msg + "失败，请联系工作人员");
+		    		alert("保存失败，请联系工作人员");
 		    	} else if(data == '-2'){
 		    		alert("该账号已存在");
 		    		$("#uidInput").focus();
 		    	}else{
-		    		alert("成功" + msg);
-		    		window.location.href="goAccountManagePage.do?sysUnionCode="+unionCode;
+		    		alert("保存成功");
+		    		window.location.href = contextPath + "/account/goAccountPage.do";
 		    	}
 		    }});
 }
