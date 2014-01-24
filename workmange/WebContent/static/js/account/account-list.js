@@ -1,16 +1,37 @@
 var rowCount;
 var pageCount;
+var size = 10;
+var hPage;
 $(function(){
 	getInfo(1);
+	$("#search").click(function(){
+	    getInfo(1);
+	});
 });
 var checkFlag = true;
 function getInfo(page){
+    var param = {
+      page : page,
+      size : size,
+      msg : new Date().getTime()
+    };
+    if($("#authSel").val()){
+        param.level = $("#authSel").val();
+    }
+    if($("#depSel").val()){
+        param.depCode = $("#depSel").val();
+    }
+    if($("#name").val()){
+        param.name = $("#name").val();
+    }
+    $("#preloadDiv").mypop();
     $.get('account/getAccountList.do',param,function(data){
+        $("#preloadDiv").mypopClose();
         if(data){
+            $("#userList").find("tbody").empty();
             if(data == '401'){
-                 window.location.href = contextPath + "/internal/login.do";
+                 goLoginPage();
             }else{
-                $("#userList").find("tbody").empty();
                 rowCount = data.rowCount;
                 pageCount = data.pageCount;
                 if(data.data && data.rowCount > 0){
@@ -18,7 +39,6 @@ function getInfo(page){
                         var user = data.data[i];
                         var editUrl = 'account/goAccountInfoPage.do?id='+user.id;
                         var res = '<tr>'+
-                                    '<td><input name="cbox" type="checkbox" style="margin-top:10px;border:0px;" value="'+user.uid+'"/></td>'+
                                     '<td>'+user.userName+'</td>'+
                                     '<td>'+user.name+'&nbsp;</td>'+
                                     '<td>'+user.auth.level+'</td>'+
@@ -32,14 +52,18 @@ function getInfo(page){
                                     '</td></tr>';
                          $("#userList").find('tbody').append(res);
                     }
+                    setPage(page);
+                    $("#pager").show();
                 }else{
                     $("#selectDiv").hide();
                     $("#userList").find("tbody").empty();
                     $("#userList").find("tbody").append("<tr><td  colspan='8'>暂无数据</td></tr>");
+                    $("#pager").hide();
                 }
             }
         }else {
             $("#selectDiv").hide();
+            $("#userList").find("tbody").empty();
             $("#userList").find("tbody").append("<tr><td  colspan='8'>暂无数据</td></tr>");
         }
     });
@@ -97,9 +121,9 @@ function delSysUser() {
 }
 function setPage(currIndex){
     hPage = currIndex;
-    $("#pager1").pager({ pagenumber: hPage,
-    pagecount: hTotalPage,
-    datanumber:hTotalCount, 
+    $("#pager").pager({ pagenumber: hPage,
+    pagecount: pageCount,
+    datanumber:rowCount, 
     buttonClickCallback: PageClick });
 }
 PageClick = function(pageclickednumber) {

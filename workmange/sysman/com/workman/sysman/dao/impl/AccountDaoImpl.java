@@ -19,17 +19,23 @@ public class AccountDaoImpl implements AccountDao {
 	public ResponseModel getAccountList(Integer level, Integer depCode,
 			String name, int page, int size) {
 		ResponseModel res = new ResponseModel();
-		int count = mapper.getCount();
-		res.setRowCount(count);
-		res.setPageCount(PageUtils.getPageCount(count, size));
-		int start = PageUtils.getStart(page,size);
-		int end = PageUtils.getEnd(page,size);
 		AccountWrapper wrapper = new AccountWrapper();
+		if(level == null){
+			level = 0;
+		}
+		if(depCode == null){
+			depCode = 0;
+		}
 		wrapper.setAuthLevel(level);
 		wrapper.setDepCode(depCode);
 		if(StringUtility.isNotBlank(name)){
 			wrapper.setName("%" + name + "%");
 		}
+		int count = mapper.getCount(wrapper);
+		res.setRowCount(count);
+		res.setPageCount(PageUtils.getPageCount(count, size));
+		int start = PageUtils.getStart(page,size);
+		int end = PageUtils.getEnd(page,size);
 		wrapper.setStart(start);
 		wrapper.setEnd(end);
 		res.setData(mapper.getList(wrapper));

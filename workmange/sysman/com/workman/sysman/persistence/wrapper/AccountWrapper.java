@@ -1,21 +1,21 @@
 package com.workman.sysman.persistence.wrapper;
 
 public class AccountWrapper {
-	private Integer authLevel;
-	private Integer  depCode;
+	private int authLevel;
+	private int  depCode;
 	private String name;
 	private int start;
 	private int end;
 	public int getAuthLevel() {
 		return authLevel;
 	}
-	public void setAuthLevel(Integer authLevel) {
+	public void setAuthLevel(int authLevel) {
 		this.authLevel = authLevel;
 	}
 	public int getDepCode() {
 		return depCode;
 	}
-	public void setDepCode(Integer depCode) {
+	public void setDepCode(int depCode) {
 		this.depCode = depCode;
 	}
 	public String getName() {

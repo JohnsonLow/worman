@@ -57,18 +57,13 @@
         	<div style="background:none;" class="frame_title">
             	
 	            <span style="float:right; margin-right:10px;"><a href="javascript:;" onclick="goAccountInfo(1);">添加新账号</a></span>
-            	<span id="selectDiv" style="float:right;">
-	            	<span><a href="javascript:void(0)" onclick="checkAll()">全选</a></span>
-                    <span style="margin-left: 10px;"><a href="javascript:;" onclick="delSysUser()">删除</a></span>
-	            	<span style="color:#404040; margin:0 10px;"><a href="javascript:;">|</a></span>
-	             </span>
             </div>
             <div class=frame_table>
            		<div class="cl"></div>
            		<table id="userList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
            				<tr>
-           					<th>选中</th><th>账号</th><th>姓名</th><th>权限</th><th>所在部门</th><th>联系电话</th><th>微博账号</th><th>管理</th>
+           					<th>账号</th><th>姓名</th><th>权限</th><th>所在部门</th><th>联系电话</th><th>微博账号</th><th>管理</th>
            				</tr>
            			</thead>
            			<tbody>
@@ -81,6 +76,7 @@
         </div>
 	</div>
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
+	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
 	<%pageContext.include("/WEB-INF/jsp/inc/pager/pagination.jsp?skin=go&number=5");%>
 	<script type="text/javascript" src="static/js/account/account-list.js"></script>
 	<script type="text/javascript" src="static/js/common/json/json2.js"></script>

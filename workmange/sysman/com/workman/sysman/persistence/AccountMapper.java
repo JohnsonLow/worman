@@ -13,7 +13,7 @@ public interface AccountMapper {
 	
 	void delete(int id);
 	
-	int getCount();
+	int getCount(AccountWrapper wrapper);
 
 	List<AccountModel> getList(AccountWrapper wrapper);
 

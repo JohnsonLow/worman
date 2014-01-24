@@ -5,8 +5,18 @@
 <mapper namespace="com.workman.sysman.persistence.AccountMapper">
 
 	<cache />
-	<select id="getCount" resultType="int">
-		SELECT COUNT(ID) FROM ACCOUNT
+	<select id="getCount" resultType="int" parameterType="com.workman.sysman.persistence.wrapper.AccountWrapper">
+		SELECT COUNT(ID) FROM ACCOUNT 
+		WHERE 1=1
+		<if test="name != null">
+			AND NAME LIKE #{name}
+		</if>
+		<if test="authLevel>0">
+			AND AUTH_LEVEL = #{level}
+		</if>
+		<if test="depCode>0">
+			AND DEPARTMENT_CODE = #{depCode}
+		</if>
 	</select>
 	<resultMap type="com.workman.sysman.model.AccountModel" id="accountMap">
 		<id column="id" property="id"/>
@@ -57,6 +67,15 @@
 		DE.NAME AS d_name
 		FROM ACCOUNT AC, AUTH AU , DEPARTMENT DE
 		WHERE AC.AUTH_LEVEL=AU.LEVEL AND DE.CODE=AC.DEPARTMENT_CODE 
+		<if test="name != null">
+			AND AC.NAME LIKE #{name}
+		</if>
+		<if test="authLevel>0">
+			AND AC.AUTH_LEVEL = #{level}
+		</if>
+		<if test="depCode>0">
+			AND AC.DEPARTMENT_CODE = #{depCode}
+		</if>
 		LIMIT #{start},#{end}
 		
 	</select>
