@@ -9,7 +9,6 @@ function defaultPwd(){
 	$("#conPwd").val("000000");
 }
 function addOrUpdate(){
-	var uid =$("#uid").text();
 	var pwd = $("#pwd").val();
 	var npwd = $("#npwd").val();
 	var cpwd = $("#conPwd").val();
