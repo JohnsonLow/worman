@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8" language="java"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -24,28 +25,33 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 			  	<th width="25%">姓名：</th>
-			  	<td><input id="userName" type="text" value="${userInfo.userName }" class="input_text240"/>
+			  	<td><input id="name" type="text" value="${currUser.name }" class="input_text240"/>
 		           <span id="userNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
+			  
 			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
-			  	<td><input id="dep" type="text" value="${userInfo.userName }" class="input_text240"/>
-		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
-			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>联系电话：</th>
-			  	<td><input id="phone" type="text" value="${userInfo.userName }" class="input_text240"/>
-		           <span id="phoneNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  	<th width="25%">联系电话：</th>
+			  	<td><input id="phone" type="text" value="${currUser.phone }" class="input_text240"/>
+		           <span id="phoneMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>权限类别：</th>
-			  	<td><input id="authLevel" type="text" value="${userInfo.userName }" class="input_text240"/>
+			  	<td><input id="authLevel" type="text" value="${currUser.auth.name }" class="input_text240" readonly="readonly"/>
 		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
+			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
+			  	<td><select id="dep" type="text" class="input_text240">
+			  			<c:forEach var="dep" items="${depList }">
+				  			<option value="${dep.code }">${ dep.name}</option>
+				  		</c:forEach>
+			  		</select>
+		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  </tr>
+			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>微博账号：</th>
-			  	<td><input id="weibo" type="text" value="${userInfo.userName }" class="input_text240"/>
-		           <span id="weiboNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  	<td><input id="weibo" type="text" value="${currUser.weibo }" class="input_text240"/>
+		           <span id="weiboMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 					<tr>
 						<th></th>
@@ -60,9 +66,10 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
-	<script type="text/javascript" src="static/js/operatorManage/info.js"></script>
+	<script type="text/javascript" src="static/js/operation/info.js"></script>
 	<script type="text/javascript" src="static/js/common/json/json2.js"></script>
 	<script type="text/javascript" language="javascript">
+		var currDep = '${currUser.department.code }';
 	</script>
 </body>
 </html>

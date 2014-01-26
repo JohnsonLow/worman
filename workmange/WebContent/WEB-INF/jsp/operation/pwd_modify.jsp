@@ -52,7 +52,8 @@
 <script type="text/javascript" src="static/js/operation/pwd_modify.js"></script>
 <script type="text/javascript" src="static/js/sha-1.js"></script>
 <script type="text/javascript" language="javascript">
-	var oldPwd = "${userInfo.password}";
+	var oldPwd = "${currUser.password}";
+	var uid = '${currUser.id}';
 </script>
 </body>
 </html>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.workman.commons.util.StringUtility;
+import com.workman.permission.util.SessionUtils;
 
 public class AuthSessionFilter implements Filter {
 	private String pageUrl; 
@@ -31,8 +32,7 @@ public class AuthSessionFilter implements Filter {
 		String currentURL = req.getRequestURI(); 
 		String shortURL = currentURL.replace(contentURL, "");
 		String ajaxHeader= req.getHeader("x-requested-with");
-		HttpSession session = req.getSession();
-		if(session.getAttribute("intUser")==null){
+		if(SessionUtils.getUser(req) == null){
 			if(StringUtility.isNotBlank(ajaxHeader)){			
 				if(pageUrl.indexOf(shortURL)>-1){
 					chain.doFilter(request, response);

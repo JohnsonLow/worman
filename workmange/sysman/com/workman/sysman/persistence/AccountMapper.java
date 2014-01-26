@@ -1,6 +1,7 @@
 package com.workman.sysman.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.workman.sysman.model.AccountModel;
 import com.workman.sysman.persistence.wrapper.AccountWrapper;
@@ -16,5 +17,13 @@ public interface AccountMapper {
 	int getCount(AccountWrapper wrapper);
 
 	List<AccountModel> getList(AccountWrapper wrapper);
+
+	AccountModel getAccount(int id);
+	
+	AccountModel getAccountByUserName(String name);
+
+	void updateInfo(Map<String, Object> map);
+
+	void updatePwd(int id, String password);
 
 }

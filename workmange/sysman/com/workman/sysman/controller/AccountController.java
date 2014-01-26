@@ -1,17 +1,21 @@
 package com.workman.sysman.controller;
 
 
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.workman.commons.po.ResponseModel;
 import com.workman.commons.util.SysLogUtils;
+import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.AccountDao;
 import com.workman.sysman.dao.SysmanDao;
 import com.workman.sysman.model.AccountModel;
@@ -23,6 +27,9 @@ public class AccountController {
 	private AccountDao dao;
 	@Autowired
 	private SysmanDao sysDao;
+	
+	private ObjectMapper mapper = new ObjectMapper();
+	
 	@RequestMapping("goAccountPage.do")
 	public String goAccountPage(HttpServletRequest req,ModelMap model){
 		req.getSession().setAttribute("intMainFrameSrc", "/account/goAccountPage.do");
@@ -32,8 +39,12 @@ public class AccountController {
 	}
 	
 	@RequestMapping("goAccountInfoPage.do")
-	public String goAccountInfoPage(HttpServletRequest req,ModelMap model){
+	public String goAccountInfoPage(@RequestParam(required=false) Integer id,
+			HttpServletRequest req,ModelMap model) throws Exception{
 		req.getSession().setAttribute("intMainFrameSrc", "/account/goAccountInfoPage.do");
+		if(id != null){
+			model.addAttribute("authInfo", mapper.writeValueAsString(dao.getAccount(id)));
+		}
 		model.addAttribute("posList",sysDao.getPositionList());
 		model.addAttribute("authList",sysDao.getAuthList());
 		model.addAttribute("depList",sysDao.getDepartmentList());
@@ -43,7 +54,7 @@ public class AccountController {
 	@ResponseBody
 	public ResponseModel getAccountList(Integer level,
 			Integer depCode,String name,
-			Integer page,Integer size){
+			Integer page,Integer size,HttpServletRequest req){
 		if(page == null){
 			page = 1;
 		}
@@ -51,8 +62,9 @@ public class AccountController {
 			size = 10;
 		}
 		ResponseModel result = null;
+		AccountModel currAccount = SessionUtils.getUser(req);
 		try {
-			result = dao.getAccountList(level, depCode, name, page, size);
+			result = dao.getAccountList(level, depCode, name, page, size,currAccount.getId());
 		} catch (Exception e) {
 			SysLogUtils.error(AccountController.class, e, "查询账号信息出错");
 		}
@@ -84,5 +96,16 @@ public class AccountController {
 		}
 		return result;
 	}
-
+	@RequestMapping("delAccount.do")
+	@ResponseBody
+	public boolean delAccount(int id){
+		boolean result = true;
+		try {
+			dao.delete(id);
+		} catch (Exception e) {
+			SysLogUtils.error(AccountController.class, e, "删除账号失败");
+			result = false;
+		}
+		return result;
+	}
 }

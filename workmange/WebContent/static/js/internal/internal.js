@@ -103,7 +103,7 @@ function getSysLoginValidator() {
     }
     var date = loginDate();
     passWord = SHA1(passWord);
-    $.post("internal/sysLoginValidator.do?sysUnionCode=" + userName, {
+    $.post("internal/sysLoginValidator.do", {
         "userName" : $.trim(userName),
         "passWord" : passWord,
         "verificationCode" : validationcode,
@@ -115,14 +115,11 @@ function getSysLoginValidator() {
             $(".i-tip").eq(2).show();
             $(".i-tip").eq(2).find("p").html("验证码错误！");
         } else if (data == '-2') {
+            $(".i-tip").eq(0).show();
+            $(".i-tip").eq(0).find("p").html("不存在的账号！");
+        } else if (data == '-3') {
             $(".i-tip").eq(1).show();
             $(".i-tip").eq(1).find("p").html("密码错误！");
-        } else if (data == '-3') {
-            $(".i-tip").eq(3).show();
-            $(".i-tip").eq(3).find("p").html("您没有足够的权限，请与管理员联系！");
-        } else {
-            $(".i-tip").eq(0).show();
-            $(".i-tip").eq(0).find("p").html("账号不存在！");
         }
     });
 }

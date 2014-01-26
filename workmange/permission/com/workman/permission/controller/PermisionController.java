@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
+
+
+
+
+
+
 import com.workman.commons.util.StringUtility;
+import com.workman.commons.util.SysLogUtils;
+import com.workman.permission.util.SessionUtils;
+import com.workman.sysman.dao.AccountDao;
+import com.workman.sysman.model.AccountModel;
 
 import weibo4j.Oauth;
 import weibo4j.model.WeiboException;
@@ -20,6 +31,8 @@ import weibo4j.model.WeiboException;
 @Controller
 @RequestMapping("/internal/*")
 public class PermisionController {
+	@Autowired
+	private AccountDao accountDao;
 	@RequestMapping("index.do")
 	public String indexPage(String code,HttpServletRequest req){
 		try {
@@ -54,9 +67,21 @@ public class PermisionController {
 				session.getAttribute("validation_code"))) {
 			data = "-1";// 验证码错误
 		}else{
-			//TODO 权限认证
-			data = "1";
-			session.setAttribute("intUser","xxx");
+			try {
+				AccountModel account = accountDao.getAccount(userName);
+				if(account == null){
+					data = "-2";
+				}else{
+					if(account.getPassword().equals(passWord)){
+						data = "1";
+						SessionUtils.putUserInSession(req, account);
+					}else{
+						data = "-3";
+					}
+				}
+			} catch (Exception e) {
+				SysLogUtils.error(PermisionController.class, e, "查询账号信息出错");
+			}
 		}
 		return data;
 	}
@@ -74,18 +99,16 @@ public class PermisionController {
 	}
 	@RequestMapping("main.do")
 	public String goMainPage(HttpServletRequest req){
-		Object url = req.getSession().getAttribute("intMainFrameSrc");
-		if(url != null && StringUtility.isNotBlank(url.toString())){
-			return "redirect:"+url.toString();
+		String url = SessionUtils.getMainUrl(req);
+		if(StringUtility.isNotBlank(url)){
+			return "redirect:"+url;
 		}
 		return "internal/welcome";
 	}
 	@RequestMapping("logout.do")
 	@ResponseBody
 	public void logout(HttpServletRequest req){
-		HttpSession session = req.getSession();
-		session.removeAttribute("intUser");
-		session.removeAttribute("intMainFrameSrc");
+		SessionUtils.destroyAtt(req);
 	};
 	
 }

@@ -82,7 +82,7 @@ var inputLongSub=function(node,length){
 	if(tempVal!=str){
 		$(node).val(str.substring(0,str.length-3));
 	}
-}
+};
 
 //超长截取加省略号
 function longSub(str,length){
@@ -111,7 +111,7 @@ function isHanZi(str){
 var setTopCurrent=function(cIndex){
 	var elements=$("#zhijiawangTop span");
 	elements.eq(cIndex).addClass("current");
-}
+};
 
 
 //将javascript object转换成string  用于事件传参 
