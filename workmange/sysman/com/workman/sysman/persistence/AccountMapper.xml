@@ -140,7 +140,7 @@
 		DEPARTMENT_CODE = #{depCode}
 		WHERE ID = #{currId}
 	</update>
-	<update id="updatePwd">
+	<update id="updatePwd" parameterType="map">
 		UPDATE ACCOUNT SET PASSWORD=#{password}
 		WHERE ID=#{id}
 	</update>

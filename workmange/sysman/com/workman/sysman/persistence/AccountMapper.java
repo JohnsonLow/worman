@@ -24,6 +24,6 @@ public interface AccountMapper {
 
 	void updateInfo(Map<String, Object> map);
 
-	void updatePwd(int id, String password);
+	void updatePwd(Map<String,Object> map);
 
 }

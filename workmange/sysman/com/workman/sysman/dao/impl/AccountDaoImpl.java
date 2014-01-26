@@ -88,7 +88,10 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public void updatePwd(int id, String password) {
-		mapper.updatePwd(id,password);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("password", password);
+		mapper.updatePwd(map);
 
 	}
 
