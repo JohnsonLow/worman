@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.workman.commons.util.SysLogUtils;
 import com.workman.sysman.dao.SysmanDao;
-import com.workman.sysman.model.AuthModel;
+//import com.workman.sysman.model.AuthModel;
 import com.workman.sysman.model.DepartmentModel;
 import com.workman.sysman.model.PositionModel;
 import com.workman.sysman.persistence.AuthMapper;
@@ -23,9 +22,10 @@ public class SysmanDaoImpl implements SysmanDao{
 	private DepartmentMapper depMapper;
 	@Autowired
 	private PositionMapper posMapper;
-	@Override
-	public List<AuthModel> getAuthList() {
-		return authMapper.getAuthList();
+	/*
+		@Override
+	 * public List<AuthModel> getAuthList(int currLevel) {
+		return authMapper.getAuthList(currLevel);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class SysmanDaoImpl implements SysmanDao{
 			SysLogUtils.error(SysmanDaoImpl.class, e, "插入权限信息出错");
 			return false;
 		}
-	}
+	}*/
 
 	@Override
 	public List<DepartmentModel> getDepartmentList() {

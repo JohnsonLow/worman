@@ -2,15 +2,15 @@ package com.workman.sysman.dao;
 
 import java.util.List;
 
-import com.workman.sysman.model.AuthModel;
+//import com.workman.sysman.model.AuthModel;
 import com.workman.sysman.model.DepartmentModel;
 import com.workman.sysman.model.PositionModel;
 
 public interface SysmanDao {
 	
-	List<AuthModel> getAuthList();
+	/*List<AuthModel> getAuthList(int currLevel);
 	AuthModel getAuthInfo(int level);
-	boolean addOrUpdateAuth(AuthModel auth);
+	boolean addOrUpdateAuth(AuthModel auth);*/
 	void deleteAuth(String[] ids);
 	
 	List<DepartmentModel> getDepartmentList();

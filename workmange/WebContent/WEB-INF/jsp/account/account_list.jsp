@@ -23,25 +23,27 @@
 		        <tr>
 		          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 		              <tr>
-		                <th>权限类别：</th>
-		                <td><select id="authSel" style="width:100px;">
-		                		<option value="">--请选择--</option>
-						  		<c:forEach var="auth" items="${authList }">
-						  			<option value="${auth.level }">${ auth.name}</option>
-						  		</c:forEach>
-						  	</select>
-		                </td>
-		              </tr>
-		            </table></td>
-		          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		              <tr>
 		                <th>所在部门：</th>
-		                <td><select id="depSel" style="width:100px;">
+		                <td>
+		                <select id="depSel" style="width:100px;">
 		                		<option value="">--请选择--</option>
 						  		<c:forEach var="dep" items="${depList }">
 						  			<option value="${dep.code }">${ dep.name}</option>
 						  		</c:forEach>
-						  	</select></td>
+						  	</select>
+					  	</td>
+		              </tr>
+		            </table></td>
+		            <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		              <tr>
+		                <th>职位类别：</th>
+		                <td><select id="posSel" style="width:100px;">
+		                		<option value="">--请选择--</option>
+						  		<c:forEach var="pos" items="${posList }">
+						  			<option value="${pos.code }">${ pos.name}</option>
+						  		</c:forEach>
+						  	</select>
+		                </td>
 		              </tr>
 		            </table></td>
 	          <td width="20%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -63,7 +65,7 @@
            		<table id="userList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
            				<tr>
-           					<th>账号</th><th>姓名</th><th>权限</th><th>所在部门</th><th>联系电话</th><th>微博账号</th><th>管理</th>
+           					<th>账号</th><th>姓名</th><th>所在部门</th><th>职位类别</th><th>联系电话</th><th>微博账号</th><th>管理</th>
            				</tr>
            			</thead>
            			<tbody>
@@ -82,7 +84,6 @@
 	<script type="text/javascript" src="static/js/common/json/json2.js"></script>
 	<script type="text/javascript" language="javascript">
 		var userList = '${userList}';
-		var unionCode = "${unionCode}";
 		function showDiv(){
 			document.getElementById('lgdiv').style.display='block';
 		}

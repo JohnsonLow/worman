@@ -3,10 +3,11 @@ package com.workman.sysman.model;
 import java.io.Serializable;
 
 /**
- * 权限
+ * 权限 此类弃用
  * @author
  *
  */
+@Deprecated
 public class AuthModel implements Serializable {
 	
 	/**

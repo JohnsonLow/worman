@@ -20,19 +20,19 @@ public class AccountDaoImpl implements AccountDao {
 	private AccountMapper mapper;
 
 	@Override
-	public ResponseModel getAccountList(Integer level, Integer depCode,
-			String name, int page, int size, int currId) {
+	public ResponseModel getAccountList(Integer posCode, Integer depCode,
+			String name, int page, int size, AccountModel currAccount) {
 		ResponseModel res = new ResponseModel();
 		AccountWrapper wrapper = new AccountWrapper();
-		if (level == null) {
-			level = 0;
+		if (posCode == null) {
+			posCode = 0;
 		}
 		if (depCode == null) {
 			depCode = 0;
 		}
-		wrapper.setAuthLevel(level);
+		wrapper.setPosCode(posCode);
 		wrapper.setDepCode(depCode);
-		wrapper.setCurrId(currId);
+		wrapper.setCurrId(currAccount.getId());
 		if (StringUtility.isNotBlank(name)) {
 			wrapper.setName("%" + name + "%");
 		}
@@ -75,11 +75,10 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	@Override
-	public void updateAccount(String name, String phone, int depCode,
+	public void updateAccount(String name, String phone,
 			String weibo, int id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("currId", id);
-		map.put("depCode", depCode);
 		map.put("weibo", weibo);
 		map.put("name", name);
 		map.put("phone", phone);

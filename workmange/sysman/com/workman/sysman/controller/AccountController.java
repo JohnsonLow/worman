@@ -33,26 +33,29 @@ public class AccountController {
 	@RequestMapping("goAccountPage.do")
 	public String goAccountPage(HttpServletRequest req,ModelMap model){
 		req.getSession().setAttribute("intMainFrameSrc", "/account/goAccountPage.do");
-		model.addAttribute("authList",sysDao.getAuthList());
 		model.addAttribute("depList",sysDao.getDepartmentList());
+		model.addAttribute("posList",sysDao.getPositionList());
 		return "account/account_list";
 	}
 	
 	@RequestMapping("goAccountInfoPage.do")
 	public String goAccountInfoPage(@RequestParam(required=false) Integer id,
 			HttpServletRequest req,ModelMap model) throws Exception{
-		req.getSession().setAttribute("intMainFrameSrc", "/account/goAccountInfoPage.do");
+		String url = "/account/goAccountInfoPage.do";
 		if(id != null){
-			model.addAttribute("authInfo", mapper.writeValueAsString(dao.getAccount(id)));
+			url += "?id=" + id;
+		}
+		req.getSession().setAttribute("intMainFrameSrc", url);
+		if(id != null){
+			model.addAttribute("userInfo", mapper.writeValueAsString(dao.getAccount(id)));
 		}
 		model.addAttribute("posList",sysDao.getPositionList());
-		model.addAttribute("authList",sysDao.getAuthList());
 		model.addAttribute("depList",sysDao.getDepartmentList());
 		return "account/account_info";
 	}
 	@RequestMapping("getAccountList.do")
 	@ResponseBody
-	public ResponseModel getAccountList(Integer level,
+	public ResponseModel getAccountList(Integer posCode,
 			Integer depCode,String name,
 			Integer page,Integer size,HttpServletRequest req){
 		if(page == null){
@@ -64,7 +67,7 @@ public class AccountController {
 		ResponseModel result = null;
 		AccountModel currAccount = SessionUtils.getUser(req);
 		try {
-			result = dao.getAccountList(level, depCode, name, page, size,currAccount.getId());
+			result = dao.getAccountList(posCode, depCode, name, page, size,currAccount);
 		} catch (Exception e) {
 			SysLogUtils.error(AccountController.class, e, "查询账号信息出错");
 		}
@@ -78,18 +81,14 @@ public class AccountController {
 	 */
 	@RequestMapping("addOrUpdateAccount.do")
 	@ResponseBody
-	public int addOrUpdate(Integer type,
-			@RequestBody AccountModel account){
+	public int addOrUpdate(@RequestBody AccountModel account){
 		int result = 1;
 		try {
-			switch (type) {
-			case 1 :
-				dao.insertAccount(account);
-				break;
-			case 2 :
-				dao.updateAccount(account);
-				break;
-			}
+				if(account.getId() == 0){
+					dao.insertAccount(account);
+				}else{
+					dao.updateAccount(account);
+				}
 		}catch (Exception e) {
 			SysLogUtils.error(AccountController.class, e, "保存账号信息失败");
 			result = -1;

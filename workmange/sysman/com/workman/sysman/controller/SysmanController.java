@@ -6,14 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.workman.commons.util.SysLogUtils;
 import com.workman.sysman.dao.SysmanDao;
-import com.workman.sysman.model.AuthModel;
 import com.workman.sysman.model.DepartmentModel;
 import com.workman.sysman.model.PositionModel;
 
@@ -26,7 +24,7 @@ import com.workman.sysman.model.PositionModel;
 public class SysmanController {
 	@Autowired
 	private SysmanDao sysDao;
-	@RequestMapping("goAuthPage.do")
+	/*@RequestMapping("goAuthPage.do")
 	public String goAuthPage(HttpServletRequest req,
 			ModelMap model){
 		req.getSession().setAttribute("intMainFrameSrc", "/sysMan/goAuthPage.do");
@@ -34,10 +32,10 @@ public class SysmanController {
 	}
 	@RequestMapping("getAuthList.do")
 	@ResponseBody
-	public List<AuthModel> getAuthList(){
+	public List<AuthModel> getAuthList(HttpServletRequest req){
 		List<AuthModel> result = null;
 		try {
-			result = sysDao.getAuthList();
+			result = sysDao.getAuthList(SessionUtils.getUser(req).getAuth().getLevel());
 		} catch (Exception e) {
 			SysLogUtils.error(SysmanController.class, e, "查询权限信息出错");
 		}
@@ -64,7 +62,7 @@ public class SysmanController {
 			SysLogUtils.error(SysmanController.class, e, "删除权限信息出错");
 			return false;
 		}
-	}
+	}*/
 	
 	@RequestMapping("goDepartmentPage.do")
 	public String goDepartmentPage(HttpServletRequest req){

@@ -1,8 +1,5 @@
 package com.workman.operation.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.workman.commons.util.SysLogUtils;
 import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.AccountDao;
-import com.workman.sysman.dao.SysmanDao;
 import com.workman.sysman.model.AccountModel;
 
 @Controller
 @RequestMapping("/operation/*")
 public class OperationController {
-	@Autowired
-	private SysmanDao sysDao;
 	@Autowired
 	private AccountDao accountDao;
 	
@@ -34,17 +28,16 @@ public class OperationController {
 	@RequestMapping("goInfoModifyPage.do")
 	public String goInfoModifyPage(HttpServletRequest req,ModelMap model){
 		req.getSession().setAttribute("intMainFrameSrc", "/operation/goInfoModifyPage.do");
-		model.addAttribute("depList",sysDao.getDepartmentList());
 		return "operation/info_modify";
 	}
 	@RequestMapping("updateInfo.do")
 	@ResponseBody
 	public boolean updateInfo(String name,String phone,
-			int depCode,String weibo,HttpServletRequest req){
+			String weibo,HttpServletRequest req){
 		boolean result = true;
 		AccountModel curr = SessionUtils.getUser(req);
 		try {
-			accountDao.updateAccount(name,phone,depCode,weibo,curr.getId());
+			accountDao.updateAccount(name,phone,weibo,curr.getId());
 			SessionUtils.putUserInSession(req, accountDao.getAccount(curr.getId()));
 		} catch (Exception e) {
 			SysLogUtils.error(OperationController.class, e, "操作账号表失败");

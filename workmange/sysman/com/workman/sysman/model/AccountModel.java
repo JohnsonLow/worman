@@ -19,24 +19,26 @@ public class AccountModel implements Serializable{
 	private String password;
 	private String name;
 	private String phone;
-	private AuthModel auth;
-	private PositionModel postion;
+	private PositionModel pos;
 	private DepartmentModel department;
 	
+/*	private AuthModel auth;
 	public AuthModel getAuth() {
 		return auth;
 	}
 	public void setAuth(AuthModel auth) {
 		this.auth = auth;
-	}
-	public PositionModel getPostion() {
-		return postion;
-	}
-	public void setPostion(PositionModel postion) {
-		this.postion = postion;
-	}
+	}*/
+	
+	
 	public String getUserName() {
 		return userName;
+	}
+	public PositionModel getPos() {
+		return pos;
+	}
+	public void setPos(PositionModel pos) {
+		this.pos = pos;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;

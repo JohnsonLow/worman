@@ -11,8 +11,8 @@
 		<if test="name != null">
 			AND NAME LIKE #{name}
 		</if>
-		<if test="authLevel>0">
-			AND AUTH_LEVEL = #{authLevel}
+		<if test="posCode>0">
+			AND POSTION = #{posCode}
 		</if>
 		<if test="depCode>0">
 			AND DEPARTMENT_CODE = #{depCode}
@@ -25,10 +25,10 @@
 		<result column="name" property="name" />
 		<result column="phone" property="phone" />
 		<result column="weibo" property="weibo" />
-		<association property="auth" column="auth_level"
-			javaType="com.workman.sysman.model.AuthModel">
-			<result property="level" column="a_level" />
-			<result property="name" column="a_name" />
+		<association property="pos" column="pos_code"
+			javaType="com.workman.sysman.model.PositionModel">
+			<result property="code" column="p_code" />
+			<result property="name" column="p_name" />
 		</association>
 		<association property="department" column="department_code"
 			javaType="com.workman.sysman.model.DepartmentModel">
@@ -44,11 +44,11 @@
 		AC.PASSWORD,
 		AC.PHONE,
 		AC.WEIBO,
-		AU.LEVEL AS a_level,
-		AU.NAME AS a_name,
+		PO.CODE AS p_code,
+		PO.NAME AS p_name,
 		DE.CODE AS d_code,
 		DE.NAME AS d_name 
-		FROM ACCOUNT AC LEFT JOIN AUTH AU ON AC.AUTH_LEVEL = AU.LEVEL 
+		FROM ACCOUNT AC LEFT JOIN POSITION PO ON AC.POSTION = PO.CODE 
 		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
 		WHERE ID = #{id}
 	</select>
@@ -61,18 +61,18 @@
 		AC.PASSWORD,
 		AC.PHONE,
 		AC.WEIBO,
-		AU.LEVEL AS a_level,
-		AU.NAME AS a_name,
+		PO.CODE AS p_code,
+		PO.NAME AS p_name,
 		DE.CODE AS d_code,
-		DE.NAME AS d_name
-		FROM ACCOUNT AC LEFT JOIN AUTH AU ON AC.AUTH_LEVEL=AU.LEVEL  
+		DE.NAME AS d_name 
+		FROM ACCOUNT AC LEFT JOIN POSITION PO ON AC.POSTION = PO.CODE 
 		LEFT JOIN DEPARTMENT DE ON DE.CODE=AC.DEPARTMENT_CODE
 		WHERE  AC.ID != #{currId}
 		<if test="name != null">
 			AND AC.NAME LIKE #{name}
 		</if>
-		<if test="authLevel>0">
-			AND AC.AUTH_LEVEL = #{authLevel}
+		<if test="posCode>0">
+			AND POSTION = #{posCode}
 		</if>
 		<if test="depCode>0">
 			AND AC.DEPARTMENT_CODE = #{depCode}
@@ -88,11 +88,11 @@
 		AC.PASSWORD,
 		AC.PHONE,
 		AC.WEIBO,
-		AU.LEVEL AS a_level,
-		AU.NAME AS a_name,
+		PO.CODE AS p_code,
+		PO.NAME AS p_name,
 		DE.CODE AS d_code,
-		DE.NAME AS d_name
-		FROM ACCOUNT AC LEFT JOIN AUTH AU ON AC.AUTH_LEVEL = AU.LEVEL 
+		DE.NAME AS d_name 
+		FROM ACCOUNT AC LEFT JOIN POSITION PO ON AC.POSTION = PO.CODE 
 		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
 		WHERE AC.USERNAME = #{name}
 	</select>
@@ -104,27 +104,27 @@
 		AC.PASSWORD,
 		AC.PHONE,
 		AC.WEIBO,
-		AU.LEVEL AS a_level,
-		AU.NAME AS a_name,
+		PO.CODE AS p_code,
+		PO.NAME AS p_name,
 		DE.CODE AS d_code,
-		DE.NAME AS d_name
-		FROM ACCOUNT AC LEFT JOIN AUTH AU ON AC.AUTH_LEVEL = AU.LEVEL 
+		DE.NAME AS d_name 
+		FROM ACCOUNT AC LEFT JOIN POSITION PO ON AC.POSTION = PO.CODE 
 		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
 		WHERE AC.ID = #{id}
 	</select>
 	<insert id="insert" parameterType="com.workman.sysman.model.AccountModel">
 		INSERT INTO ACCOUNT
-		(USERNAME,NAME, PASSWORD,AUTH_LEVEL,DEPARTMENT_CODE,PHONE,WEIBO)VALUES(
-		#{userName},#{name},#{password},#{auth.level},#{department.code},#{phone},#{weibo}
+		(USERNAME,NAME, PASSWORD,POSTION,DEPARTMENT_CODE,PHONE,WEIBO)VALUES(
+		#{userName},#{name},#{password},#{pos.code},#{department.code},#{phone},#{weibo}
 		)
 	</insert>
-	<update id="update" parameterType="com.workman.sysman.model.AuthModel">
+	<update id="update" parameterType="com.workman.sysman.model.AccountModel">
 		UPDATE ACCOUNT SET
 		NAME = #{name},
 		PHONE = #{phone},
 		WEIBO = #{weibo},
 		PASSWORD = #{password},
-		AUTH_LEVEL = #{auth.level},
+		POSTION = #{pos.code},
 		DEPARTMENT_CODE = #{department.code}
 		WHERE ID = #{id}
 	</update>
@@ -137,7 +137,6 @@
 			PHONE = #{phone},
 		</if>
 		WEIBO = #{weibo},
-		DEPARTMENT_CODE = #{depCode}
 		WHERE ID = #{currId}
 	</update>
 	<update id="updatePwd" parameterType="map">

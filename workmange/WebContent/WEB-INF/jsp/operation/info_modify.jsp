@@ -23,31 +23,27 @@
 		<div class="frame_cont" id="infos">
 			<div class="">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					  <tr id="depDiv">
+					  	<th width="25%">所在部门：</th>
+					  	<td>${currUser.department.name }
+				           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+					  </tr>
+					  <tr id="posDiv">
+					  	<th width="25%">职位类别：</th>
+					  	<td>${currUser.pos.name }</td>
+					 </tr>
 					<tr>
-			  	<th width="25%">姓名：</th>
-			  	<td><input id="name" type="text" value="${currUser.name }" class="input_text240"/>
-		           <span id="userNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
+					  	<th width="25%">姓名：</th>
+					  	<td><input id="name" type="text" value="${currUser.name }" class="input_text240"/>
+			           <span id="userNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+				  	</tr>
 			  
 			  <tr>
 			  	<th width="25%">联系电话：</th>
 			  	<td><input id="phone" type="text" value="${currUser.phone }" class="input_text240"/>
 		           <span id="phoneMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
-			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>权限类别：</th>
-			  	<td><input id="authLevel" type="text" value="${currUser.auth.name }" class="input_text240" readonly="readonly"/>
-		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
-			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
-			  	<td><select id="dep" type="text" class="input_text240">
-			  			<c:forEach var="dep" items="${depList }">
-				  			<option value="${dep.code }">${ dep.name}</option>
-				  		</c:forEach>
-			  		</select>
-		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
+			  
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>微博账号：</th>
 			  	<td><input id="weibo" type="text" value="${currUser.weibo }" class="input_text240"/>
@@ -68,8 +64,8 @@
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="static/js/operation/info.js"></script>
 	<script type="text/javascript" src="static/js/common/json/json2.js"></script>
-	<script type="text/javascript" language="javascript">
-		var currDep = '${currUser.department.code }';
+	<script type="text/javascript">
+		var userName = '${currUser.userName}';
 	</script>
 </body>
 </html>

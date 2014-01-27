@@ -5,9 +5,9 @@ import com.workman.sysman.model.AccountModel;
 
 public interface AccountDao {
 	
-	ResponseModel getAccountList(Integer level,
+	ResponseModel getAccountList(Integer posCode,
 			Integer depCode,String name,
-			int page,int size,int currId);
+			int page,int size,AccountModel currAccount);
 
 	void insertAccount(AccountModel account);
 
@@ -20,7 +20,7 @@ public interface AccountDao {
 	AccountModel getAccount(String userName);
 
 
-	void updateAccount(String name, String phone, int depCode, String weibo,
+	void updateAccount(String name, String phone, String weibo,
 			int id);
 
 	void updatePwd(int id, String password);

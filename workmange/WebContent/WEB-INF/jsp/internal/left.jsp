@@ -1,4 +1,7 @@
+<%@page import="com.workman.permission.util.SessionUtils"%>
+<%@page import="com.workman.sysman.model.AccountModel"%>
 <%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -64,15 +67,14 @@ function showList(obj,index){
                 </div>
             </div>
        	</div>
+       	<%AccountModel currAccount = SessionUtils.getUser(request); 
+       	if(currAccount.getUserName().equals("sysadmin")){%>
        	<div class="d1">
             <div class="d2">
                 <div id="czygl" class="dv2" onclick="showList(this)">
                 	<img align="absmiddle" src="static/images/news/menu_icon6.gif"/>系统管理</div>
             </div>
-            <div class="dlist" style="display: none;"> 
-                <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/sysMan/goAuthPage.do'"><div class="ds1">权限管理</div></a>
-                </div>
+            <div class="dlist" style="display: none;">
                 <div class="d3">
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/sysMan/goDepartmentPage.do'"><div class="ds1">部门管理</div></a>
                 </div>
@@ -84,6 +86,7 @@ function showList(obj,index){
                 </div>
             </div>
         </div>
+        <%} %>
     </div>
     <div style="clear:both;"></div>
 </div>

@@ -1,8 +1,10 @@
-var numberReg = /^\d+$/;
 var mobileReg = /^(13[0-9]|15[0-9]|18[0|2|3|5|6|7|8|9])\d{8}$/;
 var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 $(function(){
-    $("select").eq(0).val(currDep);
+    if(userName == 'sysadmin'){
+        $("#depDiv").hide();
+        $("#posDiv").hide();
+    }
     $("#saveBtn").click(function() {
         var param = validateData();
         if(param){
@@ -45,7 +47,6 @@ function validateData(){
     }
     if(flag){
         var infos = {
-            depCode : $("#dep").val(),
             weibo : $("#weibo").val(),
             phone : phone,
             name : $("#name").val()

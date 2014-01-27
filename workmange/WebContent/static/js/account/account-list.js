@@ -15,8 +15,8 @@ function getInfo(page){
       size : size,
       msg : new Date().getTime()
     };
-    if($("#authSel").val()){
-        param.level = $("#authSel").val();
+    if($("#posSel").val()){
+        param.posCode = $("#posSel").val();
     }
     if($("#depSel").val()){
         param.depCode = $("#depSel").val();
@@ -41,8 +41,8 @@ function getInfo(page){
                         var res = '<tr>'+
                                     '<td>'+user.userName+'</td>'+
                                     '<td>'+user.name+'&nbsp;</td>'+
-                                    '<td>'+user.auth.level+'</td>'+
-                                    '<td>'+user.department.code+'</td>'+
+                                    '<td>'+user.department.name+'</td>'+
+                                    '<td>'+user.pos.name+'</td>'+
                                     '<td>'+user.phone+'</td>'+
                                     '<td>'+user.weibo+'</td>'+
                                     '<td>'+
@@ -68,8 +68,8 @@ function getInfo(page){
         }
     });
 }
-function goAccountInfo(type) {
-	window.location = "account/goAccountInfoPage.do?type="+type;
+function goAccountInfo() {
+	window.location = "account/goAccountInfoPage.do";
 }
 function delUser(uid){
 	if(confirm("确定删除账号?")){

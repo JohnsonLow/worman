@@ -15,7 +15,9 @@
 		<div class="btnarea">
 			<img src="static/images/news/btn_Exit.gif" style="cursor:pointer;"  onclick="inExitCompanyUser()"/>
 		</div>
-		<div style="margin-top:0px; margin-left:10px;width:140px;" class="btnarea"><span>登陆账号：</span><strong><%="sss" %></strong><br></div>
+		<div style="margin-top:0px; margin-left:10px;width:270px;word-wrap:break-word; " class="btnarea">
+			<span>登陆账号：</span><strong>${currUser.userName }</strong>
+			<span>(${currUser.name })</span></div>
 		微博任务管理系统
 	</div>
 </div>

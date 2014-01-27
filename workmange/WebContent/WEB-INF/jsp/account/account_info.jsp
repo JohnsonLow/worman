@@ -1,3 +1,5 @@
+<%@page import="com.workman.permission.util.SessionUtils"%>
+<%@page import="com.workman.sysman.model.AccountModel"%>
 <%@ page contentType="text/html;charset=utf-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
@@ -21,15 +23,13 @@
 <body> 
 <div class="frame">
 	<div class="frame_title">操作员管理 &gt; <span id="titleSpan"></span></div>
-	<input id="level" type="hidden" value="${userInfo.level }"/>
-    <input id="unionCode" type="hidden" value="${userInfo.unionCode }"/>
 	<div class="frame_cont">
 		<div class="">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			 <tr id="uidDiv">
+			 <tr id="userNameDiv">
 			    <th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>帐号：</th>
 			    <td> <input id=username type="text" class="input_text240" value="" maxlength="16"/>
-		          	<span style="margin-left:5px;color: gray;">账号由数字、字母或下划线组成</span>
+		          	<span style="margin-left:5px;color: gray;">账号由数字、字母或下划线组成，最大长度为20</span>
 		                 <span id="uidMsgSpan" style="margin-left:5px;color:red;"></span></td>
 			  </tr>
 			  <tr>
@@ -45,16 +45,16 @@
 			    <td><input id="conPwd" type="password" value="" class="input_text240"/>
 			     <span id="cpwdMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
-			  <tr>
+			  <tr id="authDiv">
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>权限类别：</th>
-			  	<td><select id="authSel" class="select-company select">
-			  		<c:forEach var="auth" items="${authList }">
-			  			<option value="${auth.level }">${ auth.name}</option>
+			  	<td><select id="posSel" class="select-company select">
+			  		<c:forEach var="pos" items="${posList }">
+			  			<option value="${pos.code }">${ pos.name}</option>
 			  		</c:forEach>
 			  	</select>
 		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
-			  <tr>
+			  <tr id="depDiv">
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
 			  	<td><select id="depSel" class="select-company select">
 			  		<c:forEach var="dep" items="${depList }">
@@ -64,18 +64,18 @@
 		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>微博账号：</th>
+			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>新浪微博账号：</th>
 			  	<td><input id="weibo" type="text" value="" class="input_text240"/>
 		           <span id="weiboMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
 			  	<th width="25%">姓名：</th>
-			  	<td><input id="name" type="text" value="${userInfo.userName }" class="input_text240"/>
+			  	<td><input id="name" type="text" value="" class="input_text240"/>
 		           <span id="userNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
 			  	<th width="25%">联系电话：</th>
-			  	<td><input id="phone" type="text" value="${userInfo.userName }" class="input_text240"/>
+			  	<td><input id="phone" type="text" value="" class="input_text240"/>
 		           <span id="phoneNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr><th></th><td><div class="frame_button">
@@ -99,7 +99,7 @@
 function showDiv(){
 document.getElementById('lgdiv').style.display='block';
 }
-var oldPwd = '${userInfo.password}';
+var userInfo = getJSONObject(${userInfo});
 </script>
 </body>
 </html>
