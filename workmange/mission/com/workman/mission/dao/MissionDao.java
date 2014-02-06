@@ -1,11 +1,11 @@
-package com.workman.mission.persistence;
+package com.workman.mission.dao;
 
 import java.util.List;
 
 import com.workman.mission.model.MissionModel;
 import com.workman.mission.persistence.wrapper.MissionWrapper;
 
-public interface MissionMapper {
+public interface MissionDao {
 	List<MissionModel> getMissions(MissionWrapper wrapper);
 	MissionModel getMission(int missionId);
 	void create(MissionModel mission);

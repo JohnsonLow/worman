@@ -22,15 +22,6 @@ public class MissionHandleModel implements Serializable {
 	private AccountModel toPeople;
 	private Date addTime;
 	private Date handleTime;
-	private HandleTypeModel handleType;
-	private List<MissionHandleModel> handls;
-	
-	public List<MissionHandleModel> getHandls() {
-		return handls;
-	}
-	public void setHandls(List<MissionHandleModel> handls) {
-		this.handls = handls;
-	}
 	public int getId() {
 		return id;
 	}
@@ -72,12 +63,6 @@ public class MissionHandleModel implements Serializable {
 	}
 	public void setHandleTime(Date handleTime) {
 		this.handleTime = handleTime;
-	}
-	public HandleTypeModel getHandleType() {
-		return handleType;
-	}
-	public void setHandleType(HandleTypeModel handleType) {
-		this.handleType = handleType;
 	}
 
 }

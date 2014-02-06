@@ -2,6 +2,7 @@ package com.workman.mission.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.workman.sysman.model.AccountModel;
 
@@ -18,6 +19,15 @@ public class MissionModel implements Serializable{
 	private Date createTime;
 	private Date handlerTime;
 	private Date commitTime;
+	
+	private List<MissionHandleModel> handls;
+	
+	public List<MissionHandleModel> getHandls() {
+		return handls;
+	}
+	public void setHandls(List<MissionHandleModel> handls) {
+		this.handls = handls;
+	}
 	public int getCode() {
 		return code;
 	}
