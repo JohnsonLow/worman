@@ -9,10 +9,13 @@
 
 <body>
 	<div id="insertDiv" class="out"
-		style="height: 220px; background: #22879E; display: none">
-		<input type="hidden" id="code" />
+		style="height: 258px; background: #22879E; display: none">
 		<table width="98%" border="0" cellpadding="0" cellspacing="1"
 			bgcolor="#cccccc">
+			<tr>
+				<th style="text-align: right">部门编号：</th>
+				<td style="text-align: left"><input class="out_input" id="code" /></td>
+			</tr>
 			<tr>
 				<th style="text-align: right">部门名称：</th>
 				<td style="text-align: left"><input class="out_input" id="name" /></td>

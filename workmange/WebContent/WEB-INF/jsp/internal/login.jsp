@@ -29,9 +29,7 @@
 <script type="text/javascript" src="static/js/sha-1.js"></script>
 <script type="text/javascript" src="static/js/internal/internal.js"></script>
 <script type="text/javascript">
-</script>
-<script type="text/javascript">
-	var baseUrl = '<%=request.getContextPath()%>';
+	var adminUserName = '${adminUser}';
 	
 	function loginsubmit(event) {
 		var keyCode = event.keyCode ? event.keyCode : event.which ? event.which

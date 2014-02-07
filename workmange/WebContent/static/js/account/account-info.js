@@ -18,8 +18,10 @@ function initInfo(){
         $("#weibo").val(userInfo.weibo);
         $("#name").val(userInfo.name);
         $("#phone").val(userInfo.phone);
+        $("#titleSpan").text("修改账号");
     }else{
         userInfo = {};
+        $("#titleSpan").text("添加账号");
     }
 }
 function addOrUpdate(){
@@ -62,6 +64,13 @@ function addOrUpdate(){
 	    $("#weiboMsgSpan").text("请输入正确的新浪微博账号");
 	    return;
 	}
+	var name = $("#name").val();
+	if(name && $.trim(name)){
+	    $("#userNameMsgSpan").text("");
+	}else{
+	    $("#userNameMsgSpan").text("用户姓名不可为空");
+	    return;
+	}
 	if(userInfo && !$.isEmptyObject(userInfo)){
     	if(pwd != userInfo.password){
     	    pwd = SHA1(pwd);
@@ -72,7 +81,7 @@ function addOrUpdate(){
 	userInfo.password = pwd;
 	userInfo.pos = {'code':parseInt($("#posSel").val(),10)};
 	userInfo.phone = $("#phone").val();
-	userInfo.name = $("#name").val();
+	userInfo.name = name;
 	userInfo.weibo = weibo;
 	$.ajax({ cache:false,
 			type : 'post',

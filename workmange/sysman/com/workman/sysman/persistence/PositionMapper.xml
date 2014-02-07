@@ -16,9 +16,9 @@
   
    <insert id="insert" parameterType="com.workman.sysman.model.PositionModel">
     INSERT INTO POSITION
-      (NAME, DESCRIPTION)
+      (CODE,NAME, DESCRIPTION)
     VALUES
-      (#{name}, #{description})
+      (#{code},#{name}, #{description})
   </insert>
   <update id="update" parameterType="com.workman.sysman.model.PositionModel">
     UPDATE POSITION SET

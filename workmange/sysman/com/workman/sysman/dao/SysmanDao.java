@@ -14,10 +14,10 @@ public interface SysmanDao {
 	void deleteAuth(String[] ids);
 	
 	List<DepartmentModel> getDepartmentList();
-	void addOrUpdateDep(DepartmentModel dep);
+	void addOrUpdateDep(DepartmentModel dep, int type);
 	void deleteDep(String[] codes);
 	
 	List<PositionModel> getPositionList();
-	void addOrUpdatePos(PositionModel pos);
+	void addOrUpdatePos(PositionModel pos, int type);
 	void deletePos(String[] codes);
 }

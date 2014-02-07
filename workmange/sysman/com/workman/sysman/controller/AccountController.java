@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.workman.commons.po.ResponseModel;
 import com.workman.commons.util.SysLogUtils;
-import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.AccountDao;
 import com.workman.sysman.dao.SysmanDao;
 import com.workman.sysman.model.AccountModel;
@@ -65,9 +64,9 @@ public class AccountController {
 			size = 10;
 		}
 		ResponseModel result = null;
-		AccountModel currAccount = SessionUtils.getUser(req);
+//		AccountModel currAccount = SessionUtils.getUser(req);
 		try {
-			result = dao.getAccountList(posCode, depCode, name, page, size,currAccount);
+			result = dao.getAccountList(posCode, depCode, name, page, size);
 		} catch (Exception e) {
 			SysLogUtils.error(AccountController.class, e, "查询账号信息出错");
 		}

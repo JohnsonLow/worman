@@ -19,7 +19,14 @@ public class MissionModel implements Serializable{
 	private Date createTime;
 	private Date handlerTime;
 	private Date commitTime;
+	private int missionType;
 	
+	public int getMissionType() {
+		return missionType;
+	}
+	public void setMissionType(int missionType) {
+		this.missionType = missionType;
+	}
 	private List<MissionHandleModel> handls;
 	
 	public List<MissionHandleModel> getHandls() {

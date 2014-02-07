@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
+
+
+
+import com.workman.commons.util.PropertiesUtils;
 import com.workman.commons.util.StringUtility;
 import com.workman.commons.util.SysLogUtils;
 import com.workman.permission.util.SessionUtils;
@@ -50,6 +54,7 @@ public class PermisionController {
 			Oauth oauth = new Oauth();
 			auth = oauth.authorize("code", "","");
 			model.addAttribute("weiboUrl",auth);
+			model.addAttribute("adminUser", PropertiesUtils.getSysUserName());
 		} catch (WeiboException e) {
 			e.printStackTrace();
 		}
@@ -57,9 +62,9 @@ public class PermisionController {
 	}
 	@RequestMapping("sysLoginValidator.do")
 	@ResponseBody
-	public String sysLogin(@RequestParam String userName,
-			@RequestParam String passWord,
-			@RequestParam String verificationCode,
+	public String sysLogin(@RequestParam(required=true) String userName,
+			@RequestParam(required=true) String passWord,
+			@RequestParam(required=true) String verificationCode,
 			HttpServletRequest req, HttpServletResponse res){
 		String data = "";
 		HttpSession session = req.getSession();
@@ -68,7 +73,14 @@ public class PermisionController {
 			data = "-1";// 验证码错误
 		}else{
 			try {
-				AccountModel account = accountDao.getAccount(userName);
+				AccountModel account = null;
+				if(userName.equals(PropertiesUtils.getSysUserName())){//判断是否为管理员用户
+					account = new AccountModel();
+					account.setUserName(userName);
+					account.setPassword(PropertiesUtils.getSysPwd());
+				}else{
+					account = accountDao.getAccount(userName);
+				}
 				if(account == null){
 					data = "-2";
 				}else{
@@ -76,7 +88,7 @@ public class PermisionController {
 						data = "1";
 						SessionUtils.putUserInSession(req, account);
 					}else{
-						data = "-3";
+						data = "-3";//密码错误
 					}
 				}
 			} catch (Exception e) {

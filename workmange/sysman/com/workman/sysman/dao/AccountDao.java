@@ -7,7 +7,7 @@ public interface AccountDao {
 	
 	ResponseModel getAccountList(Integer posCode,
 			Integer depCode,String name,
-			int page,int size,AccountModel currAccount);
+			int page,int size);
 
 	void insertAccount(AccountModel account);
 

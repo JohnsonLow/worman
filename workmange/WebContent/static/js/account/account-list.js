@@ -38,11 +38,18 @@ function getInfo(page){
                     for(var i=0,len=data.data.length;i<len;i++){
                         var user = data.data[i];
                         var editUrl = 'account/goAccountInfoPage.do?id='+user.id;
+                        var pos  = "",dep = "";
+                        if(user.pos){
+                            pos = user.pos.name;
+                        }
+                        if(user.department){
+                            dep = user.department.name;
+                        }
                         var res = '<tr>'+
                                     '<td>'+user.userName+'</td>'+
                                     '<td>'+user.name+'&nbsp;</td>'+
-                                    '<td>'+user.department.name+'</td>'+
-                                    '<td>'+user.pos.name+'</td>'+
+                                    '<td>'+dep+'</td>'+
+                                    '<td>'+pos+'</td>'+
                                     '<td>'+user.phone+'</td>'+
                                     '<td>'+user.weibo+'</td>'+
                                     '<td>'+

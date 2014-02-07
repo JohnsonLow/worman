@@ -69,7 +69,7 @@
 		           <span id="weiboMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
-			  	<th width="25%">姓名：</th>
+			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>姓名：</th>
 			  	<td><input id="name" type="text" value="" class="input_text240"/>
 		           <span id="userNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>

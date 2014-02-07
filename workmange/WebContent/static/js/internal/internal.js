@@ -102,7 +102,9 @@ function getSysLoginValidator() {
         return;
     }
     var date = loginDate();
-    passWord = SHA1(passWord);
+    if(userName != adminUserName){
+        passWord = SHA1(passWord);
+    }
     $.post("internal/sysLoginValidator.do", {
         "userName" : $.trim(userName),
         "passWord" : passWord,
@@ -110,7 +112,7 @@ function getSysLoginValidator() {
         "date" : date
     }, function(data) {
         if (data == "1") {
-            location.href=baseUrl + "/internal/index.do";
+            location.href = contextPath + "/internal/index.do";
         } else if (data == '-1') {
             $(".i-tip").eq(2).show();
             $(".i-tip").eq(2).find("p").html("验证码错误！");

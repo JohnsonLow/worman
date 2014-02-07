@@ -36,11 +36,13 @@ function showList(obj,index){
 <body>
 <div class="leftarea">
 	<div class="sv3">
+	<%AccountModel currAccount = SessionUtils.getUser(request); 
+   	if(!currAccount.getUserName().equals("sysadmin")){ %>
      <div class="d1">
      	<div class="d2">
      		<div class="dv2" onclick="showList(this)">
             	<img align="absmiddle" src="static/images/news/menu_icon1.gif"/>个人信息</div>
-        	</div>
+       	</div>
         	<div class="dlist" style="display: none;"> 
         		<div class="d3">
                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goPwdModifyPage.do'"><div class="ds1">密码修改</div></a>
@@ -56,19 +58,18 @@ function showList(obj,index){
                 	<img align="absmiddle" src="static/images/news/menu_icon5.gif"/>任务管理</div>
             </div>
             <div class="dlist" style="display: none;">
+            	 <div class="d3">
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">待处理任务</div></a>
+                </div>
             	<div class="d3">
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goMessagePage.do'"><div class="ds1">任务查看</div></a>
                 </div>
                 <div class="d3">
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">任务分配</div></a>
                 </div>
-                <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">任务处理类型</div></a>
-                </div>
             </div>
        	</div>
-       	<%AccountModel currAccount = SessionUtils.getUser(request); 
-       	if(currAccount.getUserName().equals("sysadmin")){%>
+       	<%}else{%>
        	<div class="d1">
             <div class="d2">
                 <div id="czygl" class="dv2" onclick="showList(this)">

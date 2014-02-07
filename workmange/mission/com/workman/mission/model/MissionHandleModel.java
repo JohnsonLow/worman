@@ -2,7 +2,6 @@ package com.workman.mission.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import com.workman.sysman.model.AccountModel;
 /**
@@ -22,6 +21,13 @@ public class MissionHandleModel implements Serializable {
 	private AccountModel toPeople;
 	private Date addTime;
 	private Date handleTime;
+	private int handleType;
+	public int getHandleType() {
+		return handleType;
+	}
+	public void setHandleType(int handleType) {
+		this.handleType = handleType;
+	}
 	public int getId() {
 		return id;
 	}

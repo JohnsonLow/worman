@@ -1,22 +1,25 @@
 var dataList;
 var flag = true;
+var intReg = /^[1-9][0-9]{3}$/;
+var type = 1;
 $(function() {
     initInfos();
     $("#addAuthBtn").click(function() {
         var param = {
+            code : $("#code").val(),
             name : $("#name").val(),
             description : $("#desc").val()
         };
-        var code = $("#code").val();
-        if (code) {
-            param.code = code;
+        if(!param.code || !intReg.test(param.code)){
+            alert("部门编号应为四位数字");
+            return;
         }
-        if (!param.name || !param.description) {
-            alert("名称和描述不可为空！");
+        if (!param.name) {
+            alert("部门名称不可为空");
             return;
         }
         $.ajax({
-            url : 'sysMan/addOrUpdateDep.do',
+            url : 'sysMan/addOrUpdateDep.do?type='+type,
             type : 'post',
             contentType : 'application/json',
             data : JSON.stringify(param),
@@ -29,7 +32,7 @@ $(function() {
                 }else if(data == '401'){
                     goLoginPage();
                 } else {
-                    alert("保存失败");
+                    alert("保存失败，可能已存在相应的部门编号");
                 }
             }
         });
@@ -45,8 +48,8 @@ function initInfos() {
                 dataList = data;
                 for (var i = 0, len = data.length; i < len; i++) {
                     var dt = data[i];
-                    var man = '<a href="javascript:;" onclick="modifyInfo(' + i + ')">修 改</a><a href="javascript:;" style="margin: 0 10px;">/</a><a href="javascript:;" onclick="delInfo(\'' + dt.code + '\')">删 除</a>';
-                    var res = '<tr><td><input name="cbox" style="border:0px;" type="checkbox" value="' + dt.code + '"/></td><td>' + dt.code + '</td><td>' + dt.name + '</td><td>' + dt.description + '</td><td>' + man + '</td></tr>';
+                    var man = '<a href="javascript:;" onclick="modifyInfo(' + i + ')">修 改</a><a href="javascript:;" style="margin: 0 10px;">/</a><a href="javascript:;" onclick="delInfo(\'' + dt.id + '\')">删 除</a>';
+                    var res = '<tr><td><input name="cbox" style="border:0px;" type="checkbox" value="' + dt.id + '"/></td><td>' + dt.code + '</td><td>' + dt.name + '</td><td>' + dt.description + '</td><td>' + man + '</td></tr>';
                     $("#depList").find("tbody").append(res);
                 }
             } else {
@@ -61,7 +64,9 @@ function initInfos() {
 }
 
 function modifyInfo(index) {
+    type = 2;
     $("#code").val(dataList[index].code);
+    $("#code").attr("readonly","true");
     $("#name").val(dataList[index].name);
     $("#desc").val(dataList[index].description);
     $('#insertDiv').mypop();
@@ -69,9 +74,11 @@ function modifyInfo(index) {
 
 function closeAddDiv() {
     $('#insertDiv').mypopClose();
+    $("#id").val("");
     $("#code").val("");
     $("#name").val("");
     $("#desc").val("");
+    type = 1;
 }
 
 function checkAll() {

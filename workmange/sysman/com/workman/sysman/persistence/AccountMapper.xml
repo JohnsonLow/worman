@@ -7,7 +7,7 @@
 	<cache />
 	<select id="getCount" resultType="int" parameterType="com.workman.sysman.persistence.wrapper.AccountWrapper">
 		SELECT COUNT(ID) FROM ACCOUNT 
-		WHERE 1=1 AND ID != #{currId}
+		WHERE 1=1 AND ID > 0
 		<if test="name != null">
 			AND NAME LIKE #{name}
 		</if>
@@ -67,7 +67,7 @@
 		DE.NAME AS d_name 
 		FROM ACCOUNT AC LEFT JOIN POSITION PO ON AC.POSTION = PO.CODE 
 		LEFT JOIN DEPARTMENT DE ON DE.CODE=AC.DEPARTMENT_CODE
-		WHERE  AC.ID != #{currId}
+		WHERE  1=1
 		<if test="name != null">
 			AND AC.NAME LIKE #{name}
 		</if>

@@ -21,7 +21,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public ResponseModel getAccountList(Integer posCode, Integer depCode,
-			String name, int page, int size, AccountModel currAccount) {
+			String name, int page, int size) {
 		ResponseModel res = new ResponseModel();
 		AccountWrapper wrapper = new AccountWrapper();
 		if (posCode == null) {
@@ -32,7 +32,7 @@ public class AccountDaoImpl implements AccountDao {
 		}
 		wrapper.setPosCode(posCode);
 		wrapper.setDepCode(depCode);
-		wrapper.setCurrId(currAccount.getId());
+//		wrapper.setCurrId(currAccount.getId());
 		if (StringUtility.isNotBlank(name)) {
 			wrapper.setName("%" + name + "%");
 		}

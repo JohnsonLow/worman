@@ -73,8 +73,8 @@ public class SysmanDaoImpl implements SysmanDao{
 	}
 
 	@Override
-	public void addOrUpdateDep(DepartmentModel dep) {
-		if(dep.getCode() != 0){
+	public void addOrUpdateDep(DepartmentModel dep, int type) {
+		if(type != 1){
 			depMapper.update(dep);
 		}else{
 			depMapper.insert(dep);
@@ -95,8 +95,8 @@ public class SysmanDaoImpl implements SysmanDao{
 	}
 
 	@Override
-	public void addOrUpdatePos(PositionModel pos) {
-		if(pos.getCode() == 0){
+	public void addOrUpdatePos(PositionModel pos, int type) {
+		if(type == 1){
 			posMapper.insert(pos);
 		}else{
 			posMapper.update(pos);

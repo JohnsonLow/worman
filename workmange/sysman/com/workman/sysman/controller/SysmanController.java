@@ -82,9 +82,9 @@ public class SysmanController {
 	}
 	@RequestMapping("addOrUpdateDep.do")
 	@ResponseBody
-	public boolean insertDep(@RequestBody DepartmentModel dep){
+	public boolean insertDep(int type ,@RequestBody DepartmentModel dep){
 		try {
-			sysDao.addOrUpdateDep(dep);
+			sysDao.addOrUpdateDep(dep,type);
 			return true;
 		} catch (Exception e) {
 			SysLogUtils.error(SysmanController.class, e, "更改部门信息出错");
@@ -120,9 +120,9 @@ public class SysmanController {
 	}
 	@RequestMapping("addOrUpdatePos.do")
 	@ResponseBody
-	public boolean addOrUpdatePos(@RequestBody PositionModel pos){
+	public boolean addOrUpdatePos(int type ,@RequestBody PositionModel pos){
 		try {
-			sysDao.addOrUpdatePos(pos);
+			sysDao.addOrUpdatePos(pos,type);
 			return true;
 		} catch (Exception e) {
 			SysLogUtils.error(SysmanController.class, e, "更改职位信息出错");
