@@ -11,10 +11,6 @@ $(function() {
             name : $("#name").val(),
             description : $("#desc").val()
         };
-        var id = $("#id").val();
-        if (id) {
-            param.id = id;
-        }
         if(!param.code || !intReg.test(param.code)){
             alert("职位编号应为四位数字");
             return;
@@ -53,8 +49,8 @@ function initInfos() {
                 dataList = data;
                 for (var i = 0, len = data.length; i < len; i++) {
                     var dt = data[i];
-                    var man = '<a href="javascript:;" onclick="modifyInfo(' + i + ')">修 改</a><a href="javascript:;" style="margin: 0 10px;">/</a><a href="javascript:;" onclick="delInfo(\'' + dt.id + '\')">删 除</a>';
-                    var res = '<tr><td><input name="cbox" style="border:0px;" type="checkbox" value="' + dt.id + '"/></td><td>' + dt.code + '</td><td>' + dt.name + '</td><td>' + dt.description + '</td><td>' + man + '</td></tr>';
+                    var man = '<a href="javascript:;" onclick="modifyInfo(' + i + ')">修 改</a><a href="javascript:;" style="margin: 0 10px;">/</a><a href="javascript:;" onclick="delInfo(\'' + dt.code + '\')">删 除</a>';
+                    var res = '<tr><td><input name="cbox" style="border:0px;" type="checkbox" value="' + dt.code + '"/></td><td>' + dt.code + '</td><td>' + dt.name + '</td><td>' + dt.description + '</td><td>' + man + '</td></tr>';
                     $("#posList").find("tbody").append(res);
                 }
             } else {

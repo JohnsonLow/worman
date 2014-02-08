@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.workman.commons.util.SysLogUtils;
+import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.SysmanDao;
 import com.workman.sysman.model.DepartmentModel;
 import com.workman.sysman.model.PositionModel;
@@ -66,7 +67,7 @@ public class SysmanController {
 	
 	@RequestMapping("goDepartmentPage.do")
 	public String goDepartmentPage(HttpServletRequest req){
-		req.getSession().setAttribute("intMainFrameSrc", "/sysMan/goDepartmentPage.do");
+		SessionUtils.putMainUrlInSession(req, "/sysMan/goDepartmentPage.do");
 		return "sysman/department";
 	}
 	@RequestMapping("getDepartmentList.do")

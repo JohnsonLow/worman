@@ -45,15 +45,6 @@
 			    <td><input id="conPwd" type="password" value="" class="input_text240"/>
 			     <span id="cpwdMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
-			  <tr id="authDiv">
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>权限类别：</th>
-			  	<td><select id="posSel" class="select-company select">
-			  		<c:forEach var="pos" items="${posList }">
-			  			<option value="${pos.code }">${ pos.name}</option>
-			  		</c:forEach>
-			  	</select>
-		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
-			  </tr>
 			  <tr id="depDiv">
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>所在部门：</th>
 			  	<td><select id="depSel" class="select-company select">
@@ -62,6 +53,15 @@
 			  		</c:forEach>
 			  	</select>
 		           <span id="depNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  </tr>
+			  <tr id="authDiv">
+			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>职位类别：</th>
+			  	<td><select id="posSel" class="select-company select">
+			  		<c:forEach var="pos" items="${posList }">
+			  			<option value="${pos.code }">${ pos.name}</option>
+			  		</c:forEach>
+			  	</select>
+		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>新浪微博账号：</th>

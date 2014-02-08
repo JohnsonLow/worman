@@ -59,13 +59,13 @@ function showList(obj,index){
             </div>
             <div class="dlist" style="display: none;">
             	 <div class="d3">
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/mission/goAddMissionPage.do'"><div class="ds1">新建任务</div></a>
+                </div>
+            	 <div class="d3">
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">待处理任务</div></a>
                 </div>
             	<div class="d3">
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goMessagePage.do'"><div class="ds1">任务查看</div></a>
-                </div>
-                <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">任务分配</div></a>
                 </div>
             </div>
        	</div>

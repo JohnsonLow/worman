@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.workman.commons.po.ResponseModel;
 import com.workman.commons.util.SysLogUtils;
+import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.AccountDao;
 import com.workman.sysman.dao.SysmanDao;
 import com.workman.sysman.model.AccountModel;
@@ -31,7 +32,7 @@ public class AccountController {
 	
 	@RequestMapping("goAccountPage.do")
 	public String goAccountPage(HttpServletRequest req,ModelMap model){
-		req.getSession().setAttribute("intMainFrameSrc", "/account/goAccountPage.do");
+		SessionUtils.putMainUrlInSession(req, "/account/goAccountPage.do");
 		model.addAttribute("depList",sysDao.getDepartmentList());
 		model.addAttribute("posList",sysDao.getPositionList());
 		return "account/account_list";
@@ -44,7 +45,7 @@ public class AccountController {
 		if(id != null){
 			url += "?id=" + id;
 		}
-		req.getSession().setAttribute("intMainFrameSrc", url);
+		SessionUtils.putMainUrlInSession(req, url);
 		if(id != null){
 			model.addAttribute("userInfo", mapper.writeValueAsString(dao.getAccount(id)));
 		}
@@ -83,12 +84,12 @@ public class AccountController {
 	public int addOrUpdate(@RequestBody AccountModel account){
 		int result = 1;
 		try {
-				if(account.getId() == 0){
-					dao.insertAccount(account);
-				}else{
-					dao.updateAccount(account);
-				}
-		}catch (Exception e) {
+			if (account.getId() == 0) {
+				dao.insertAccount(account);
+			} else {
+				dao.updateAccount(account);
+			}
+		} catch (Exception e) {
 			SysLogUtils.error(AccountController.class, e, "保存账号信息失败");
 			result = -1;
 		}

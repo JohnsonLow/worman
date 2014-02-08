@@ -136,7 +136,7 @@
 		<if test="phone != null">
 			PHONE = #{phone},
 		</if>
-		WEIBO = #{weibo},
+		WEIBO = #{weibo}
 		WHERE ID = #{currId}
 	</update>
 	<update id="updatePwd" parameterType="map">
