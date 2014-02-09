@@ -17,77 +17,40 @@
 						<div class="infoL">任务主题：</div>
 						<div class="infoR">
 							<span><input id='mTitle' type="text" class="txt-log-date"
-								style="width: 400px;" /></span> <span
-								style="margin-left: 5px; color: red;">*</span>
+								style="width: 435px;" /></span> 
+							<span style="margin-left: 5px; color: red;">*</span>
 						</div>
 					</div>
 					<div class="inform">
 						<div class="infoL">紧急程度：</div>
 						<div class="infoR">
-							<select class="select-company" style="width: 50px;"></select>
+							<span><select class="select-company" style="width: 80px;">
+								<option value="普通">普通</option>
+								<option value="中等">中等</option>
+								<option value="紧急">紧急</option>
+							</select></span>
 						</div>
 					</div>
 					<div class="inform">
-						<div class="infoL">账号开关：</div>
+						<div class="infoL">任务内容：</div>
 						<div class="infoR">
-							<select name="select" class="select-company"
-								style="width: 100px;">
-								<option>开启</option>
-								<option>关闭</option>
-							</select>
-						</div>
-					</div>
-					<div class="inform">
-						<div class="infoL">所属角色：</div>
-						<div class="infoR">
-							<span> <select name="select" class="select-company"
-								style="width: 100px;">
-									<option>高级操作员</option>
-									<option>普通操作员</option>
-							</select>
-							</span> <span style="color: red;">*</span>
-						</div>
-					</div>
-					<div class="inform">
-						<div class="infoL">所属单位：</div>
-						<div class="infoR">
-							<input type="text" class="txt-log-date" style="width: 160px;" />
-						</div>
-					</div>
-					<div class="inform">
-						<div class="infoL">真实姓名：</div>
-						<div class="infoR">
-							<input type="text" class="txt-log-date" style="width: 160px;" />
-						</div>
-					</div>
-					<div class="inform">
-						<div class="infoL">联系电话：</div>
-						<div class="infoR">
-							<input type="text" class="txt-log-date" style="width: 160px;" />
-						</div>
-					</div>
-					<div class="inform">
-						<div class="infoL">通信地址：</div>
-						<div class="infoR">
-							<input type="text" class="txt-log-date" style="width: 300px;" />
-						</div>
-					</div>
-					<div class="inform">
-						<div class="infoL">邮编：</div>
-						<div class="infoR">
-							<input type="text" class="txt-log-date" style="width: 160px;" />
-						</div>
-					</div>
-					<div class="inform">
-						<div class="infoL">电子邮箱：</div>
-						<div class="infoR">
-							<input type="text" class="txt-log-date" style="width: 160px;" />
+							<span><textarea rows="10" cols="80"></textarea></span>
+							<span style="margin-left: 5px; color: red;">*</span>
 						</div>
 					</div>
 					<div class="inform">
 						<div class="infoL">备注：</div>
 						<div class="infoR">
-							<input type="text" class="txt-log-date" style="width: 300px;" />
+							<span><input type="text" class="txt-log-date" style="width: 435px;" /></span>
+						</div>
+					</div>
+					<div class="inform">
+						<div class="infoL">受理人：</div>
+						<div class="infoR">
+							<span>受理部门：</span><span><select id="slDep" class="select-company" style="width: 120px;"></select></span>
+							<span style="margin-left:20px;">受理人：</span>
+							<span><select id="slPeo" class="select-company" style="width: 120px;">
+							<option value="-1">--请选择部门--</option></select></span>
 						</div>
 					</div>
 				</div>
@@ -95,14 +58,14 @@
 			</div>
 			<div class="info-foot"
 				style="margin-top: 30px; padding-top: 10px; border-top: 1px solid #ccc;">
-				<span style="margin-left: 200px;"><input type="button"
-					class="btn-tj" value=" " /></span> <span style="margin-left: 20px;"><input
-					type="button" class="btn-qx"
-					style="background: url(static/images/btn_fh.gif) no-repeat;" value=" "
-					onclick="location.href='account.html'" /></span>
+				<span style="margin-left: 200px;">
+				<input type="button" class="btn-tj" value=""/></span>
 			</div>
 		</div>
 		<div style="clear: both;"></div>
 	</div>
+	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
+	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
+	<script type="text/javascript" src="static/js/mission/add_mission.js"></script>
 </body>
 </html>

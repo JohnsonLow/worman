@@ -25,5 +25,7 @@ public interface AccountMapper {
 	void updateInfo(Map<String, Object> map);
 
 	void updatePwd(Map<String,Object> map);
+	
+	List<AccountModel> getByDep(int depCode);
 
 }

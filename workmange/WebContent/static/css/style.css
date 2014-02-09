@@ -192,7 +192,7 @@ margin-top:-150px!important;/*FF IE7 该值为本身高的一半*/margin-top:0px
 .m-tz-2{ width:212px; height:126px; float:left; background:url(../images/m-tz-1.jpg) no-repeat;}
 /*********************************************权限设置**************************************************/
 .authority-top-1{width:1600px; height:auto; left:0px; top:0px; bottom:0px; right:0px; position:absolute;}
-.authority-top{width:1200px; height:auto; left:0px; top:0px; bottom:0px; right:0px; position:absolute;}
+.authority-top{ height:auto; left:0px; top:0px; bottom:0px; right:0px; position:absolute;}
 .authority-down{width:100%; height:auto; left:0px; bottom:0px; position:absolute;}
 .authority-top-content{width:98%; margin:1%; float:left; height:auto;}
 .authority-top-content-top{width:100%; height:20px; float:left; border-bottom:3px solid #f6a917; text-align:left; line-height:20px; font-weight:bold; color:#000;}

@@ -112,6 +112,12 @@
 		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
 		WHERE AC.ID = #{id}
 	</select>
+	<select id="getAccount" parameterType="int" resultType="com.workman.sysman.model.AccountMode">
+		SELECT
+		AC.ID,
+		AC.NAME
+		FROM ACCOUNT WHERE DEPARTMENT_CODE = #{depCode}
+	</select>
 	<insert id="insert" parameterType="com.workman.sysman.model.AccountModel">
 		INSERT INTO ACCOUNT
 		(USERNAME,NAME, PASSWORD,POSTION,DEPARTMENT_CODE,PHONE,WEIBO)VALUES(

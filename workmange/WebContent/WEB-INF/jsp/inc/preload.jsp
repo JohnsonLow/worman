@@ -14,12 +14,5 @@
 	<div id="preloadDiv"class="preload"  style="display: none;">
 	加载中...
 	</div>
-	
-	<script type="text/javascript">
-		$("#preloadDiv").mypop();
-		$(function(){
-			$("#preloadDiv").mypopClose();
-		});
-	</script>
 </body>
 </html>

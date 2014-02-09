@@ -1,6 +1,7 @@
 package com.workman.sysman.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,11 @@ public class AccountDaoImpl implements AccountDao {
 		map.put("password", password);
 		mapper.updatePwd(map);
 
+	}
+
+	@Override
+	public List<AccountModel> getAccountByDep(Integer depCode) {
+		return mapper.getByDep(depCode);
 	}
 
 }

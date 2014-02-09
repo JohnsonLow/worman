@@ -2,6 +2,8 @@ package com.workman.sysman.controller;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -53,6 +55,16 @@ public class AccountController {
 		model.addAttribute("depList",sysDao.getDepartmentList());
 		return "account/account_info";
 	}
+	/**
+	 * 获取帐号信息
+	 * @param posCode
+	 * @param depCode
+	 * @param name
+	 * @param page
+	 * @param size
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping("getAccountList.do")
 	@ResponseBody
 	public ResponseModel getAccountList(Integer posCode,
@@ -65,7 +77,6 @@ public class AccountController {
 			size = 10;
 		}
 		ResponseModel result = null;
-//		AccountModel currAccount = SessionUtils.getUser(req);
 		try {
 			result = dao.getAccountList(posCode, depCode, name, page, size);
 		} catch (Exception e) {
@@ -73,6 +84,21 @@ public class AccountController {
 		}
 		return result;
 	}
+	
+	/**
+	 * 通过部门代码查询帐号信息
+	 * @param depCode
+	 * @return
+	 */
+	@RequestMapping("getAccountInfos.do")
+	@ResponseBody
+	public List<AccountModel> getAccountInfos(Integer depCode){
+		List<AccountModel> result = null;
+		result = dao.getAccountByDep(depCode);
+		return result;
+	}
+
+	
 	/**
 	 * 添加或更新账户信息
 	 * @param type 1：添加  2：更新
