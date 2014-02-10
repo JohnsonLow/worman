@@ -145,6 +145,7 @@
 @-moz-document url-prefix(){#uploadMulSel{left: -1325px;width:379px;font-size:120px;}
 /*.upload-select-btn:hover{background-position:0px -45px;}.upload-select-btn:active{background-position:0px -90px;}*/
 .upload-box{width:109px;position:relative;}
+.btn-n{padding:3px 10px 3px 10px; background:url(../images/news/bg_btn.gif) repeat-x; border:1px solid #8398ac;color:#000000;cursor: pointer;}
 
 
 

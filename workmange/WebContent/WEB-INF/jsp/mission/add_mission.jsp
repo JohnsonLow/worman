@@ -17,7 +17,7 @@
 						<div class="infoL">任务主题：</div>
 						<div class="infoR">
 							<span><input id='mTitle' type="text" class="txt-log-date"
-								style="width: 435px;" /></span> 
+								style="width: 445px;" /></span> 
 							<span style="margin-left: 5px; color: red;">*</span>
 						</div>
 					</div>
@@ -28,7 +28,7 @@
 								<option value="普通">普通</option>
 								<option value="中等">中等</option>
 								<option value="紧急">紧急</option>
-							</select></span>
+							</select></span><span style="margin-left: 5px; color: red;">*</span>
 						</div>
 					</div>
 					<div class="inform">
@@ -41,16 +41,16 @@
 					<div class="inform">
 						<div class="infoL">备注：</div>
 						<div class="infoR">
-							<span><input type="text" class="txt-log-date" style="width: 435px;" /></span>
+							<span><input type="text" class="txt-log-date" style="width: 445px;" /></span>
 						</div>
 					</div>
 					<div class="inform">
 						<div class="infoL">受理人：</div>
 						<div class="infoR">
-							<span>受理部门：</span><span><select id="slDep" class="select-company" style="width: 120px;"></select></span>
+							<span>受理部门：</span><span><select id="slDep" class="select-company" style="width: 140px;"></select></span>
 							<span style="margin-left:20px;">受理人：</span>
-							<span><select id="slPeo" class="select-company" style="width: 120px;">
-							<option value="-1">--请选择部门--</option></select></span>
+							<span><select id="slPeo" class="select-company" style="width: 140px;">
+							<option value="-1">--请选择部门--</option></select></span><span style="margin-left: 5px; color: red;">*</span>
 						</div>
 					</div>
 				</div>
@@ -59,7 +59,7 @@
 			<div class="info-foot"
 				style="margin-top: 30px; padding-top: 10px; border-top: 1px solid #ccc;">
 				<span style="margin-left: 200px;">
-				<input type="button" class="btn-tj" value=""/></span>
+				<input type="button" class="btn-n" value="创建并发送私信"/></span>
 			</div>
 		</div>
 		<div style="clear: both;"></div>
