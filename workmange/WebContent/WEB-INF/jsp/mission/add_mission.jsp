@@ -59,7 +59,7 @@
 			<div class="info-foot"
 				style="margin-top: 30px; padding-top: 10px; border-top: 1px solid #ccc;">
 				<span style="margin-left: 200px;">
-				<input type="button" class="btn-n" value="创建并发送私信"/></span>
+				<input id="createAndSend" type="button" class="btn-n" value="创建并发送私信"/></span>
 			</div>
 		</div>
 		<div style="clear: both;"></div>
@@ -67,5 +67,8 @@
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
 	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
 	<script type="text/javascript" src="static/js/mission/add_mission.js"></script>
+	<script type="text/javascript">
+		var accessUrl = '${accessUrl}';
+	</script>
 </body>
 </html>

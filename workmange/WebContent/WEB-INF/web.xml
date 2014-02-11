@@ -37,7 +37,7 @@
 		<filter-class>com.workman.permission.filter.AuthSessionFilter</filter-class>
 		<init-param>
 			<param-name>validityUrl</param-name>
-			<param-value>/internal/login.do,/internal/sysLoginValidator.do</param-value>
+			<param-value>/internal/login.do,/internal/sysLoginValidator.do,/auth.do,/accessUser.do</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

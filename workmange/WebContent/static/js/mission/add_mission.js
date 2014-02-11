@@ -1,5 +1,10 @@
 $(function(){
     initInfos();
+    $("#createAndSend").click(function(){
+        if(accessUrl){
+            window.open(accessUrl);
+        } 
+    });
 });
 function initInfos(){
     $("#preloadDiv").mypop();

@@ -12,16 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-
-
-
-
-
-
-
-
-
-
 import com.workman.commons.util.PropertiesUtils;
 import com.workman.commons.util.StringUtility;
 import com.workman.commons.util.SysLogUtils;
@@ -29,35 +19,19 @@ import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.AccountDao;
 import com.workman.sysman.model.AccountModel;
 
-import weibo4j.Oauth;
-import weibo4j.model.WeiboException;
-
 @Controller
 @RequestMapping("/internal/*")
 public class PermisionController {
 	@Autowired
 	private AccountDao accountDao;
 	@RequestMapping("index.do")
-	public String indexPage(String code,HttpServletRequest req){
-		try {
-			//TODO 绑定微博授权信息
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:login.do";
-		}
+	public String indexPage(HttpServletRequest req){
 		return "internal/index";
 	}
+	
 	@RequestMapping("login.do")
 	public String goLoginPage(ModelMap model){
-		String auth;
-		try {
-			Oauth oauth = new Oauth();
-			auth = oauth.authorize("code", "","");
-			model.addAttribute("weiboUrl",auth);
-			model.addAttribute("adminUser", PropertiesUtils.getSysUserName());
-		} catch (WeiboException e) {
-			e.printStackTrace();
-		}
+		model.addAttribute("adminUser", PropertiesUtils.getSysUserName());
 		return "internal/login";
 	}
 	@RequestMapping("sysLoginValidator.do")
