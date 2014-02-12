@@ -71,20 +71,19 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	@Override
-	public AccountModel getAccount(String userName) {
-		return mapper.getAccountByUserName(userName);
+	public AccountModel getAccount(String condition, int type) {
+		AccountModel account = null;
+		switch (type) {
+		case 1:
+			account = mapper.getAccountByUserName(condition);
+			break;
+		case 2:
+			account = mapper.getAccountByWeibo(condition);
+			break;
+		}
+		return account;
 	}
 
-	@Override
-	public void updateAccount(String name, String phone,
-			String weibo, int id) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("currId", id);
-		map.put("weibo", weibo);
-		map.put("name", name);
-		map.put("phone", phone);
-		mapper.updateInfo(map);
-	}
 
 	@Override
 	public void updatePwd(int id, String password) {
@@ -96,8 +95,8 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	@Override
-	public List<AccountModel> getAccountByDep(Integer depCode) {
-		return mapper.getByDep(depCode);
+	public List<AccountModel> getAccountByDep(Integer depCode,int currId) {
+		return mapper.getByDep(depCode,currId);
 	}
 
 }

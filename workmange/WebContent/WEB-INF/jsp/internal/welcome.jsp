@@ -6,6 +6,7 @@
 <jsp:include page="/WEB-INF/jsp/meta.jsp"></jsp:include>
 <script type="text/javascript" src="static/js/Calendar.js"></script>
 </head>
+	<body>
     <p style="padding-left:465px;padding-top:415px;line-height:20px;color:#777777;">登录时间：<script type="text/javascript">document.write(datetime.getNowDate());</script></p>
 </body>
 </html>

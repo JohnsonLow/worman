@@ -51,6 +51,20 @@ function showList(obj,index){
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goInfoModifyPage.do'"><div class="ds1">资料修改</div></a>
                 </div>
             </div>
+       </div>
+       <div class="d1">
+     	<div class="d2">
+     		<div class="dv2" onclick="showList(this)">
+            	<img align="absmiddle" src="static/images/news/icon_weibo.png" width="32px"/>微博管理</div>
+       	</div>
+        	<div class="dlist" style="display: none;"> 
+                 <div class="d3">
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/weibo/goAccessPage.do'"><div class="ds1">微博绑定并授权</div></a>
+                </div>
+                 <div class="d3">
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/weibo/goRevokeAccessPage.do'"><div class="ds1">授权收回</div></a>
+                </div>
+            </div>
        </div>  
         <div class="d1">
             <div class="d2">

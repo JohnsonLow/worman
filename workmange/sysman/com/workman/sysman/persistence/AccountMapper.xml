@@ -94,7 +94,23 @@
 		DE.NAME AS d_name 
 		FROM ACCOUNT AC LEFT JOIN POSITION PO ON AC.POSTION = PO.CODE 
 		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
-		WHERE AC.USERNAME = #{name}
+		WHERE AC.USERNAME = #{condition}
+	</select>
+	<select id="getAccountByWeibo" parameterType="string" resultMap="accountMap">
+		SELECT
+		AC.ID,
+		AC.NAME,
+		AC.USERNAME,
+		AC.PASSWORD,
+		AC.PHONE,
+		AC.WEIBO,
+		PO.CODE AS p_code,
+		PO.NAME AS p_name,
+		DE.CODE AS d_code,
+		DE.NAME AS d_name 
+		FROM ACCOUNT AC LEFT JOIN POSITION PO ON AC.POSTION = PO.CODE 
+		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
+		WHERE AC.WEIBO = #{condition}
 	</select>
 	<select id="getAccount" parameterType="int" resultMap="accountMap">
 		SELECT
@@ -116,7 +132,7 @@
 		SELECT
 		ID,
 		NAME
-		FROM ACCOUNT WHERE DEPARTMENT_CODE = #{depCode}
+		FROM ACCOUNT WHERE DEPARTMENT_CODE = #{depCode} AND ID != #{currId}
 	</select>
 	<insert id="insert" parameterType="com.workman.sysman.model.AccountModel">
 		INSERT INTO ACCOUNT
@@ -133,17 +149,6 @@
 		POSTION = #{pos.code},
 		DEPARTMENT_CODE = #{department.code}
 		WHERE ID = #{id}
-	</update>
-	<update id="updateInfo" parameterType="map">
-		UPDATE ACCOUNT SET
-		<if test="name != null">
-			NAME = #{name},
-		</if>
-		<if test="phone != null">
-			PHONE = #{phone},
-		</if>
-		WEIBO = #{weibo}
-		WHERE ID = #{currId}
 	</update>
 	<update id="updatePwd" parameterType="map">
 		UPDATE ACCOUNT SET PASSWORD=#{password}

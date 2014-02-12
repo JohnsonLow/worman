@@ -37,8 +37,11 @@ public class OperationController {
 		boolean result = true;
 		AccountModel curr = SessionUtils.getUser(req);
 		try {
-			accountDao.updateAccount(name,phone,weibo,curr.getId());
-			SessionUtils.putUserInSession(req, accountDao.getAccount(curr.getId()));
+			curr.setName(name);
+			curr.setPhone(phone);
+			curr.setWeibo(weibo);
+			accountDao.updateAccount(curr);
+			SessionUtils.putUserInSession(req, curr);
 		} catch (Exception e) {
 			SysLogUtils.error(OperationController.class, e, "操作账号表失败");
 			result = false;

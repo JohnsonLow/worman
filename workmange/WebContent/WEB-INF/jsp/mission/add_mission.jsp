@@ -1,3 +1,4 @@
+<%@page import="com.workman.permission.util.SessionUtils"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
@@ -69,6 +70,7 @@
 	<script type="text/javascript" src="static/js/mission/add_mission.js"></script>
 	<script type="text/javascript">
 		var accessUrl = '${accessUrl}';
+		var currId = '<%=SessionUtils.getUser(request).getId()%>';
 	</script>
 </body>
 </html>

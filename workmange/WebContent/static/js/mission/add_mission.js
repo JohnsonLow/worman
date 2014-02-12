@@ -1,9 +1,21 @@
 $(function(){
     initInfos();
     $("#createAndSend").click(function(){
-        if(accessUrl){
-            window.open(accessUrl);
-        } 
+        $.get("weibo/sysWeibo.do?msg=" + new Date().getTime(),{
+            id : currId
+        },function(data){
+            if(data == -1){
+                 window.location.href = accessUrl;
+            }else if(data == -2){
+                alert("获取微博授权失败");
+                window.location.href = contextPath + "internal/main.do";
+            } else if(data == -3){
+                alert("不存在的微博账号，请重新授权");
+                window.location.href = contextPath + "internal/main.do";
+            }else if(data == 1){
+                //创建任务，发送私信
+            }
+        });
     });
 });
 function initInfos(){

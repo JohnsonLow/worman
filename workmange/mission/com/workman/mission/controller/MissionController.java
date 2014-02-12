@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.workman.commons.util.WeiboUtils;
 import com.workman.mission.dao.MissionDao;
 import com.workman.mission.model.MissionModel;
 import com.workman.permission.util.SessionUtils;
@@ -20,12 +19,11 @@ public class MissionController {
 	@RequestMapping("goAddMissionPage.do")
 	public String goAddMissionPage(HttpServletRequest req,ModelMap model){
 		SessionUtils.putMainUrlInSession(req, "/mission/goAddMissionPage.do");
-		model.addAttribute("accessUrl", WeiboUtils.getAccessWeiboUrl());
 		return "mission/add_mission";
 	}
 	@RequestMapping("createMission")
 	public String createMission(MissionModel mission){
-		mDao.create(mission);//创建人物
+		mDao.create(mission);//创建任务
 		//发送私信
 		return "1";
 	}

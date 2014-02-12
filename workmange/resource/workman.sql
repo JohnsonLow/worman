@@ -10,10 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50512
 File Encoding         : 65001
 
-Date: 2014-02-07 16:52:59
+Date: 2014-02-12 17:26:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for `access_token`
+-- ----------------------------
+DROP TABLE IF EXISTS `access_token`;
+CREATE TABLE `access_token` (
+  `uid` varchar(50) NOT NULL COMMENT '微博账号id',
+  `token` varchar(100) NOT NULL COMMENT '授权token',
+  `account_id` int(8) NOT NULL COMMENT '站内账号ID',
+  `weibo_domain` varchar(50) NOT NULL COMMENT '微博账号',
+  PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微博认证信息';
+
+-- ----------------------------
+-- Records of access_token
+-- ----------------------------
+INSERT INTO access_token VALUES ('1752877703', '2.00BZtcuB9hdppDfe5e2f03953BGpGE', '1', 'candicelyw');
+
 -- ----------------------------
 -- Table structure for `account`
 -- ----------------------------
@@ -33,13 +50,15 @@ CREATE TABLE `account` (
   UNIQUE KEY `uk_account_weibo` (`weibo`),
   KEY `pk_account_dep_code` (`department_code`),
   KEY `pk_account_pos_code` (`postion`),
-  CONSTRAINT `pk_account_pos_code` FOREIGN KEY (`postion`) REFERENCES `position` (`code`),
-  CONSTRAINT `pk_account_dep_code` FOREIGN KEY (`department_code`) REFERENCES `department` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='员工账号表';
+  CONSTRAINT `pk_account_dep_code` FOREIGN KEY (`department_code`) REFERENCES `department` (`code`),
+  CONSTRAINT `pk_account_pos_code` FOREIGN KEY (`postion`) REFERENCES `position` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='员工账号表';
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
+INSERT INTO account VALUES ('1', 'sdf', 'c984aed014aec7623a54f0591da07a85fd4b762d', null, '1002', '测试人员', '18601235215', 'lyw1223@163.com', '1001');
+INSERT INTO account VALUES ('2', 'test002', 'c984aed014aec7623a54f0591da07a85fd4b762d', null, '1002', '测试2', '', 'luochen13@sina.cn', '1002');
 
 -- ----------------------------
 -- Table structure for `auth`
@@ -151,19 +170,5 @@ CREATE TABLE `position` (
 -- ----------------------------
 -- Records of position
 -- ----------------------------
-INSERT INTO position VALUES ('1111', 'ss', 'ss');
-
--- ----------------------------
--- Table structure for `weiboinfo`
--- ----------------------------
-DROP TABLE IF EXISTS `weiboinfo`;
-CREATE TABLE `weiboinfo` (
-  `username` varchar(50) NOT NULL COMMENT '微博账号',
-  `screen_name` varchar(100) DEFAULT NULL COMMENT '昵称',
-  `image_url` varchar(100) DEFAULT NULL COMMENT '头像地址',
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微博账号信息';
-
--- ----------------------------
--- Records of weiboinfo
--- ----------------------------
+INSERT INTO position VALUES ('1001', '部门经理', '部门经理');
+INSERT INTO position VALUES ('1002', '普通员工', '普通员工');

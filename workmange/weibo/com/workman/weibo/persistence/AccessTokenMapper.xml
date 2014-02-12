@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.weibo.persistence.AccessTokenMapper">
+
+  <cache />
+  
+  <select id="getByAccountId" parameterType="int" resultType="com.workman.weibo.model.AccessTokenModel">
+	    SELECT
+	      UID,
+	      TOKEN,
+	      ACCOUNT_ID AS accountId,
+	      WEIBO_DOMAIN as weiboDomain
+	    FROM ACCESS_TOKEN
+	    WHERE ACCOUNT_ID = #{accountId}
+  </select>
+  
+   <insert id="add" parameterType="com.workman.weibo.model.AccessTokenModel">
+    INSERT INTO ACCESS_TOKEN
+      (UID,TOKEN, ACCOUNT_ID,WEIBO_DOMAIN)
+    VALUES
+      (#{uid},#{token}, #{accountId},#{weiboDomain})
+  </insert>
+  <update id="update" parameterType="com.workman.weibo.model.AccessTokenModel">
+    UPDATE ACCESS_TOKEN SET
+      UID = #{uid},
+      TOKEN = #{token},
+      WEIBO_DOMAIN = #{weiboDomain}
+    WHERE ACCOUNT_ID = #{accountId}
+  </update>
+  
+</mapper>

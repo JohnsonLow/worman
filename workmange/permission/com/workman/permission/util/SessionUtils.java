@@ -3,16 +3,21 @@ package com.workman.permission.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import weibo4j.http.AccessToken;
-
 import com.workman.sysman.model.AccountModel;
-
+import com.workman.weibo.model.AccessTokenModel;
+/**
+ * 对session进行相关操作
+ * 当前登录用户的存取
+ * 当前访问URL的存取
+ * @author lyw
+ *
+ */
 public class SessionUtils {
 	
 	public static final String KEY_USER = "currUser";
 	
 	public static final String KEY_MAIN_FRAME = "intMainFrameSrc";
-	public static final String KEY_ACCESS_TK = "weiboAccessToken";
+	public static final String KEY_TOKEN = "currAccessToken";
 	
 	public static void putUserInSession(HttpServletRequest req,AccountModel account){
 		req.getSession().setAttribute(KEY_USER, account);
@@ -45,12 +50,21 @@ public class SessionUtils {
 		HttpSession session = req.getSession();
 		session.removeAttribute(KEY_USER);
 		session.removeAttribute(KEY_MAIN_FRAME);
-		session.removeAttribute(KEY_ACCESS_TK);
+		session.removeAttribute(KEY_TOKEN);
 	}
-	public static void putAccessToken(AccessToken tok, HttpServletRequest req) {
-		req.getSession().setAttribute(KEY_ACCESS_TK, tok);
+	public static void putAccessToken(HttpServletRequest req,
+			AccessTokenModel tokenModel) {
+		req.getSession().setAttribute(KEY_TOKEN, tokenModel);
 	}
-	public static Object getAccessToken(HttpServletRequest req){
-		return req.getSession().getAttribute(KEY_ACCESS_TK);
+	public static AccessTokenModel getAccessToken(HttpServletRequest req){
+		Object obj = req.getSession().getAttribute(KEY_TOKEN);
+		if(obj != null){
+			return (AccessTokenModel) obj;
+		}else{
+			return null;
+		}
+	}
+	public static void removeAccessToken(HttpServletRequest req){
+		req.getSession().removeAttribute(KEY_TOKEN);
 	}
 }

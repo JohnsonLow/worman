@@ -53,7 +53,7 @@ public class PermisionController {
 					account.setUserName(userName);
 					account.setPassword(PropertiesUtils.getSysPwd());
 				}else{
-					account = accountDao.getAccount(userName);
+					account = accountDao.getAccount(userName, 1);
 				}
 				if(account == null){
 					data = "-2";

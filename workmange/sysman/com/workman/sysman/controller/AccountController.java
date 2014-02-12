@@ -92,9 +92,10 @@ public class AccountController {
 	 */
 	@RequestMapping("getAccountInfos.do")
 	@ResponseBody
-	public List<AccountModel> getAccountInfos(Integer depCode){
+	public List<AccountModel> getAccountInfos(Integer depCode,
+			HttpServletRequest req){
 		List<AccountModel> result = null;
-		result = dao.getAccountByDep(depCode);
+		result = dao.getAccountByDep(depCode,SessionUtils.getUser(req).getId());
 		return result;
 	}
 
