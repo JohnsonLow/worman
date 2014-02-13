@@ -11,22 +11,22 @@
 	      UID,
 	      TOKEN,
 	      ACCOUNT_ID AS accountId,
-	      WEIBO_DOMAIN as weiboDomain
+	      WEIBO_NAME as weiboName
 	    FROM ACCESS_TOKEN
 	    WHERE ACCOUNT_ID = #{accountId}
   </select>
   
    <insert id="add" parameterType="com.workman.weibo.model.AccessTokenModel">
     INSERT INTO ACCESS_TOKEN
-      (UID,TOKEN, ACCOUNT_ID,WEIBO_DOMAIN)
+      (UID,TOKEN, ACCOUNT_ID,WEIBO_NAME)
     VALUES
-      (#{uid},#{token}, #{accountId},#{weiboDomain})
+      (#{uid},#{token}, #{accountId},#{weiboName})
   </insert>
   <update id="update" parameterType="com.workman.weibo.model.AccessTokenModel">
     UPDATE ACCESS_TOKEN SET
       UID = #{uid},
       TOKEN = #{token},
-      WEIBO_DOMAIN = #{weiboDomain}
+      WEIBO_NAME = #{weiboName}
     WHERE ACCOUNT_ID = #{accountId}
   </update>
   

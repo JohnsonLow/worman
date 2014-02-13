@@ -37,6 +37,7 @@ function showList(obj,index){
 <div class="leftarea">
 	<div class="sv3">
 	<%AccountModel currAccount = SessionUtils.getUser(request); 
+	String contextPath = request.getContextPath();
    	if(!currAccount.getUserName().equals("sysadmin")){ %>
      <div class="d1">
      	<div class="d2">
@@ -45,10 +46,10 @@ function showList(obj,index){
        	</div>
         	<div class="dlist" style="display: none;"> 
         		<div class="d3">
-                   <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goPwdModifyPage.do'"><div class="ds1">密码修改</div></a>
+                   <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/operation/goPwdModifyPage.do'"><div class="ds1">密码修改</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/operation/goInfoModifyPage.do'"><div class="ds1">资料修改</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/operation/goInfoModifyPage.do'"><div class="ds1">资料修改</div></a>
                 </div>
             </div>
        </div>
@@ -59,10 +60,10 @@ function showList(obj,index){
        	</div>
         	<div class="dlist" style="display: none;"> 
                  <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/weibo/goAccessPage.do'"><div class="ds1">微博绑定并授权</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/weibo/goAccessPage.do'"><div class="ds1">微博绑定并授权</div></a>
                 </div>
                  <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/weibo/goRevokeAccessPage.do'"><div class="ds1">授权收回</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/weibo/goRevokeAccessPage.do'"><div class="ds1">授权收回</div></a>
                 </div>
             </div>
        </div>  
@@ -73,13 +74,13 @@ function showList(obj,index){
             </div>
             <div class="dlist" style="display: none;">
             	 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/mission/goAddMissionPage.do'"><div class="ds1">新建任务</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/mission/goAddMissionPage.do'"><div class="ds1">新建任务</div></a>
                 </div>
             	 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goAppPage.do'"><div class="ds1">待处理任务</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/ServiceInform/goAppPage.do'"><div class="ds1">待处理任务</div></a>
                 </div>
             	<div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/ServiceInform/goMessagePage.do'"><div class="ds1">任务查看</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/ServiceInform/goMessagePage.do'"><div class="ds1">任务查看</div></a>
                 </div>
             </div>
        	</div>
@@ -91,13 +92,13 @@ function showList(obj,index){
             </div>
             <div class="dlist" style="display: none;">
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/sysMan/goDepartmentPage.do'"><div class="ds1">部门管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/sysMan/goDepartmentPage.do'"><div class="ds1">部门管理</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/sysMan/goPositionPage.do'"><div class="ds1">职位管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/sysMan/goPositionPage.do'"><div class="ds1">职位管理</div></a>
                 </div>
                 <div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=request.getContextPath()%>/account/goAccountPage.do'"><div class="ds1">帐号管理</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/account/goAccountPage.do'"><div class="ds1">帐号管理</div></a>
                 </div>
             </div>
         </div>

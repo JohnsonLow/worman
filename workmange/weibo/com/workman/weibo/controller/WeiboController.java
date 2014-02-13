@@ -22,6 +22,8 @@ import com.workman.weibo.model.AccessTokenModel;
 import weibo4j.Oauth;
 import weibo4j.Users;
 import weibo4j.http.AccessToken;
+import weibo4j.http.HttpClient;
+import weibo4j.http.Response;
 import weibo4j.model.User;
 import weibo4j.model.WeiboException;
 
@@ -56,18 +58,18 @@ public class WeiboController {
 			User user = getWeiboUesr(tok.getAccessToken(),tok.getUid());
 			AccountModel account = SessionUtils.getUser(req);
 			if(account == null){
-				result = "<script>alert('认证失败，登陆微博与用户绑定微博不一致！');window.location.href='internal/index.do';</script>";
+				result = "<script>alert('认证失败，登陆微博与用户绑定微博不一致！');window.location.href='../internal/welcome.do';</script>";
 			}else{
 				AccessTokenModel tokenModel = weiboDao.addOrUpdateToken(tok, user,account);
 				SessionUtils.putAccessToken(req, tokenModel);
-				result = "<script>alert('认证成功！');window.location.href='internal/index.do';</script>";
+				result = "<script>alert('认证成功！');window.location.href='../internal/welcome.do';</script>";
 			}
 		} catch (WeiboException e) {
 			SysLogUtils.error(getClass(), e, "获取微博认证失败");
-			result = "<script>alert('认证出错，请重新认证');window.location.href='internal/index.do';</script>";
+			result = "<script>alert('认证出错，请重新认证');window.location.href='../internal/welcome.do';</script>";
 		}catch(Exception e){
 			SysLogUtils.error(getClass(), e, "保存微博认证失败");
-			result = "<script>alert('与账号绑定失败！');window.location.href='internal/index.do';</script>";
+			result = "<script>alert('与账号绑定失败！');window.location.href='../internal/welcome.do';</script>";
 		}
 		res.getWriter().print(result);
 	}
@@ -104,6 +106,33 @@ public class WeiboController {
 			ModelMap model){
 		model.addAttribute("accessUrl", WeiboUtils.getAccessWeiboUrl());
 		return "weibo/access";
+	}
+	@RequestMapping("goRevokeAccessPage.do")
+	public String goRevokeAccessPage(HttpServletRequest req){
+		SessionUtils.removeMainUrl(req);
+		return "weibo/revoke";
+	}
+	@RequestMapping("revoke.do")
+	@ResponseBody
+	public int revokeAccess(HttpServletRequest req){
+		HttpClient client = new HttpClient();
+		int result = 0;
+		try {
+			AccessTokenModel token = SessionUtils.getAccessToken(req);
+			if(token != null){
+				client.setToken(token.getToken());
+				Response res = client.get("https://api.weibo.com/oauth2/revokeoauth2?access_token="+token.getToken());
+				if(res.asJSONObject().getBoolean("result")){
+					result = 1;
+				}
+			}else{
+				result = -1;
+			}
+		} catch (Exception e) {
+			SysLogUtils.error(getClass(), e, "收回授权失败！");
+			result = -2;
+		}
+		return result;
 	}
 	private AccessTokenModel getAccessToken(HttpServletRequest req,Integer id) {
 		AccessTokenModel token = SessionUtils.getAccessToken(req);

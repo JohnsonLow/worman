@@ -60,7 +60,9 @@
 			<div class="info-foot"
 				style="margin-top: 30px; padding-top: 10px; border-top: 1px solid #ccc;">
 				<span style="margin-left: 200px;">
-				<input id="createAndSend" type="button" class="btn-n" value="创建并发送私信"/></span>
+				<input id="createAndSend" type="button" class="btn-n" value="创建并发送微博通知"/>
+				<input id="create" type="button" class="btn-n" value="只创建任务"/>
+				<input id="send" type="button" class="btn-n" value="发送微博通知"/></span>
 			</div>
 		</div>
 		<div style="clear: both;"></div>

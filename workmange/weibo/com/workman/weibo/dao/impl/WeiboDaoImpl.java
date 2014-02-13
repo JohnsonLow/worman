@@ -24,12 +24,12 @@ public class WeiboDaoImpl implements WeiboDao {
 			tokenModel.setUid(token.getUid());
 			tokenModel.setAccountId(account.getId());
 			tokenModel.setToken(token.getAccessToken());
-			tokenModel.setWeiboDomain(user.getUserDomain());
+			tokenModel.setWeiboName(user.getScreenName());
 			mapper.add(tokenModel);
 		}else{//更新
 			tokenModel.setUid(token.getUid());
 			tokenModel.setToken(token.getAccessToken());
-			tokenModel.setWeiboDomain(user.getUserDomain());
+			tokenModel.setWeiboName(user.getScreenName());
 			mapper.update(tokenModel);
 		}
 		return tokenModel;

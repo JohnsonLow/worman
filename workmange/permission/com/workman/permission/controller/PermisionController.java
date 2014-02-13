@@ -12,18 +12,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+
 import com.workman.commons.util.PropertiesUtils;
 import com.workman.commons.util.StringUtility;
 import com.workman.commons.util.SysLogUtils;
 import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.AccountDao;
 import com.workman.sysman.model.AccountModel;
+import com.workman.weibo.dao.WeiboDao;
 
 @Controller
 @RequestMapping("/internal/*")
 public class PermisionController {
 	@Autowired
 	private AccountDao accountDao;
+	
+	@Autowired
+	private WeiboDao weiboDao;
+	
 	@RequestMapping("index.do")
 	public String indexPage(HttpServletRequest req){
 		return "internal/index";
@@ -61,6 +67,7 @@ public class PermisionController {
 					if(account.getPassword().equals(passWord)){
 						data = "1";
 						SessionUtils.putUserInSession(req, account);
+						SessionUtils.putAccessToken(req, weiboDao.getToken(account.getId()));
 					}else{
 						data = "-3";//密码错误
 					}
@@ -89,6 +96,10 @@ public class PermisionController {
 		if(StringUtility.isNotBlank(url)){
 			return "redirect:"+url;
 		}
+		return "redirect:/internal/welcome.do";
+	}
+	@RequestMapping("welcome.do")
+	public String goWelcomePage(){
 		return "internal/welcome";
 	}
 	@RequestMapping("logout.do")

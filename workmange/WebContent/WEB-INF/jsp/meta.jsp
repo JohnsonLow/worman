@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String contextPath = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/";
 %>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,7 +12,7 @@
 <link href="static/css/elements.css" rel="stylesheet" type="text/css" />
 <link href="static/css/style.css" rel="stylesheet" type="text/css" />
 <script>
-	var contextPath = '<%=path%>';
+	var contextPath = '<%=contextPath%>';
 	function goLoginPage(){
 		 alert("您还未登录或登录已过期,请重新登录!");
          window.parent.location.href = contextPath + "/internal/login.do";

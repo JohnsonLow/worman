@@ -13,15 +13,17 @@ public class AccessTokenModel implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5558415653995636144L;
-	private String weiboDomain;
+	private String weiboName;
 	private String token;
 	private int accountId;
 	private String uid;
-	public String getWeiboDomain() {
-		return weiboDomain;
+	
+	
+	public String getWeiboName() {
+		return weiboName;
 	}
-	public void setWeiboDomain(String weiboDomain) {
-		this.weiboDomain = weiboDomain;
+	public void setWeiboName(String weiboName) {
+		this.weiboName = weiboName;
 	}
 	public String getToken() {
 		return token;

@@ -18,45 +18,51 @@
 		color: #c09853;
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 		font-size: 14px;
+		width:300px;
 	}
 	.alert h4 {
 		color: #c09853;
 		font-size: 18px;
 		font-family: inherit;
+		margin : 10px 0;
+		text-align : cent;
 		font-weight: bold;
 		line-height: 20px;
 	}
-	.alert strong a{
+	.alert a{
 		font-size: 14px;
 		color: #c09853;
+	}
+	.alert span{
+		margin: 20px 20px;
 	}
 	</style>
 </head>
 <body style="">
 	<div class="alert" style="display:none;">
-	       	<h4>提示</h4>
-	       	你已进行授权！如果要更改授权账号，请先进行  <strong><a href="weibo/goRevokeAccessPage.do">授权收回</a></strong> 操作！</div>
+	       	提示
+	       	<h4>确认取消授权？</h4> 
+	       	<span><a href="javascript:;" onclick="revokeAccess()">确定</a></span><span><a href="javascript:;" onclick="goWelcomePage()">取消</a></span></div>
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
 	<script type="text/javascript">
-		var id = '${currUser.id}';
-		var accessUrl = '${accessUrl}';
 		$(function(){
-			$.get('weibo/sysWeibo.do?msg=' + new Date().getTime(),{
-				id : id
-			},function(data){
-				if(data == -1){
-					window.location.href = accessUrl;
-	            }else if(data == -2){
-	                alert("获取微博授权失败，请重新授权");
-	                window.location.href = accessUrl;
-	            } else if(data == -3){
-	            	alert("不存在的微博账号，请重新授权");
-	            	window.location.href = accessUrl;
-	            }else if(data == 1){
-	            	$(".alert").mypop();
-	            }
-			});
+			$(".alert").mypop();
 		});
+		function goWelcomePage(){
+			window.parent.location.href = contextPath + '/internal/index.do';
+		}
+		function revokeAccess(){
+			$.get('weibo/revoke.do', function(data){
+				if(data == 1){
+					alert("成功收回授权！");
+				} else if(data == -1){
+					alert("当前为未授权状态！");
+				}else if(data == -2){
+					alert("收回授权异常，请联系管理员！");
+				}
+				window.location.href = contextPath + '/internal/welcome.do';
+			}); 
+		};
 	</script>
 </body>
 </html>

@@ -9,6 +9,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/commons"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/mission"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/sysman"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="context-root" value="workmange"/>
         <property name="java-output-path" value="/workmange/WebContent/WEB-INF/classes"/>
     </wb-module>

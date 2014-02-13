@@ -15,4 +15,7 @@ public class WeiboUtils {
 		}
 		return auth;
 	}
+	public static void sendMsg(){
+		
+	}
 }

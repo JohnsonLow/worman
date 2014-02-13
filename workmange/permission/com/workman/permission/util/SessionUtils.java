@@ -67,4 +67,8 @@ public class SessionUtils {
 	public static void removeAccessToken(HttpServletRequest req){
 		req.getSession().removeAttribute(KEY_TOKEN);
 	}
+	public static void removeMainUrl(HttpServletRequest req) {
+		req.getSession().removeAttribute(KEY_MAIN_FRAME);
+		
+	}
 }
