@@ -20,10 +20,10 @@ public interface MissionDao {
 	 */
 	MissionModel getMission(int missionId);
 	/**
-	 * 创建人物
+	 * 创建任务
 	 * @param mission
 	 */
-	void create(MissionModel mission);
+	int create(MissionModel mission);
 	/**
 	 * 处理任务
 	 * @param handel

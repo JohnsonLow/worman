@@ -30,8 +30,8 @@ public class MissionDaoImpl implements MissionDao {
 	}
 
 	@Override
-	public void create(MissionModel mission) {
-		missionMapper.create(mission);
+	public int create(MissionModel mission) {
+		return missionMapper.create(mission);
 	}
 
 	@Override

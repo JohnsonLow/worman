@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.mission.persistence.MissionMapper">
+
+  <cache />
+  
+   <insert id="create" parameterType="com.workman.mission.model.MissionModel">
+    INSERT INTO MISSION
+      (TITLE,CONTENT, SPONSOR_ID,HANDLER_ID,CREATETIME,TYPE,STATUS)
+    VALUES
+      (#{title},#{content}, #{sponsor.id},#{handler.id},#{createTime},#{type},#{status})
+  </insert>
+  <update id="update" parameterType="com.workman.mission.model.MissionModel">
+    UPDATE MISSION SET
+    	<if test="commitTime != null">
+    		COMMITTIME = #{commitTime},
+    	</if>
+    	<if test="handleTime != null">
+    		HANDLETIME = #{handleTime},
+    	</if>
+      STATUS = #{status}
+    WHERE CODE = #{code}
+  </update>
+  
+</mapper>

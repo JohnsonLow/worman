@@ -8,7 +8,7 @@ import com.workman.mission.persistence.wrapper.MissionWrapper;
 public interface MissionMapper {
 	List<MissionModel> getMissions(MissionWrapper wrapper);
 	MissionModel getMission(int missionId);
-	void create(MissionModel mission);
+	int create(MissionModel mission);
 	void update(MissionModel mission);
 	void commitMission(int missionId);
 }

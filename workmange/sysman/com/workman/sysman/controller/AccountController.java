@@ -95,7 +95,11 @@ public class AccountController {
 	public List<AccountModel> getAccountInfos(Integer depCode,
 			HttpServletRequest req){
 		List<AccountModel> result = null;
-		result = dao.getAccountByDep(depCode,SessionUtils.getUser(req).getId());
+		try {
+			result = dao.getAccountByDep(depCode,SessionUtils.getUser(req).getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 

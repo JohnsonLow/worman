@@ -128,7 +128,8 @@
 		LEFT JOIN DEPARTMENT DE ON AC.DEPARTMENT_CODE = DE.CODE 
 		WHERE AC.ID = #{id}
 	</select>
-	<select id="getByDep" parameterType="int" resultType="com.workman.sysman.model.AccountModel">
+	<select id="getByDep" resultType="com.workman.sysman.model.AccountModel" 
+		parameterType="com.workman.sysman.persistence.wrapper.AccountWrapper">
 		SELECT
 		ID,
 		NAME

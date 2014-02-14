@@ -29,7 +29,7 @@ function getInfo(page){
         $("#preloadDiv").mypopClose();
         if(data){
             $("#userList").find("tbody").empty();
-            if(data == '401'){
+            if(data == '-401'){
                  goLoginPage();
             }else{
                 rowCount = data.rowCount;

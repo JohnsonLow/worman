@@ -79,7 +79,7 @@ public interface AccountMapper {
 	 * @param currId
 	 * @return
 	 */
-	List<AccountModel> getByDep(int depCode,int currId);
+	List<AccountModel> getByDep(AccountWrapper wrapper);
 
 
 }

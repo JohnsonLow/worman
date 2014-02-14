@@ -26,7 +26,7 @@ $(function() {
                     alert("保存成功！");
                     closeAddDiv();
                     initInfos();
-                } else if(data == '401'){
+                } else if(data == '-401'){
                     goLoginPage();
                 } else {
                     alert("保存失败");
@@ -40,7 +40,7 @@ function initInfos() {
     $.post("sysMan/getAuthList.do?msg=" + new Date().getTime(), function(data) {
         $("#authList").find("tbody").empty();
         if (data && data.length > 0) {
-            if (data != '401') {
+            if (data != '-401') {
                 $("#selectDiv").show();
                 authList = data;
                 $("#selectDiv").show();
@@ -104,7 +104,7 @@ function delInfo(ids){
         data : JSON.stringify(idArr),
         success : function(data){
             if(data){
-                if(data == '401'){
+                if(data == '-401'){
                     goLoginPage();
                 }else{
                     alert("删除成功！");

@@ -17,18 +17,33 @@ public class MissionModel implements Serializable{
 	private AccountModel sponsor;
 	private AccountModel handler;
 	private Date createTime;
-	private Date handlerTime;
+	private Date handleTime;
 	private Date commitTime;
-	private int missionType;
+	private String type;
+	private int status;
+	private String notes;
 	
-	public int getMissionType() {
-		return missionType;
+	public String getNotes() {
+		return notes;
 	}
-	public void setMissionType(int missionType) {
-		this.missionType = missionType;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 	private List<MissionHandleModel> handls;
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public List<MissionHandleModel> getHandls() {
 		return handls;
 	}
@@ -71,11 +86,11 @@ public class MissionModel implements Serializable{
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public Date getHandlerTime() {
-		return handlerTime;
+	public Date getHandleTime() {
+		return handleTime;
 	}
-	public void setHandlerTime(Date handlerTime) {
-		this.handlerTime = handlerTime;
+	public void setHandleTime(Date handleTime) {
+		this.handleTime = handleTime;
 	}
 	public Date getCommitTime() {
 		return commitTime;

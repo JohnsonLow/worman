@@ -38,7 +38,7 @@ public class AuthSessionFilter implements Filter {
 				}else{
 					res.setCharacterEncoding("utf-8");
 					res.setContentType("text/html; charset=UTF-8");
-					res.getWriter().print("401");	
+					res.getWriter().print("-401");	
 					return ;
 				}
 			}else{			

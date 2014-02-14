@@ -6,7 +6,16 @@ public class AccountWrapper {
 	private String name;
 	private int start;
 	private int end;
+	private int currId;
 	
+	
+	
+	public int getCurrId() {
+		return currId;
+	}
+	public void setCurrId(int currId) {
+		this.currId = currId;
+	}
 	public int getPosCode() {
 		return posCode;
 	}

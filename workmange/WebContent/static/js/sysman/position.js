@@ -30,7 +30,7 @@ $(function() {
                     alert("保存成功！");
                     closeAddDiv();
                     initInfos();
-                } else if (data == '401') {
+                } else if (data == '-401') {
                     goLoginPage();
                 } else {
                     alert("保存失败，可能已存在相应的职位编号");
@@ -44,7 +44,7 @@ function initInfos() {
     $.post("sysMan/getPositionList.do?msg=" + new Date().getTime(), function(data) {
         $("#posList").find("tbody").empty();
         if (data && data.length > 0) {
-            if (data != '401') {
+            if (data != '-401') {
                 $("#selectDiv").show();
                 dataList = data;
                 for (var i = 0, len = data.length; i < len; i++) {
@@ -115,7 +115,7 @@ function delInfo(ids) {
         data : JSON.stringify(idArr),
         success : function(data) {
             if (data) {
-                if (data == '401') {
+                if (data == '-401') {
                     goLoginPage();
                 } else {
                     alert("删除成功！");

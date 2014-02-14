@@ -96,7 +96,10 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public List<AccountModel> getAccountByDep(Integer depCode,int currId) {
-		return mapper.getByDep(depCode,currId);
+		AccountWrapper wrapper = new AccountWrapper();
+		wrapper.setDepCode(depCode);
+		wrapper.setCurrId(currId);
+		return mapper.getByDep(wrapper);
 	}
 
 }

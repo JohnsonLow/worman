@@ -308,7 +308,7 @@ margin-top:-224px!important;/*FF IE7 该值为本身高的一半*/margin-top:0px
 .lg-lgtime{ width:24%; height:auto; float:left; line-height:36px;}
 /*******************************************资料修改*****************************************************/
 .info{ width:98%; padding:1%; left:0px; top:0px; position:absolute; height:auto;}
-.info-top{ width:100%; height:20px; float:left; border-bottom:3px solid #f6a917; text-align:left; line-height:20px; font-weight:bold; color:#000;}
+.info-top{ width:100%; height:20px; float:left; border-bottom:3px solid #CCCCCC; text-align:left; line-height:20px; font-weight:bold; color:#000;}
 .info-top a{ color:#0079ca; text-decoration:underline; font-weight:normal;}
 .info-content{ width:100%; height:auto; margin-top:20px; float:left;}
 .info-content-detail{ width:100%; height:auto; float:left;}
@@ -342,6 +342,7 @@ margin-top:-224px!important;/*FF IE7 该值为本身高的一半*/margin-top:0px
 .infoL{ width:120px; height:auto; float:left; line-height:22px; text-align:right;}
 .infoR{ width:auto; height:auto; float:left; line-height:22px; text-align:left;}
 .infoR input{margin-right:5px;}
+.infoR textarea{border: 1px solid #CCCCCC;}
 .infoR span{float:left;margin-left:5px;}
 .table01{border-top:1px solid #b2b2b2;border-left:1px solid #b2b2b2;width:680px;}
 .table01 th{background:url(../images/thbg.gif) repeat-x;font-weight:normal;height:38px;text-align:right;}

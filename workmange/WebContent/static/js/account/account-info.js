@@ -92,7 +92,7 @@ function addOrUpdate(){
 		    	if(data == '1'){
 		    		alert("保存成功");
 		    		window.location.href = contextPath + "/account/goAccountPage.do";
-		    	}else if(data =='401'){
+		    	}else if(data =='-401'){
 		    	    goLoginPage();
 		    	}else{
 		    	    alert("保存失败，可能已存在相同的用户名");
