@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.mission.persistence.HandleMapper">
+
+  <cache />
+  
+   <insert id="add" parameterType="com.workman.mission.model.HandleModel">
+    INSERT INTO MISSION
+      (MISSIONID,ADDTIME, CONTENT,HANDLEPEO,TOPEO,HANDLETYPE)
+    VALUES
+      (#{missionId},#{addTime}, #{CONTENT},#{handlePeople.id},#{toPeople.id},#{handleType})
+  </insert>
+  <resultMap type="com.workman.mission.model.HandleModel" id="handleMap">
+  	<id column="id" property="id"/>
+  	<result column="MISSIONID" property="missionId"/>
+  	<result column="CONTENT" property="content"/>
+  	<result column="ADDTIME" property="addTime"/>
+  	<result column="HANDLETIME" property="handleTime"/>
+  	<association property="handlePeople" column="HANDLEPEO"
+  		resultMap="accountMap">
+  	</association>
+  	<association property="toPeople" column="TOPEO"
+  		resultMap="accountMap">
+  	</association>
+  </resultMap>
+  <select id="getList" resultMap="handleMap">
+    SELECT MISSIONID AS missionId,
+    	CONTENT AS content,
+    	ADDTIME AS addTime,
+    	CONTENT AS content,
+    	HANDLEPEO AS handlePeople,
+    	TOPEO AS toPeople,
+    	HANDLETIME AS handleTime,
+    	HANDELTYPE AS handleType,
+    	
+    FROM MISSION_HANDLE MH , ACCOUNT AC
+    WHERE MH
+    	
+  </select>
+  
+</mapper>

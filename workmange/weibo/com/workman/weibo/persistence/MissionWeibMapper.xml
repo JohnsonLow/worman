@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workman.weibo.persistence.AccessTokenMapper">
+
+  <cache />
+  
+  <select id="get" parameterType="int" resultType="com.workman.weibo.model.MissionWeibModel">
+	    SELECT
+	      MISSION_ID AS missionId,
+	      HANDLE_ID AS handleId,
+	      WEIBO_ID AS weiboId,
+	    FROM WEIBO_INFO
+	    WHERE MISSION_ID = #{missionId}
+	    <if test="handleId != null">
+	    	AND HANDLE_ID = #{handleId}
+	    </if>
+  </select>
+  
+   <insert id="insert" parameterType="com.workman.weibo.model.MissionWeibModel">
+    INSERT INTO WEIBO_INFO
+      (MISSION_ID,HANDLE_ID, WEIBO_ID)
+    VALUES
+      (#{missionId},#{handleId}, #{weiboId})
+  </insert>
+  <delete id="delete" parameterType="int">
+    DELETE FROM WEIBO_INFO WHERE MISSION_ID = #{missionId}
+    <if test="handleId > 0">
+    	AND HANDLE_ID = #{handleId}
+    </if>
+  </delete>
+  
+</mapper>

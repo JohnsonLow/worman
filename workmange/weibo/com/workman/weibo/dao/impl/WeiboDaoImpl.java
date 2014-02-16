@@ -10,11 +10,14 @@ import com.workman.sysman.model.AccountModel;
 import com.workman.weibo.dao.WeiboDao;
 import com.workman.weibo.model.AccessTokenModel;
 import com.workman.weibo.persistence.AccessTokenMapper;
+import com.workman.weibo.persistence.MissionWeibMapper;
 
 @Service
 public class WeiboDaoImpl implements WeiboDao {
 	@Autowired
 	private AccessTokenMapper mapper;
+	@Autowired
+	private MissionWeibMapper wbMapper;
 
 	@Override
 	public AccessTokenModel addOrUpdateToken(AccessToken token, User user, AccountModel account) {

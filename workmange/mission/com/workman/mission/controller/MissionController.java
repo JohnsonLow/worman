@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.workman.commons.util.SysLogUtils;
@@ -27,8 +28,11 @@ public class MissionController {
 		return "mission/add_mission";
 	}
 	@RequestMapping("goMissionInfoPage.do")
-	public String goMissionInfoPage(int id,HttpServletRequest req,ModelMap model){
+	public String goMissionInfoPage(@RequestParam(required=false) Integer id,
+			HttpServletRequest req,ModelMap model){
 		SessionUtils.putMainUrlInSession(req, "/mission/goAddMissionPage.do");
+		MissionModel mission = mDao.getMission(id);
+		model.addAttribute("missionInfos", mission);
 		return "mission/mission_info";
 	}
 	@RequestMapping("createMission")
