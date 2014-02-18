@@ -23,7 +23,7 @@ public interface MissionDao {
 	 * 创建任务
 	 * @param mission
 	 */
-	int create(MissionModel mission);
+	void create(MissionModel mission);
 	/**
 	 * 处理任务
 	 * @param handel

@@ -113,9 +113,11 @@ function initInfos(){
                         }
                     }
                 }else{
-                    $("#slPeo").append("<option value='-1'>暂无数据</option>");
+                    $("#slPeo").append("<option value='-1'>--请选择部门--</option>");
                 }
             });
+        } else{
+            $("#slPeo").append("<option value='-1'>暂无数据</option>");
         }
     });
 }

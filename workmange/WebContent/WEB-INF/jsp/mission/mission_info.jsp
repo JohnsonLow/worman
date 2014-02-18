@@ -22,7 +22,7 @@
 	<div class="authority-top">
 		<div class="info">
 			<div class="info-top">任务信息</div>
-			<div class="info-content" style="width:90%;margin-left: 5%;">
+			<div class="info-content">
 <table class="table" width="100%" cellspacing="1" cellpadding="3" border="0" align="center">
   <tbody><tr> 
   	<td width="100px" class="bg_c">编号：</td>

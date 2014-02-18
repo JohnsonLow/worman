@@ -53,7 +53,8 @@ public class MissionController {
 			mission.setSponsorId(curr.getId());
 			mission.setSponsorName(curr.getName());
 			mission.setSponsorDep(curr.getDepartment().getName());
-			code = mDao.create(mission);
+			mDao.create(mission);
+			code = mission.getId();
 		} catch (Exception e) {
 			SysLogUtils.error(getClass(), e, "创建任务失败");
 			code = -1;

@@ -30,9 +30,13 @@
   </select>
    <insert id="create" parameterType="com.workman.mission.model.MissionModel">
     INSERT INTO MISSION
-      (TITLE,CONTENT,CREATETIME,TYPE,STATUS,SPONSOR_ID,SPONSOR_NAME,SPONSOR_DEP,HANDLER_ID,HANDLER_NAME,HANDLER_DEP)
+      (TITLE,CONTENT,CREATETIME,TYPE,STATUS,SPONSOR_ID,SPONSOR_NAME,SPONSOR_DEP,HANDLER_ID,HANDLER_NAME,HANDLER_DEP,NOTES)
     VALUES
-      (#{title},#{content},#{createTime},#{type},#{status},#{sponsorId},#{sponsorName},#{sponsorDep},#{handlerId},#{handlerName},#{handlerDep})
+      (#{title},#{content},#{createTime},#{type},#{status},#{sponsorId},#{sponsorName},#{sponsorDep},#{handlerId},#{handlerName},#{handlerDep},#{notes})
+      
+      <selectKey resultType="int" keyProperty="id" order="AFTER">
+   		SELECT LAST_INSERT_ID()
+   	</selectKey>
   </insert>
   <update id="update" parameterType="com.workman.mission.model.MissionModel">
     UPDATE MISSION SET
