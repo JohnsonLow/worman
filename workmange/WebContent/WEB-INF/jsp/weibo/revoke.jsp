@@ -59,6 +59,8 @@
 					alert("当前为未授权状态！");
 				}else if(data == -2){
 					alert("收回授权异常，请联系管理员！");
+				} else {
+					alert("收回授权失败");
 				}
 				window.location.href = contextPath + '/internal/welcome.do';
 			}); 

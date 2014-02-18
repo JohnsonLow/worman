@@ -6,13 +6,13 @@
 
   <cache />
   
-   <insert id="add" parameterType="com.workman.mission.model.HandleModel">
+   <insert id="add" parameterType="com.workman.mission.model.MissionHandleModel">
     INSERT INTO MISSION
       (MISSIONID,ADDTIME, CONTENT,HANDLEPEO,TOPEO,HANDLETYPE)
     VALUES
       (#{missionId},#{addTime}, #{CONTENT},#{handlePeople.id},#{toPeople.id},#{handleType})
   </insert>
-  <resultMap type="com.workman.mission.model.HandleModel" id="handleMap">
+  <resultMap type="com.workman.mission.model.MissionHandleModel" id="handleMap">
   	<id column="id" property="id"/>
   	<result column="MISSIONID" property="missionId"/>
   	<result column="CONTENT" property="content"/>
@@ -35,9 +35,8 @@
     	HANDLETIME AS handleTime,
     	HANDELTYPE AS handleType,
     	
-    FROM MISSION_HANDLE MH , ACCOUNT AC
-    WHERE MH
-    	
+    FROM MISSION_HANDLE MH , ACCOUNT AC1 ,ACCOUNT AC2
+    WHERE MH.HANDLEPEO = AC1.ID AND MH.TOPEO = AC2.ID
   </select>
   
 </mapper>

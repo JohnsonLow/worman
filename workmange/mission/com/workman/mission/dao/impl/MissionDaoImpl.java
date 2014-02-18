@@ -26,7 +26,7 @@ public class MissionDaoImpl implements MissionDao {
 	@Override
 	public MissionModel getMission(int missionId) {
 		// TODO Auto-generated method stub
-		return null;
+		return missionMapper.getMission(missionId);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import com.workman.commons.util.SysLogUtils;
 import com.workman.mission.dao.MissionDao;
 import com.workman.mission.model.MissionModel;
 import com.workman.permission.util.SessionUtils;
+import com.workman.sysman.model.AccountModel;
 
 @Controller
 @RequestMapping("/mission/*")
@@ -31,16 +32,27 @@ public class MissionController {
 	public String goMissionInfoPage(@RequestParam(required=false) Integer id,
 			HttpServletRequest req,ModelMap model){
 		SessionUtils.putMainUrlInSession(req, "/mission/goAddMissionPage.do");
-		MissionModel mission = mDao.getMission(id);
-		model.addAttribute("missionInfos", mission);
+		if(id != null){
+			try {
+				MissionModel mission = mDao.getMission(id);
+				model.addAttribute("missionInfo", mission);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return "mission/mission_info";
 	}
 	@RequestMapping("createMission")
 	@ResponseBody
-	public int createMission(@RequestBody MissionModel mission){
+	public int createMission(@RequestBody MissionModel mission,HttpServletRequest req){
 		mission.setCreateTime(new Date());
 		int code = 0;
 		try {
+			AccountModel curr = SessionUtils.getUser(req);
+			mission.setStatus(1);
+			mission.setSponsorId(curr.getId());
+			mission.setSponsorName(curr.getName());
+			mission.setSponsorDep(curr.getDepartment().getName());
 			code = mDao.create(mission);
 		} catch (Exception e) {
 			SysLogUtils.error(getClass(), e, "创建任务失败");

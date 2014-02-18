@@ -3,16 +3,16 @@ $(function(){
     $("#create").click(function(){
         var mission = checkAllInput();
         if(mission){
-            mission.sponsor = {id : currId};
             $.ajax({url : "mission/createMission.do?msg=" + new Date().getTime(),
                 type : "POST",
                 contentType:"application/json",
-                data : JSON.stringify(mision),
+                data : JSON.stringify(mission),
                 success : function(data){
                     if(data == '-401'){
                         goLoginPage();
                     }else if(data != -1){
-                            window.location.href = contextPath + '/mission/goMissionInfoPage.do?id' + data;
+                        alert("创建成功");
+                        window.location.href = contextPath + '/mission/goMissionInfoPage.do?id=' + data;
                     }else{
                         alert("创建任务失败，请联系管理员！");
                     }
@@ -65,13 +65,14 @@ function checkAllInput(){
         $("#peoMsgSpan").text("受理人不可为空");
     }
     if(flag){
-        var mision = {
+        var mission = {
           title : title,
           type : type,
           content : content,
-          handler : {id : handlerId},
+          handlerId : handlerId,
+          handlerName : $.trim($("#slPeo").find("option:selected").text()),
+          handlerDep : $.trim($("#slDep").find("option:selected").text()),
           notes : $("#notes").val(),
-          sponsor : {"id" : currId}
         };
         return mission;
     }

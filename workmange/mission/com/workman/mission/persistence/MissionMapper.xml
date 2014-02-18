@@ -6,11 +6,33 @@
 
   <cache />
   
+  <select id="getMission" parameterType="int" resultType="com.workman.mission.model.MissionModel">
+  	SELECT M.ID ,
+  	M.TITLE,
+  	M.CONTENT,
+  	M.CREATETIME,
+  	M.HANDLETIME,
+  	M.COMMITTIME,
+  	M.TYPE,
+  	M.STATUS,
+  	M.NOTES,
+  	SPONSOR_ID AS sponsorId,
+  	SPONSOR_NAME AS sponsorName,
+  	SPONSOR_DEP AS sponsorDep,
+  	HANDLER_ID AS handlerId,
+  	HANDLER_NAME AS handlerName,
+  	HANDLER_DEP AS handlerDep
+  	FROM MISSION M
+  	WHERE M.ID=#{missionId}
+  </select>
+  <select id="getList" resultType="com.workman.mission.model.MissionModel">
+  
+  </select>
    <insert id="create" parameterType="com.workman.mission.model.MissionModel">
     INSERT INTO MISSION
-      (TITLE,CONTENT, SPONSOR_ID,HANDLER_ID,CREATETIME,TYPE,STATUS)
+      (TITLE,CONTENT,CREATETIME,TYPE,STATUS,SPONSOR_ID,SPONSOR_NAME,SPONSOR_DEP,HANDLER_ID,HANDLER_NAME,HANDLER_DEP)
     VALUES
-      (#{title},#{content}, #{sponsor.id},#{handler.id},#{createTime},#{type},#{status})
+      (#{title},#{content},#{createTime},#{type},#{status},#{sponsorId},#{sponsorName},#{sponsorDep},#{handlerId},#{handlerName},#{handlerDep})
   </insert>
   <update id="update" parameterType="com.workman.mission.model.MissionModel">
     UPDATE MISSION SET

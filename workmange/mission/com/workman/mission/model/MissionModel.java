@@ -4,18 +4,20 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.workman.sysman.model.AccountModel;
-
 public class MissionModel implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6508467153044598589L;
-	private int code;
+	private int id;
 	private String title;
 	private String content;
-	private AccountModel sponsor;
-	private AccountModel handler;
+	private int sponsorId;
+	private String sponsorName;
+	private String sponsorDep;
+	private int handlerId;
+	private String handlerName;
+	private String handlerDep;
 	private Date createTime;
 	private Date handleTime;
 	private Date commitTime;
@@ -23,6 +25,42 @@ public class MissionModel implements Serializable{
 	private int status;
 	private String notes;
 	
+	public int getSponsorId() {
+		return sponsorId;
+	}
+	public void setSponsorId(int sponsorId) {
+		this.sponsorId = sponsorId;
+	}
+	public String getSponsorName() {
+		return sponsorName;
+	}
+	public void setSponsorName(String sponsorName) {
+		this.sponsorName = sponsorName;
+	}
+	public String getSponsorDep() {
+		return sponsorDep;
+	}
+	public void setSponsorDep(String sponsorDep) {
+		this.sponsorDep = sponsorDep;
+	}
+	public int getHandlerId() {
+		return handlerId;
+	}
+	public void setHandlerId(int handlerId) {
+		this.handlerId = handlerId;
+	}
+	public String getHandlerName() {
+		return handlerName;
+	}
+	public void setHandlerName(String handlerName) {
+		this.handlerName = handlerName;
+	}
+	public String getHandlerDep() {
+		return handlerDep;
+	}
+	public void setHandlerDep(String handlerDep) {
+		this.handlerDep = handlerDep;
+	}
 	public String getNotes() {
 		return notes;
 	}
@@ -50,11 +88,12 @@ public class MissionModel implements Serializable{
 	public void setHandls(List<MissionHandleModel> handls) {
 		this.handls = handls;
 	}
-	public int getCode() {
-		return code;
+	
+	public int getId() {
+		return id;
 	}
-	public void setCode(int code) {
-		this.code = code;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTitle() {
 		return title;
@@ -67,18 +106,6 @@ public class MissionModel implements Serializable{
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public AccountModel getSponsor() {
-		return sponsor;
-	}
-	public void setSponsor(AccountModel sponsor) {
-		this.sponsor = sponsor;
-	}
-	public AccountModel getHandler() {
-		return handler;
-	}
-	public void setHandler(AccountModel handler) {
-		this.handler = handler;
 	}
 	public Date getCreateTime() {
 		return createTime;

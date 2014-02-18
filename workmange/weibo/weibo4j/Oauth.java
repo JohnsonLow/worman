@@ -105,4 +105,5 @@ public class Oauth extends Weibo{
 				+ "&state="+state
 				+ "&scope="+scope;
 	}
+	
 }
