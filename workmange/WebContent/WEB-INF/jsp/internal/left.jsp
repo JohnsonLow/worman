@@ -80,7 +80,7 @@ function showList(obj,index){
                     <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/ServiceInform/goAppPage.do'"><div class="ds1">待处理任务</div></a>
                 </div>
             	<div class="d3">
-                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/ServiceInform/goMessagePage.do'"><div class="ds1">任务查看</div></a>
+                    <a href="javascript:void(0)" onClick="window.parent.mainFrame.location='<%=contextPath%>/mission/goMissionListPage.do'"><div class="ds1">任务查看</div></a>
                 </div>
             </div>
        	</div>

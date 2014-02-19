@@ -1,24 +1,19 @@
 package com.workman.mission.dao;
 
-import java.util.List;
+import java.util.Date;
+import java.util.Map;
 
+import com.workman.commons.po.ResponseModel;
 import com.workman.mission.model.MissionHandleModel;
 import com.workman.mission.model.MissionModel;
-import com.workman.mission.persistence.wrapper.MissionWrapper;
 
 public interface MissionDao {
-	/**
-	 * 获取任务列表
-	 * @param wrapper
-	 * @return
-	 */
-	List<MissionModel> getMissions(MissionWrapper wrapper);
 	/**
 	 * 根据id获取任务的相关信息
 	 * @param missionId
 	 * @return
 	 */
-	MissionModel getMission(int missionId);
+	Map<String,Object> getMission(int missionId);
 	/**
 	 * 创建任务
 	 * @param mission
@@ -34,4 +29,15 @@ public interface MissionDao {
 	 * @param missionId
 	 */
 	void commitMission(int missionId);
+	
+	/**
+	 * 获取任务列表
+	 * @param endDate 
+	 * @param startDate 
+	 * @param wrapper
+	 * @return
+	 */
+
+	ResponseModel getMissions(Integer sponsor, Integer handler,Integer status, String type,
+			Date startDate, Date endDate, Integer id, int page, int size);
 }

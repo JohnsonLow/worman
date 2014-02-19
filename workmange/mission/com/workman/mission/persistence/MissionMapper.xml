@@ -25,14 +25,61 @@
   	FROM MISSION M
   	WHERE M.ID=#{missionId}
   </select>
-  <select id="getList" resultType="com.workman.mission.model.MissionModel">
-  
+  <select id="getList" resultType="com.workman.mission.model.MissionModel" 
+  		parameterType="com.workman.mission.persistence.wrapper.MissionWrapper">
+	  	SELECT M.ID ,
+	  	M.TITLE,
+	  	M.CONTENT,
+	  	M.CREATETIME,
+	  	M.HANDLETIME,
+	  	M.COMMITTIME,
+	  	M.TYPE,
+	  	M.STATUS,
+	  	M.NOTES,
+	  	SPONSOR_ID AS sponsorId,
+	  	SPONSOR_NAME AS sponsorName,
+	  	SPONSOR_DEP AS sponsorDep,
+	  	HANDLER_ID AS handlerId,
+	  	HANDLER_NAME AS handlerName,
+	  	HANDLER_DEP AS handlerDep
+	  	FROM MISSION M
+	  	WHERE 1=1 
+	  	<choose>
+	  		<when test="missionCode != null">
+	  			ID = #missionCode
+	  		</when>
+	  		<otherwise>
+	  			<if test="type != null">
+			  		AND M.TYPE = #type
+			  	</if>
+			  	<if test="startTime != null">
+			  		AND M.CREATETIME >= #startTime
+			  	</if>
+			  	AND M.CREATETIME &ls;=  #endTime
+			  	<if test="type != null">
+			  		AND M.TYPE = #type
+			  	</if>
+			  	<if test="status != null">
+			  		AND M.STATUS = #status
+			  	</if>
+			  	<if test="sponsorId != null">
+			  		AND M.SPONSOR_ID = #sponsorId
+			  	</if>
+			  	<if test="handlerId != null">
+			  		AND M.HANDLER_ID = #handlerId OR
+			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSION_ID AND MH.HANDLER_ID = #handlerId)
+			  	</if>
+	  		</otherwise>
+	  	</choose>
+	  	
   </select>
    <insert id="create" parameterType="com.workman.mission.model.MissionModel">
     INSERT INTO MISSION
-      (TITLE,CONTENT,CREATETIME,TYPE,STATUS,SPONSOR_ID,SPONSOR_NAME,SPONSOR_DEP,HANDLER_ID,HANDLER_NAME,HANDLER_DEP,NOTES)
+      (TITLE,CONTENT,CREATETIME,TYPE,STATUS,SPONSOR_ID,SPONSOR_NAME,
+      SPONSOR_DEP,HANDLER_ID,HANDLER_NAME,HANDLER_DEP,NOTES)
     VALUES
-      (#{title},#{content},#{createTime},#{type},#{status},#{sponsorId},#{sponsorName},#{sponsorDep},#{handlerId},#{handlerName},#{handlerDep},#{notes})
+      (#{title},#{content},#{createTime},#{type},#{status},#{sponsorId},#{sponsorName},
+      #{sponsorDep},#{handlerId},#{handlerName},#{handlerDep},#{notes})
       
       <selectKey resultType="int" keyProperty="id" order="AFTER">
    		SELECT LAST_INSERT_ID()

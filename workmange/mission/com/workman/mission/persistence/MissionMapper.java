@@ -11,4 +11,6 @@ public interface MissionMapper {
 	void create(MissionModel mission);
 	void update(MissionModel mission);
 	void commitMission(int missionId);
+	
+	int getCount(MissionWrapper wrapper);
 }

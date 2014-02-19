@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50512
 File Encoding         : 65001
 
-Date: 2014-02-18 16:52:27
+Date: 2014-02-19 17:21:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -140,7 +140,6 @@ CREATE TABLE `mission` (
 -- ----------------------------
 -- Records of mission
 -- ----------------------------
-INSERT INTO mission VALUES ('2', '水电费', '撒打发水电费深V线程V型陈', '1', '测试人员', '财务部', '2', '测试2', '财务部', '2014-02-18 16:41:11', null, null, '紧急', '0', null);
 
 -- ----------------------------
 -- Table structure for `mission_handle`
@@ -152,8 +151,12 @@ CREATE TABLE `mission_handle` (
   `addtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '开始受理时间',
   `handletime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '处理时间',
   `content` varchar(100) NOT NULL COMMENT '处理说明',
-  `handlepeo` int(11) NOT NULL COMMENT '处理人',
-  `topeo` int(11) NOT NULL COMMENT '回复人',
+  `handler_id` int(11) NOT NULL COMMENT '处理人',
+  `handler_name` varchar(50) NOT NULL COMMENT '处理人姓名',
+  `handler_dep` varchar(50) DEFAULT NULL COMMENT '处理人部门',
+  `to_id` int(11) NOT NULL COMMENT '回复人',
+  `to_name` varchar(50) DEFAULT NULL COMMENT '处理人姓名',
+  `to_dep` varchar(50) DEFAULT NULL COMMENT '处理人部门',
   `handletype` int(11) NOT NULL COMMENT '处理类型',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务处理表';

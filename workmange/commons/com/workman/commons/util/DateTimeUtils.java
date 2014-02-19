@@ -131,16 +131,10 @@ public class DateTimeUtils {
 	 * @param param
 	 *            datetime string, pattern: "yyyy-MM-dd HH:mm:ss".
 	 * @return java.util.Date
+	 * @throws Exception 
 	 */
 	public static Date parse(String param) {
-		Date date = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			date = sdf.parse(param);
-		} catch (ParseException ex) {
-			ex.printStackTrace();
-		}
-		return date;
+		return parse(param,"yyyy-MM-dd HH:mm:ss");
 	}
 
 	/**
@@ -149,13 +143,20 @@ public class DateTimeUtils {
 	 * @param param
 	 *            date string, pattern: "yyyy-MM-dd".
 	 * @return java.util.Date
+	 * @throws Exception 
 	 */
-	public static Date parseDate(String param) {
+	public static Date parse(String param,String pattern){
 		Date date = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			date = sdf.parse(param);
-		} catch (ParseException ex) {
+		if(StringUtility.isNotBlank(param)){
+			if(StringUtility.isBlank(pattern)){
+				pattern = "yyyy-MM-dd";
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+			try {
+				date = sdf.parse(param);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		return date;
 	}
@@ -196,10 +197,6 @@ public class DateTimeUtils {
 		String second = dateStr.substring(12, 14);
 		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":"
 				+ second;
-	}
-
-	public static String numericParse(long numeric, String pattern) {
-		return getDateTime(pattern, parse(numericParse(numeric)));
 	}
 
 	public static String getHour() {
