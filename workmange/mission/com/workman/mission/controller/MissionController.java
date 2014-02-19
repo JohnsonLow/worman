@@ -111,8 +111,16 @@ public class MissionController {
 			}else{
 				endDate = DateTimeUtils.parse(endTime);
 			}
-			ResponseModel result = mDao.getMissions(sponsor,handler,status,type,
-					startDate,endDate,id,page,size);
+			if(StringUtility.isBlank(type)){
+				type = null;
+			}
+			ResponseModel result = null;
+			try {
+				result = mDao.getMissions(sponsor,handler,status,type,
+						startDate,endDate,id,page,size);
+			} catch (Exception e) {
+				SysLogUtils.error(MissionController.class, e, "查询任务列表出错");
+			}
 			return result;
 		}
 	}

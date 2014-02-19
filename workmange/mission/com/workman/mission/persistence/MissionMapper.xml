@@ -25,7 +25,40 @@
   	FROM MISSION M
   	WHERE M.ID=#{missionId}
   </select>
-  <select id="getList" resultType="com.workman.mission.model.MissionModel" 
+  <select id="getCount" resultType="int">
+  	SELECT COUNT(ID) FROM MISSION M
+	  	WHERE 1=1 
+	  	<choose>
+	  		<when test="missionCode != null">
+	  			ID = #{missionCode}
+	  		</when>
+	  		<otherwise>
+	  			<if test="type != null">
+			  		AND M.TYPE = #{type}
+			  	</if>
+			  	<if test="startTime != null">
+			  		AND M.CREATETIME &gt;= #{startTime}
+			  	</if>
+			  	<if test="endTime != null">
+			  		AND M.CREATETIME &lt;=  #{endTime}
+			  	</if>
+			  	<if test="type != null">
+			  		AND M.TYPE = #{type}
+			  	</if>
+			  	<if test="status != null">
+			  		AND M.STATUS = #{status}
+			  	</if>
+			  	<if test="sponsorId != null">
+			  		AND M.SPONSOR_ID = #{sponsorId}
+			  	</if>
+			  	<if test="handlerId != null">
+			  		AND M.HANDLER_ID = #{handlerId} OR
+			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handlerId})
+			  	</if>
+	  		</otherwise>
+	  	</choose>
+  </select>
+  <select id="getMissions" resultType="com.workman.mission.model.MissionModel" 
   		parameterType="com.workman.mission.persistence.wrapper.MissionWrapper">
 	  	SELECT M.ID ,
 	  	M.TITLE,
@@ -46,28 +79,30 @@
 	  	WHERE 1=1 
 	  	<choose>
 	  		<when test="missionCode != null">
-	  			ID = #missionCode
+	  			ID = #{missionCode}
 	  		</when>
 	  		<otherwise>
 	  			<if test="type != null">
-			  		AND M.TYPE = #type
+			  		AND M.TYPE = #{type}
 			  	</if>
 			  	<if test="startTime != null">
-			  		AND M.CREATETIME >= #startTime
+			  		AND M.CREATETIME &gt;= #{startTime}
 			  	</if>
-			  	AND M.CREATETIME &ls;=  #endTime
+			  	<if test="endTime != null">
+			  		AND M.CREATETIME &lt;=  #{endTime}
+			  	</if>
 			  	<if test="type != null">
-			  		AND M.TYPE = #type
+			  		AND M.TYPE = #{type}
 			  	</if>
 			  	<if test="status != null">
-			  		AND M.STATUS = #status
+			  		AND M.STATUS = #{status}
 			  	</if>
 			  	<if test="sponsorId != null">
-			  		AND M.SPONSOR_ID = #sponsorId
+			  		AND M.SPONSOR_ID = #{sponsorId}
 			  	</if>
 			  	<if test="handlerId != null">
-			  		AND M.HANDLER_ID = #handlerId OR
-			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSION_ID AND MH.HANDLER_ID = #handlerId)
+			  		AND M.HANDLER_ID = #{handlerId} OR
+			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handlerId})
 			  	</if>
 	  		</otherwise>
 	  	</choose>

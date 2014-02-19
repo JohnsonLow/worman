@@ -6,10 +6,10 @@ var page2;
 var totalPage2 = 0;
 var totalSize2 = 0;
 $(function(){
-    $("search1").click(function(){
+    $("#search1").click(function(){
         getInfos(1,1);
     });
-    $("search2").click(function(){
+    $("#search2").click(function(){
         getInfos(1,2);
     });
 });
@@ -31,18 +31,38 @@ function getInfos(pNum,type){
     param.startTime = parDiv.find("input").eq(0).val();
     param.endTime = parDiv.find("input").eq(1).val();
     $(".preload").mypop();
-    $.get('mission/getMissions.do?msg='+new Date().getTime(),param
+    $.get('mission/getMissionList.do?msg='+new Date().getTime(),param
     ,function(data){
         $("#missionList"+type).find('tbody').empty();
-         $(".preload").mypopClose();
-        if(data){
-            
+        $(".preload").mypopClose();
+        if(data && data.data){
+            var missions = data.data;
+            for(var i=0,len=missions.length;i<len;i++){
+                var res = '<tr><td>'+missions[i].id+'</td><td>'+missions[i].title
+                    +'</td><td>'+getStatus(missions[i].status)+'</td><td>'+missions[i].type
+                    +'</td><td>'+missions[i].sponsorName+'</td><td>'+missions[i].handlerName+
+                    '</td><td>'+missions[i].createTime+'</td><td>'+missions[i].handleTime+
+                    '</td><td>'+missions[i].commitTime+
+                    '</td><td><a href="mission/goMissionInfoPage.do?id='+missions[i].id+'">查看</a></td></tr>';
+                $("#missionList"+type).find('tbody').append(res);
+            }
         }else if(data == -401){
             goLoginPage();
         }else{
-            $("#missionList"+type).find('tbody').apend("<tr><td colspan='11'>暂无数据</td></tr>");
+            $("#missionList"+type).find('tbody').append("<tr><td colspan='10'>暂无数据</td></tr>");
         }
     });
+}
+function getStatus(status){
+    if(status == 1){
+        return "待处理";
+    }
+    if(status == 2){
+        return "处理中";
+    }
+    if(status == 3){
+        return "已完成";
+    }
 }
 function setPager1(cPage){
     

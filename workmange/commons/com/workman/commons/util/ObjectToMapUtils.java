@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +46,12 @@ public class ObjectToMapUtils {
 		Object value =  field.get(obj);;
 		Class<?> clazz = field.getType();
 		if(value != null){
-			if(clazz == Calendar.class || clazz.getSuperclass() == Calendar.class){
+			if(clazz == Calendar.class || clazz.getSuperclass() == Calendar.class ){
 				Calendar tmp = (Calendar) value;
 				value =  DateTimeUtils.getDateTime(tmp);
+			}else if (clazz == Date.class || clazz.getSuperclass() == Date.class){
+				Date tmp = (Date)value;
+				value = DateTimeUtils.getDateTime("yyyy-MM-dd HH:mm:ss", tmp);
 			}else if(clazz.isArray()){
 				int len = Array.getLength(value);
 				List<Object> list = new ArrayList<Object>(len);

@@ -39,5 +39,5 @@ public interface MissionDao {
 	 */
 
 	ResponseModel getMissions(Integer sponsor, Integer handler,Integer status, String type,
-			Date startDate, Date endDate, Integer id, int page, int size);
+			Date startDate, Date endDate, Integer id, int page, int size) throws Exception;
 }

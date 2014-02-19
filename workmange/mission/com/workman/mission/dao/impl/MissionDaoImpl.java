@@ -1,5 +1,6 @@
 package com.workman.mission.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.workman.commons.po.ResponseModel;
+import com.workman.commons.util.ObjectToMapUtils;
 import com.workman.mission.dao.MissionDao;
 import com.workman.mission.model.MissionHandleModel;
 import com.workman.mission.model.MissionModel;
@@ -51,7 +53,7 @@ public class MissionDaoImpl implements MissionDao {
 
 	@Override
 	public ResponseModel getMissions(Integer sponsor, Integer handler,Integer status,
-			String type,Date startDate, Date endDate, Integer id, int page, int size) {
+			String type,Date startDate, Date endDate, Integer id, int page, int size) throws Exception {
 		MissionWrapper wrapper = new MissionWrapper();
 		wrapper.setSponsorId(sponsor);
 		wrapper.setHandlerId(handler);
@@ -66,7 +68,11 @@ public class MissionDaoImpl implements MissionDao {
 		int count = missionMapper.getCount(wrapper);
 		if(count > 0){
 			List<MissionModel> missions = missionMapper.getMissions(wrapper);
-			response.setData(missions);
+			List<Object> missionList = new ArrayList<Object>();
+			for(int i=0,len=missions.size();i<len;i++){
+				missionList.add(ObjectToMapUtils.toMap(missions.get(i)));
+			}
+			response.setData(missionList);
 		}
 		response.setPageCount(PageUtils.getPageCount(count, size));
 		response.setRowCount(count);

@@ -70,7 +70,7 @@
 		                </tr>
 		                </table>
 		            </td>
-	          <td width="40%" class="frame_button"><input id="search1" type="button" value="搜索" class="btn"/></td>
+	          <td width="30%" class="frame_button"><input id="search1" type="button" value="搜索" class="btn"/></td>
 	        </tr>
 	      </table>
 	    </div>
@@ -79,12 +79,12 @@
            		<table id="missionList1" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
            				<tr>
-           					<th>编号</th><th>主题</th><th>状态</th><th>紧急程度</th><th>发起人</th><th>受理人</th><th>现处理人</th>
+           					<th>编号</th><th>主题</th><th>状态</th><th>紧急程度</th><th>发起人</th><th>受理人</th>
            					<th>发起时间</th><th>受理时间</th><th>完成时间</th><th>管理</th>
            				</tr>
            			</thead>
            			<tbody>
-           				<tr><td colspan="11">暂无数据</td></tr>
+           				<tr><td colspan="10">暂无数据</td></tr>
            			</tbody>
             	</table>
             </div>
@@ -132,7 +132,7 @@
 		                </tr>
 		                </table>
 		            </td>
-	          <td width="40%" class="frame_button"><input id="search2" type="button" value="搜索" class="btn"/></td>
+	          <td width="30%" class="frame_button"><input id="search2" type="button" value="搜索" class="btn"/></td>
 	        </tr>
 	      </table>
 	    </div>
@@ -141,12 +141,12 @@
            		<table id="missionList2" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
            				<tr>
-           					<th>编号</th><th>主题</th><th>状态</th><th>紧急程度</th><th>发起人</th><th>受理人</th><th>现处理人</th>
+           					<th>编号</th><th>主题</th><th>状态</th><th>紧急程度</th><th>发起人</th><th>受理人</th>
            					<th>发起时间</th><th>受理时间</th><th>完成时间</th><th>管理</th>
            				</tr>
            			</thead>
            			<tbody>
-           				<tr><td colspan="11">暂无数据</td></tr>
+           				<tr><td colspan="10">暂无数据</td></tr>
            			</tbody>
             	</table>
             </div>
@@ -158,7 +158,7 @@
 	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
 	<%pageContext.include("/WEB-INF/jsp/inc/pager/pagination.jsp?skin=go&number=5");%>
 	<script type="text/javascript" src="../static/js/common/date/WdatePicker.js"></script>
-	<script type="text/javascript" src="static/js/account/mission_list.js"></script>
+	<script type="text/javascript" src="static/js/mission/mission_list.js"></script>
 	<script type="text/javascript" src="static/js/common/json/json2.js"></script>
 	<script type="text/javascript" language="javascript">
 		var currId = '<%= SessionUtils.getUser(request).getId()%>';
