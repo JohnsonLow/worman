@@ -113,7 +113,7 @@ public class MissionController {
 			}
 			ResponseModel result = mDao.getMissions(sponsor,handler,status,type,
 					startDate,endDate,id,page,size);
-			return null;
+			return result;
 		}
 	}
 }
