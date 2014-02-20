@@ -56,8 +56,30 @@
 			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handlerId})
 			  	</if>
 	  		</otherwise>
-	  		LIMIT #{start},#{end}
 	  	</choose>
+	  	LIMIT #{start},#{end}
+  </select>
+  <select id="getPendingMissions" resultType="com.workman.mission.model.MissionModel">
+  	SELECT M.ID ,
+  	M.TITLE,
+  	M.CONTENT,
+  	M.CREATETIME,
+  	M.HANDLETIME,
+  	M.COMMITTIME,
+  	M.TYPE,
+  	M.STATUS,
+  	M.NOTES,
+  	SPONSOR_ID AS sponsorId,
+  	SPONSOR_NAME AS sponsorName,
+  	SPONSOR_DEP AS sponsorDep,
+  	HANDLER_ID AS handlerId,
+  	HANDLER_NAME AS handlerName,
+  	HANDLER_DEP AS handlerDep 
+  	FROM MISSION M
+  	 WHERE M.STATUS = 1 OR
+ 	(M.STATUS = 2 and 
+ 		exists (SELECT 1 FROM MISSION_HANDLE MH 
+ 			WHERE MH.MISIONID = M.ID  and MH.STATUS = 0 and MH.TO_ID=#{handleId} ))
   </select>
   <select id="getMissions" resultType="com.workman.mission.model.MissionModel" 
   		parameterType="com.workman.mission.persistence.wrapper.MissionWrapper">
