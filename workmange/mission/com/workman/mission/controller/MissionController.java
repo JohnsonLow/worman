@@ -58,7 +58,7 @@ public class MissionController {
 				
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			SysLogUtils.error(MissionController.class, e, "查询任务信息出错");
 		}
 		return "mission/mission_info";
 	}
@@ -109,7 +109,7 @@ public class MissionController {
 			if(StringUtility.isBlank(endTime)){
 				endDate = new Date();
 			}else{
-				endDate = DateTimeUtils.parse(endTime);
+				endDate = DateTimeUtils.parse(endTime + " 23:59:59");
 			}
 			if(StringUtility.isBlank(type)){
 				type = null;

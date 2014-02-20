@@ -12,31 +12,23 @@
     VALUES
       (#{missionId},#{addTime}, #{CONTENT},#{handlePeople.id},#{toPeople.id},#{handleType})
   </insert>
-  <resultMap type="com.workman.mission.model.MissionHandleModel" id="handleMap">
-  	<id column="id" property="id"/>
-  	<result column="MISSIONID" property="missionId"/>
-  	<result column="CONTENT" property="content"/>
-  	<result column="ADDTIME" property="addTime"/>
-  	<result column="HANDLETIME" property="handleTime"/>
-  	<association property="handlePeople" column="HANDLEPEO"
-  		resultMap="accountMap">
-  	</association>
-  	<association property="toPeople" column="TOPEO"
-  		resultMap="accountMap">
-  	</association>
-  </resultMap>
-  <select id="getList" resultMap="handleMap">
+  <select id="getList" resultType="com.workman.mission.model.MissionHandleModel">
     SELECT MISSIONID AS missionId,
     	CONTENT AS content,
     	ADDTIME AS addTime,
     	CONTENT AS content,
-    	HANDLEPEO AS handlePeople,
-    	TOPEO AS toPeople,
+    	HANDLER_ID AS handlerId,
+    	HANDLER_NAME AS handlerName,
+    	HANDLER_DEP AS handlerDep,
+    	TO_ID AS toId,
+    	TO_NAME AS toName,
+    	TO_DEP AS toDep,
     	HANDLETIME AS handleTime,
-    	HANDELTYPE AS handleType,
+    	HANDLETYPE AS handleType,
+    	STATUS as status
     	
-    FROM MISSION_HANDLE MH , ACCOUNT AC1 ,ACCOUNT AC2
-    WHERE MH.HANDLEPEO = AC1.ID AND MH.TOPEO = AC2.ID
+    FROM MISSION_HANDLE MH
+    WHERE MH.MISSIONID = #{missionId}
   </select>
   
 </mapper>

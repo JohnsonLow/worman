@@ -56,6 +56,7 @@
 			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handlerId})
 			  	</if>
 	  		</otherwise>
+	  		LIMIT #{start},#{end}
 	  	</choose>
   </select>
   <select id="getMissions" resultType="com.workman.mission.model.MissionModel" 

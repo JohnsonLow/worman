@@ -12,7 +12,6 @@ public class MissionWrapper {
 	private int end;
 	private String type;
 	private Integer status;
-	
 	public Integer getSponsorId() {
 		return sponsorId;
 	}

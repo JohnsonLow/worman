@@ -159,14 +159,17 @@
 	<%pageContext.include("/WEB-INF/jsp/inc/pager/pagination.jsp?skin=go&number=5");%>
 	<script type="text/javascript" src="../static/js/common/date/WdatePicker.js"></script>
 	<script type="text/javascript" src="static/js/mission/mission_list.js"></script>
+	<script type="text/javascript" src="static/js/mission/mission_utils.js"></script>
 	<script type="text/javascript" src="static/js/common/json/json2.js"></script>
 	<script type="text/javascript" language="javascript">
 		var currId = '<%= SessionUtils.getUser(request).getId()%>';
+		var type = 1;
 		$("#tab_nav1").click(function() {
 			$("#tab_nav1").attr("class", 'frame_cont_nav_li1');
 			$("#tab_nav2").attr("class", 'frame_cont_nav_li');
 			$("#tab1").css("display", "block");
 			$("#tab2").css("display", "none");
+			type = 1;
 		});
 
 		$("#tab_nav2").click(function() {
@@ -174,6 +177,7 @@
 			$("#tab_nav1").attr("class", 'frame_cont_nav_li');
 			$("#tab2").css("display", "block");
 			$("#tab1").css("display", "none");
+			type = 2;
 		});
 	</script>
 </body>

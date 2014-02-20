@@ -7,20 +7,18 @@ var totalPage2 = 0;
 var totalSize2 = 0;
 $(function(){
     $("#search1").click(function(){
-        getInfos(1,1);
+        getInfos(1);
     });
     $("#search2").click(function(){
-        getInfos(1,2);
+        getInfos(1);
     });
 });
 
-function getInfos(pNum,type){
+function getInfos(pNum){
     var param = {};
     if(type == 1){//我处理过的任务
-        page1 = pNum;
         param.handler = currId;
     }else{//我发起的任务
-        page2 = pNum;
         param.sponsor = currId;
     }
     var parDiv = $("#tab"+type);
@@ -37,6 +35,14 @@ function getInfos(pNum,type){
         $(".preload").mypopClose();
         if(data && data.data){
             var missions = data.data;
+            if(type == 1){
+                totalPage1 = data.pageCount;
+                totalSize1 = data.rowCount;
+            }else{
+                totalPage2 = data.pageCount;
+                totalSize2 = data.rowCount;
+            }
+            setPager(pNum);
             for(var i=0,len=missions.length;i<len;i++){
                 var res = '<tr><td>'+missions[i].id+'</td><td>'+missions[i].title
                     +'</td><td>'+getStatus(missions[i].status)+'</td><td>'+missions[i].type
@@ -53,17 +59,26 @@ function getInfos(pNum,type){
         }
     });
 }
-function getStatus(status){
-    if(status == 1){
-        return "待处理";
+function setPager(cPage){
+    var tPage ,tRow;
+    if(type == 1){//我处理过的任务
+        page1 = cPage;
+        tPage = totalPage1;
+        tRow = totalSize1;
+    }else{//我发起的任务
+        page2 = cPage;
+        tPage = totalPage2;
+        tRow = totalSize2;
     }
-    if(status == 2){
-        return "处理中";
-    }
-    if(status == 3){
-        return "已完成";
+    if(tPage > 0){
+        $("#pager"+type).pager({ pagenumber: cPage,
+        pagecount: tPage,
+        datanumber:tRow, 
+        buttonClickCallback: PageClick });
+    }else{
+        $("#pager"+type).hide();
     }
 }
-function setPager1(cPage){
-    
+function PageClick(pageclickednumber){
+    getInfos(pageclickednumber);
 }

@@ -30,7 +30,7 @@
   	<td width="100px" class="bg_c">主题：</td>
 	<td class="bg_4" colspan="1">${missionInfo.title }</td>
   	<td width="100px" class="bg_c">状态：</td>
-	<td width="180px" class="bg_4">${missionInfo.status }</td>
+	<td width="180px" class="bg_4" id="statusTd"></td>
   	<td width="100px" class="bg_c">紧急程度：</td>
 	<td width="180px" class="no_rborder">${missionInfo.type }</td>
   </tr>
@@ -77,8 +77,10 @@
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
 	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
 	<script type="text/javascript" src="static/js/mission/mission_info.js"></script>
+	<script type="text/javascript" src="static/js/mission/mission_utils.js"></script>
 	<script type="text/javascript">
-		
+		var status = '${missionInfo.status }'; 
+		$("#statusTd").text(getStatus(status));
 	</script>
 </body>
 </html>

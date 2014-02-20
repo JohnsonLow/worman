@@ -1,6 +1,7 @@
 package com.workman.mission.dao;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.workman.commons.po.ResponseModel;
@@ -40,4 +41,6 @@ public interface MissionDao {
 
 	ResponseModel getMissions(Integer sponsor, Integer handler,Integer status, String type,
 			Date startDate, Date endDate, Integer id, int page, int size) throws Exception;
+	List<MissionModel> getMissions(Integer sponsor, Integer handler,Integer status, String type,
+			Date startDate, Date endDate, Integer id)throws Exception;
 }
