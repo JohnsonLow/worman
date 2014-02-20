@@ -89,7 +89,7 @@ public class MissionController {
 	
 	@RequestMapping("getMissionList.do")
 	@ResponseBody
-	public ResponseModel getMissionList(@RequestParam(required=false)Integer sponsor,
+	public Object getMissionList(@RequestParam(required=false)Integer sponsor,
 			@RequestParam(required=false)Integer handler,
 			@RequestParam(required=false)Integer status,
 			@RequestParam(required=false)String type,

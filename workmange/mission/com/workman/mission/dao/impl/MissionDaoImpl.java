@@ -78,13 +78,10 @@ public class MissionDaoImpl implements MissionDao {
 		response.setRowCount(count);
 		return response;
 	}
-
+	
 	@Override
-	public List<MissionModel> getMissions(Integer sponsor, Integer handler,
-			Integer status, String type, Date startDate, Date endDate,
-			Integer id) throws Exception {
-		
-		return null;
+	public List<MissionModel> getMissions(Integer handlerId) {
+		return missionMapper.getPendingMissions(handlerId);
 	}
 	
 

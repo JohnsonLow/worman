@@ -41,6 +41,11 @@ public interface MissionDao {
 
 	ResponseModel getMissions(Integer sponsor, Integer handler,Integer status, String type,
 			Date startDate, Date endDate, Integer id, int page, int size) throws Exception;
-	List<MissionModel> getMissions(Integer sponsor, Integer handler,Integer status, String type,
-			Date startDate, Date endDate, Integer id)throws Exception;
+	
+	/**
+	 * 获得待处理任务
+	 * @param handlerId
+	 * @return
+	 */
+	List<MissionModel> getMissions(Integer handlerId);
 }
