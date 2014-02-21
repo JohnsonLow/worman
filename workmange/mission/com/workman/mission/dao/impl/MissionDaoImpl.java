@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.workman.commons.po.ResponseModel;
 import com.workman.commons.util.ObjectToMapUtils;
+import com.workman.mission.constant.MissionConstant;
 import com.workman.mission.dao.MissionDao;
 import com.workman.mission.model.MissionHandleModel;
 import com.workman.mission.model.MissionModel;
@@ -52,11 +53,11 @@ public class MissionDaoImpl implements MissionDao {
 	}
 
 	@Override
-	public ResponseModel getMissions(Integer sponsor, Integer handler,Integer status,
-			String type,Date startDate, Date endDate, Integer id, int page, int size) throws Exception {
+	public ResponseModel getMissions(int handler,Integer status,
+			String type,Date startDate, Date endDate, Integer id,
+			int searchType, int page, int size) throws Exception {
 		MissionWrapper wrapper = new MissionWrapper();
-		wrapper.setSponsorId(sponsor);
-		wrapper.setHandlerId(handler);
+		wrapper.setHandler(handler);
 		wrapper.setStart(PageUtils.getStart(page, size));
 		wrapper.setEnd(PageUtils.getEnd(page, size));
 		wrapper.setMissionCode(id);
@@ -65,13 +66,21 @@ public class MissionDaoImpl implements MissionDao {
 		wrapper.setStartTime(startDate);
 		wrapper.setEndTime(endDate);
 		ResponseModel response = new ResponseModel();
-		int count = missionMapper.getCount(wrapper);
+		int count = 0;
+		List<MissionModel> missions = null;
+		switch (searchType) {
+		case MissionConstant.SEARCH_TYPE_SPON:
+			count = missionMapper.getSponCount(wrapper);
+			missions = missionMapper.getSponMissions(wrapper);;
+			break;
+
+		case MissionConstant.SEARCH_TYPE_HANDLED:
+			count = missionMapper.getHanCount(wrapper);
+			missions = missionMapper.getHanMissions(wrapper);;
+			break;
+		}
 		if(count > 0){
-			List<MissionModel> missions = missionMapper.getMissions(wrapper);
-			List<Object> missionList = new ArrayList<Object>();
-			for(int i=0,len=missions.size();i<len;i++){
-				missionList.add(ObjectToMapUtils.toMap(missions.get(i)));
-			}
+			List<Object> missionList = parsetDate(missions);
 			response.setData(missionList);
 		}
 		response.setPageCount(PageUtils.getPageCount(count, size));
@@ -79,9 +88,18 @@ public class MissionDaoImpl implements MissionDao {
 		return response;
 	}
 	
+	private List<Object> parsetDate(List<MissionModel> missions) throws Exception {
+		List<Object> missionList = new ArrayList<Object>();
+		for(int i=0,len=missions.size();i<len;i++){
+			missionList.add(ObjectToMapUtils.toMap(missions.get(i)));
+		}
+		return missionList;
+	}
+
 	@Override
-	public List<MissionModel> getMissions(Integer handlerId) {
-		return missionMapper.getPendingMissions(handlerId);
+	public List<Object> getMissions(Integer handlerId) throws Exception {
+		List<MissionModel> missions =missionMapper.getPendingMissions(handlerId);
+		return parsetDate(missions);
 	}
 	
 

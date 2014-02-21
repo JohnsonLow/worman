@@ -47,7 +47,7 @@
 				if(data == -1){
 					window.location.href = accessUrl;
 	            }else if(data == -2){
-	                alert("获取微博授权失败，请重新授权");
+	                alert("微博授权已过期，请重新授权");
 	                window.location.href = accessUrl;
 	            } else if(data == -3){
 	            	alert("不存在的微博账号，请重新授权");

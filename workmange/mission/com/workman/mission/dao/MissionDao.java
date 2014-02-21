@@ -31,21 +31,28 @@ public interface MissionDao {
 	 */
 	void commitMission(int missionId);
 	
+	
 	/**
-	 * 获取任务列表
-	 * @param endDate 
-	 * @param startDate 
-	 * @param wrapper
+	 * 
+	 * @param handler 查询用户id
+	 * @param status 任务状态
+	 * @param type 任务紧急程度
+	 * @param startDate 任务创建时间的 上限
+	 * @param endDate 任务创建时间的  下限
+	 * @param id 任务id
+	 * @param searchType 搜索类型  2为我发起的任务 3为我处理过的任务
+	 * @param page 页码
+	 * @param size 每页条数
 	 * @return
+	 * @throws Exception
 	 */
-
-	ResponseModel getMissions(Integer sponsor, Integer handler,Integer status, String type,
-			Date startDate, Date endDate, Integer id, int page, int size) throws Exception;
+	ResponseModel getMissions(int handler,Integer status, String type,
+			Date startDate, Date endDate, Integer id,int searchType, int page, int size) throws Exception;
 	
 	/**
 	 * 获得待处理任务
 	 * @param handlerId
 	 * @return
 	 */
-	List<MissionModel> getMissions(Integer handlerId);
+	List<Object> getMissions(Integer handlerId) throws Exception ;
 }

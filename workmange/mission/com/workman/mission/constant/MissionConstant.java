@@ -34,5 +34,18 @@ public class MissionConstant {
 	 */
 	public static final int MISSION_TYPE_URGENCY = 2003;
 	
+	/**
+	 * 查询类型：待处理的任务
+	 */
+	public static final int SEARCH_TYPE_PENDING = 1;
 	
+	/**
+	 * 查询类型：我发起的任务
+	 */
+	public static final int SEARCH_TYPE_SPON = 2;
+	
+	/**
+	 * 查询类型：我处理过的任务
+	 */
+	public static final int SEARCH_TYPE_HANDLED = 3;
 }

@@ -55,7 +55,7 @@
 			$.get('weibo/revoke.do', function(data){
 				if(data == 1){
 					alert("成功收回授权！");
-				} else if(data == -1){
+				} else if(data == -1 || data == 0){
 					alert("当前为未授权状态！");
 				}else if(data == -2){
 					alert("收回授权异常，请联系管理员！");

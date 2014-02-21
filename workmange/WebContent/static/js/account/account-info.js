@@ -77,7 +77,7 @@ function addOrUpdate(){
     	}
 	}
     userInfo.department = {'code':parseInt($("#depSel").val(),10)};
-	var level = $("#level").val();
+	// var level = $("#level").val();
 	userInfo.password = pwd;
 	userInfo.pos = {'code':parseInt($("#posSel").val(),10)};
 	userInfo.phone = $("#phone").val();

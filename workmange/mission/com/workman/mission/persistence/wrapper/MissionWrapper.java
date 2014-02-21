@@ -3,8 +3,7 @@ package com.workman.mission.persistence.wrapper;
 import java.util.Date;
 
 public class MissionWrapper {
-	private Integer sponsorId;//发布者id
-	private Integer handlerId;//处理者id
+	private Integer handler;//处理者id
 	private Integer missionCode;//任务id
 	private Date startTime;//起始时间
 	private Date endTime;//结束时间
@@ -12,17 +11,12 @@ public class MissionWrapper {
 	private int end;
 	private String type;
 	private Integer status;
-	public Integer getSponsorId() {
-		return sponsorId;
+	
+	public Integer getHandler() {
+		return handler;
 	}
-	public void setSponsorId(Integer sponsorId) {
-		this.sponsorId = sponsorId;
-	}
-	public Integer getHandlerId() {
-		return handlerId;
-	}
-	public void setHandlerId(Integer handlerId) {
-		this.handlerId = handlerId;
+	public void setHandler(Integer handler) {
+		this.handler = handler;
 	}
 	public Integer getMissionCode() {
 		return missionCode;

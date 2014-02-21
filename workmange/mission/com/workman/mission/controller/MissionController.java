@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.workman.commons.po.ResponseModel;
 import com.workman.commons.util.DateTimeUtils;
 import com.workman.commons.util.JSONUtils;
 import com.workman.commons.util.ObjectToMapUtils;
 import com.workman.commons.util.StringUtility;
 import com.workman.commons.util.SysLogUtils;
+import com.workman.mission.constant.MissionConstant;
 import com.workman.mission.dao.MissionDao;
 import com.workman.mission.model.MissionHandleModel;
 import com.workman.mission.model.MissionModel;
@@ -82,46 +82,54 @@ public class MissionController {
 		return code;
 	}
 	@RequestMapping("goMissionListPage.do")
-	public String goMissionsPage(HttpServletRequest req,ModelMap model){
-		SessionUtils.putMainUrlInSession(req, "/mission/goMissionListPage.do");
+	public String goMissionsPage(int searchType,HttpServletRequest req,ModelMap model){
+		SessionUtils.putMainUrlInSession(req, "/mission/goMissionListPage.do?searchType="+searchType);
+		model.addAttribute("searchType", searchType);
 		return "mission/mission_list";
 	}
-	
+	/**
+	 * 
+	 * @param handler 要查询者的id 
+	 * @param searchType 可选值为1 2 3 
+	 * @see MissionDao#getMissions(java.lang.Integer)
+	 * @see MissionDao#getMissions(int, Integer, String, Date, Date, Integer, int, int, int)
+	 * @return
+	 */
 	@RequestMapping("getMissionList.do")
 	@ResponseBody
-	public Object getMissionList(@RequestParam(required=false)Integer sponsor,
-			@RequestParam(required=false)Integer handler,
+	public Object getMissionList(Integer handler,int searchType,
 			@RequestParam(required=false)Integer status,
 			@RequestParam(required=false)String type,
 			@RequestParam(required=false) String startTime,
 			@RequestParam(required=false) String endTime,
 			@RequestParam(required=false) Integer id,
-			int page,int size){
-		if(sponsor == null && handler == null){
-			return null;
-		}else{
+			@RequestParam(required=false)Integer page,
+			@RequestParam(required=false)Integer size){
 			Date startDate = null;
 			Date endDate = null;
-			if(StringUtility.isNotBlank(startTime)){
-				startTime += " 00:00:00";
-				startDate = DateTimeUtils.parse(startTime);
-			}
-			if(StringUtility.isBlank(endTime)){
-				endDate = new Date();
-			}else{
-				endDate = DateTimeUtils.parse(endTime + " 23:59:59");
-			}
-			if(StringUtility.isBlank(type)){
-				type = null;
-			}
-			ResponseModel result = null;
+			Object result = null;
 			try {
-				result = mDao.getMissions(sponsor,handler,status,type,
-						startDate,endDate,id,page,size);
+				if (searchType == MissionConstant.SEARCH_TYPE_PENDING) {
+					result = mDao.getMissions(handler);
+				}else{
+					if(StringUtility.isNotBlank(startTime)){
+						startTime += " 00:00:00";
+						startDate = DateTimeUtils.parse(startTime);
+					}
+					if(StringUtility.isBlank(endTime)){
+						endDate = new Date();
+					}else{
+						endDate = DateTimeUtils.parse(endTime + " 23:59:59");
+					}
+					if(StringUtility.isBlank(type)){
+						type = null;
+					}
+					result = mDao.getMissions(handler,status,type,
+							startDate,endDate,id,searchType,page,size);
+				}
 			} catch (Exception e) {
 				SysLogUtils.error(MissionController.class, e, "查询任务列表出错");
 			}
-			return result;
-		}
+		return result;
 	}
 }

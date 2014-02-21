@@ -47,7 +47,8 @@ public class AuthSessionFilter implements Filter {
 				}else{
 					res.setCharacterEncoding("utf-8");
 					res.setContentType("text/html; charset=UTF-8");
-					res.getWriter().print("<script type=\"text/javascript\">alert('您还未登录或登录已过期,请重新登录!');window.parent.location.href='../internal/login.do';</script>");	
+					res.getWriter().print("<script type=\"text/javascript\">alert('您还未登录或登录已过期,请重新登录!');window.parent.location.href='"+
+						contentURL+"/internal/login.do';</script>");	
 					
 					return;
 				}

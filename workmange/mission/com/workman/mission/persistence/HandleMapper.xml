@@ -8,9 +8,9 @@
   
    <insert id="add" parameterType="com.workman.mission.model.MissionHandleModel">
     INSERT INTO MISSION
-      (MISSIONID,ADDTIME, CONTENT,HANDLEPEO,TOPEO,HANDLETYPE)
+      (MISSIONID,ADDTIME, CONTENT,HANDLEPEO,TOPEO,HANDLETYPE,STATUS)
     VALUES
-      (#{missionId},#{addTime}, #{CONTENT},#{handlePeople.id},#{toPeople.id},#{handleType})
+      (#{missionId},#{addTime}, #{CONTENT},#{handlePeople.id},#{toPeople.id},#{handleType},#{status})
   </insert>
   <select id="getList" resultType="com.workman.mission.model.MissionHandleModel">
     SELECT MISSIONID AS missionId,

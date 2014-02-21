@@ -25,7 +25,7 @@
   	FROM MISSION M
   	WHERE M.ID=#{missionId}
   </select>
-  <select id="getCount" resultType="int">
+  <select id="getSponCount" resultType="int">
   	SELECT COUNT(ID) FROM MISSION M
 	  	WHERE 1=1 
 	  	<choose>
@@ -48,15 +48,10 @@
 			  	<if test="status != null">
 			  		AND M.STATUS = #{status}
 			  	</if>
-			  	<if test="sponsorId != null">
-			  		AND M.SPONSOR_ID = #{sponsorId}
-			  	</if>
-			  	<if test="handlerId != null">
-			  		AND M.HANDLER_ID = #{handlerId} OR
-			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handlerId})
-			  	</if>
 	  		</otherwise>
 	  	</choose>
+	  	AND M.SPONSOR_ID = #{handler} OR
+		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handler})
 	  	LIMIT #{start},#{end}
   </select>
   <select id="getPendingMissions" resultType="com.workman.mission.model.MissionModel">
@@ -76,12 +71,12 @@
   	HANDLER_NAME AS handlerName,
   	HANDLER_DEP AS handlerDep 
   	FROM MISSION M
-  	 WHERE M.STATUS = 1 OR
+  	 WHERE (M.STATUS = 1 AND M.HANDLER_ID = #{handleId}) OR
  	(M.STATUS = 2 and 
  		exists (SELECT 1 FROM MISSION_HANDLE MH 
- 			WHERE MH.MISIONID = M.ID  and MH.STATUS = 0 and MH.TO_ID=#{handleId} ))
+ 			WHERE MH.MISSIONID = M.ID  and MH.STATUS = 0 and MH.TO_ID=#{handleId} ))
   </select>
-  <select id="getMissions" resultType="com.workman.mission.model.MissionModel" 
+  <select id="getSponMissions" resultType="com.workman.mission.model.MissionModel" 
   		parameterType="com.workman.mission.persistence.wrapper.MissionWrapper">
 	  	SELECT M.ID ,
 	  	M.TITLE,
@@ -99,7 +94,7 @@
 	  	HANDLER_NAME AS handlerName,
 	  	HANDLER_DEP AS handlerDep
 	  	FROM MISSION M
-	  	WHERE 1=1 
+	  	WHERE 1=1
 	  	<choose>
 	  		<when test="missionCode != null">
 	  			ID = #{missionCode}
@@ -120,17 +115,89 @@
 			  	<if test="status != null">
 			  		AND M.STATUS = #{status}
 			  	</if>
-			  	<if test="sponsorId != null">
-			  		AND M.SPONSOR_ID = #{sponsorId}
+	  		</otherwise>
+	  	</choose>
+	  	AND M.SPONSOR_ID = #{handler} OR
+		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handler})
+	  	LIMIT #{start},#{end}
+  </select>
+  
+  <select id="getHanCount" resultType="int">
+  	SELECT COUNT(ID) FROM MISSION M
+	  	WHERE 1=1 AND M.STATUS > 1
+	  	<choose>
+	  		<when test="missionCode != null">
+	  			ID = #{missionCode}
+	  		</when>
+	  		<otherwise>
+	  			<if test="type != null">
+			  		AND M.TYPE = #{type}
 			  	</if>
-			  	<if test="handlerId != null">
-			  		AND M.HANDLER_ID = #{handlerId} OR
-			  		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handlerId})
+			  	<if test="startTime != null">
+			  		AND M.CREATETIME &gt;= #{startTime}
+			  	</if>
+			  	<if test="endTime != null">
+			  		AND M.CREATETIME &lt;=  #{endTime}
+			  	</if>
+			  	<if test="type != null">
+			  		AND M.TYPE = #{type}
+			  	</if>
+			  	<if test="status != null">
+			  		AND M.STATUS = #{status}
 			  	</if>
 	  		</otherwise>
 	  	</choose>
-	  	
+	  	AND M.HANDLER_ID = #{handler} OR
+		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.TO_ID = #{handler} AND MH.STATUS=1)
+	  	LIMIT #{start},#{end}
   </select>
+  
+  <select id="getHanMissions" resultType="com.workman.mission.model.MissionModel" 
+  		parameterType="com.workman.mission.persistence.wrapper.MissionWrapper">
+	  	SELECT M.ID ,
+	  	M.TITLE,
+	  	M.CONTENT,
+	  	M.CREATETIME,
+	  	M.HANDLETIME,
+	  	M.COMMITTIME,
+	  	M.TYPE,
+	  	M.STATUS,
+	  	M.NOTES,
+	  	SPONSOR_ID AS sponsorId,
+	  	SPONSOR_NAME AS sponsorName,
+	  	SPONSOR_DEP AS sponsorDep,
+	  	HANDLER_ID AS handlerId,
+	  	HANDLER_NAME AS handlerName,
+	  	HANDLER_DEP AS handlerDep
+	  	FROM MISSION M
+	  	WHERE 1=1
+	  	<choose>
+	  		<when test="missionCode != null">
+	  			ID = #{missionCode}
+	  		</when>
+	  		<otherwise>
+	  			<if test="type != null">
+			  		AND M.TYPE = #{type}
+			  	</if>
+			  	<if test="startTime != null">
+			  		AND M.CREATETIME &gt;= #{startTime}
+			  	</if>
+			  	<if test="endTime != null">
+			  		AND M.CREATETIME &lt;=  #{endTime}
+			  	</if>
+			  	<if test="type != null">
+			  		AND M.TYPE = #{type}
+			  	</if>
+			  	<if test="status != null">
+			  		AND M.STATUS = #{status}
+			  	</if>
+	  		</otherwise>
+	  	</choose>
+	  	AND M.HANDLER_ID = #{handler} OR
+		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.TO_ID = #{handler} AND MH.STATUS=1)
+	  	LIMIT #{start},#{end}
+  </select>
+  
    <insert id="create" parameterType="com.workman.mission.model.MissionModel">
     INSERT INTO MISSION
       (TITLE,CONTENT,CREATETIME,TYPE,STATUS,SPONSOR_ID,SPONSOR_NAME,
