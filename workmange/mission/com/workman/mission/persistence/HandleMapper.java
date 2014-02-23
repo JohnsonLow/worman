@@ -10,4 +10,8 @@ public interface HandleMapper {
 	
 	List<MissionHandleModel> getList(int missionId);
 
+	void commitHandle(int missionId);
+
+	MissionHandleModel get(int id);
+
 }

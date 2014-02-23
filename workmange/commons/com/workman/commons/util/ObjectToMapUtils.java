@@ -88,36 +88,12 @@ public class ObjectToMapUtils {
 		}
 		return t;
 	}
-	public static void main(String[] args) throws Exception {
-		Test test = new Test();
-		test.setAge(24);
-		test.setName("xxx");
-		test.setBirthDay(Calendar.getInstance());
-		System.out.println(toMap(test));
+	public static List<Map<String,Object>> listToMap(List<?> list) throws Exception {
+		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
+		for(int i=0,len=list.size();i<len;i++){
+			mapList.add(toMap(list.get(i)));
+		}
+		return mapList;
 	}
 
-}
-class Test{
-	private String name ;
-	private int age;
-	private Calendar birthDay;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	public Calendar getBirthDay() {
-		return birthDay;
-	}
-	public void setBirthDay(Calendar birthDay) {
-		this.birthDay = birthDay;
-	}
-	
 }

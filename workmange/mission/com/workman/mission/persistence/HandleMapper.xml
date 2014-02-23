@@ -7,11 +7,20 @@
   <cache />
   
    <insert id="add" parameterType="com.workman.mission.model.MissionHandleModel">
-    INSERT INTO MISSION
-      (MISSIONID,ADDTIME, CONTENT,HANDLEPEO,TOPEO,HANDLETYPE,STATUS)
+    INSERT INTO MISSION_HANDLE
+      (MISSIONID,ADDTIME, CONTENT,HANDLER_ID,HANDLER_NAME,HANDLER_DEP,
+      TO_ID,TO_NAME,TO_DEP,HANDLETYPE,STATUS,HANDLETIME)
     VALUES
-      (#{missionId},#{addTime}, #{CONTENT},#{handlePeople.id},#{toPeople.id},#{handleType},#{status})
+      (#{missionId},#{addTime}, #{content},#{handlerId},#{handlerName},
+      #{handlerDep},#{toId},#{toName},#{toDep},#{handleType},#{status},#{handleTime})
+      
+     <selectKey resultType="int" keyProperty="id" order="AFTER">
+   		SELECT LAST_INSERT_ID()
+   	</selectKey>
   </insert>
+  <update id="commitHandle" parameterType="int">
+  	UPDATE MISSION_HANDLE SET STATUS = 1 WHERE MISSIONID = #{missionId}
+  </update>
   <select id="getList" resultType="com.workman.mission.model.MissionHandleModel">
     SELECT MISSIONID AS missionId,
     	CONTENT AS content,
@@ -29,6 +38,25 @@
     	
     FROM MISSION_HANDLE MH
     WHERE MH.MISSIONID = #{missionId}
+  </select>
+  
+  <select id="get" resultType="com.workman.mission.model.MissionHandleModel">
+    SELECT MISSIONID AS missionId,
+    	CONTENT AS content,
+    	ADDTIME AS addTime,
+    	CONTENT AS content,
+    	HANDLER_ID AS handlerId,
+    	HANDLER_NAME AS handlerName,
+    	HANDLER_DEP AS handlerDep,
+    	TO_ID AS toId,
+    	TO_NAME AS toName,
+    	TO_DEP AS toDep,
+    	HANDLETIME AS handleTime,
+    	HANDLETYPE AS handleType,
+    	STATUS as status
+    	
+    FROM MISSION_HANDLE MH
+    WHERE MH.ID = #{handleId}
   </select>
   
 </mapper>

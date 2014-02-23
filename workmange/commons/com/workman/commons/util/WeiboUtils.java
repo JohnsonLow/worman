@@ -2,6 +2,7 @@ package com.workman.commons.util;
 
 
 import weibo4j.Oauth;
+import weibo4j.Timeline;
 import weibo4j.model.WeiboException;
 
 public class WeiboUtils {
@@ -15,7 +16,9 @@ public class WeiboUtils {
 		}
 		return auth;
 	}
-	public static void sendMsg(){
-		
+	public static void sendMsg(String token, String toWbName, String weiboStr) throws WeiboException{
+		Timeline timeLine = new Timeline();
+		timeLine.setToken(token);
+		timeLine.UpdateStatus(weiboStr + " @" + toWbName);
 	}
 }

@@ -11,8 +11,8 @@ $(function(){
                     if(data == '-401'){
                         goLoginPage();
                     }else if(data != -1){
-                        alert("创建成功");
-                        window.location.href = contextPath + '/mission/goMissionInfoPage.do?id=' + data;
+                        var url = contextPath + '/mission/goMissionInfoPage.do?id=' + data;
+                        sendWeiboInfo(currId,data,null,url);
                     }else{
                         alert("创建任务失败，请联系管理员！");
                     }
@@ -117,6 +117,7 @@ function initInfos(){
                 }
             });
         } else{
+            $("#slPeo").empty();
             $("#slPeo").append("<option value='-1'>暂无数据</option>");
         }
     });

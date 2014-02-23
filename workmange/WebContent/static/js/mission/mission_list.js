@@ -70,8 +70,8 @@ function showInfos(data){
     }
 }
 function setPager(cPage){
-    var tPage ,tRow;
-    if(tPage > 0){
+    page = cPage;
+    if(totalPage > 0){
         $("#pager").pager({ pagenumber: cPage,
         pagecount: totalPage,
         datanumber:totalSize, 

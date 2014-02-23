@@ -1,25 +1,16 @@
 package com.workman.mission.constant;
 
 public class MissionConstant {
-	/**
-	 * 任务处理类型：回复发布人
-	 */
-	public static final int HANDLE_TYPE_TO_CREATE = 1001;
-	
-	/**
-	 *任务处理类型： 回复上一级
-	 */
-	public static final int HANDLE_TYPE_TO_UPPER = 1002;
 	
 	/**
 	 * 任务处理类型：转发
 	 */
-	public static final int HANDLE_TYPE_TRAN = 1003;
+	public static final int HANDLE_TYPE_TRAN = 1001;
 	
 	/**
 	 * 任务处理类型：完成
 	 */
-	public static final int HANDLE_TYPE_COMMIT = 1004;
+	public static final int HANDLE_TYPE_COMMIT = 1002;
 	
 	/**
 	 * 任务紧急程度：普通

@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.workman.commons.util.SysLogUtils;
 import com.workman.commons.util.WeiboUtils;
+import com.workman.mission.dao.MissionDao;
+import com.workman.mission.model.MissionHandleModel;
+import com.workman.mission.model.MissionModel;
 import com.workman.permission.util.SessionUtils;
 import com.workman.sysman.dao.AccountDao;
 import com.workman.sysman.model.AccountModel;
@@ -40,6 +44,9 @@ public class WeiboController {
 	
 	@Autowired
 	private WeiboDao weiboDao;
+	
+	@Autowired
+	private MissionDao missionDao;
 	/**
 	 * 微博授权认证
 	 * @param code
@@ -143,5 +150,61 @@ public class WeiboController {
 			token = weiboDao.getToken(id);
 		}
 		return token;
+	}
+	/**
+	 * 
+	 * @param id
+	 * @param missionId
+	 * @param handleId
+	 * @return -1 你未进行微博绑定 -2通知对象未绑定微博  -3 微博验证出错 -4 发送微博失败
+	 */
+	@RequestMapping("sendWeibo.do")
+	@ResponseBody
+	public int sendWeibo(int id,int missionId,
+			@RequestParam(required=false)Integer handleId){
+		int toId = 0 ;//@的账号id
+		String weiboStr = null;
+		MissionModel mission = missionDao.getMission(missionId);
+		int mStatu = mission.getStatus();
+		switch (mStatu) {
+		case 1://新建的任务，没有处理记录
+			toId = mission.getHandlerId();
+			weiboStr = "我给你分配了任务，请到任务模块查看或登录管理系统进行处理";
+			break;
+		case 2://有处理记录的
+			MissionHandleModel handleInfo =  missionDao.getMissionHandle(handleId);
+			toId = handleInfo.getToId();
+			weiboStr = "我给你转发了任务，请到任务模块查看或登录管理系统进行处理";
+			break;
+		case 3://已完成的任务
+			toId = mission.getSponsorId();
+			weiboStr = "我已完成了任务，请查看";
+			break;
+		}
+		AccessTokenModel sToken = weiboDao.getToken(id);
+		AccessTokenModel toToken = weiboDao.getToken(toId);
+		if(sToken == null){
+			return -1;
+		}
+		if(toToken == null){
+			return -2;
+		}
+		User user = null;
+		try {//验证token
+			user = getWeiboUesr(sToken.getToken(), sToken.getUid());
+		} catch (WeiboException e) {
+			SysLogUtils.error(WeiboController.class, e, "验证出错");
+			return -3;
+		}
+		if(user != null){
+			try {
+				WeiboUtils.sendMsg(sToken.getToken(),toToken.getWeiboName(),weiboStr);
+				return 1;
+			} catch (WeiboException e) {
+				SysLogUtils.error(WeiboController.class, e, "验证出错");
+				return -4;
+			}
+		}
+		return 0;
 	}
 }

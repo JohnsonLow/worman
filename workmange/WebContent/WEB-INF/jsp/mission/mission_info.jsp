@@ -20,7 +20,7 @@
 </head>
 <body>
 		<div class="info">
-			<div class="info-top">任务信息</div>
+			<div class="info-top">任务信息 <span id="sendWbBtn" style="float:right;display:none;"><a href='javascript:;'>发送微博通知受理人</a></span></div>
 			<div class="cl"></div>
 			<div class="info-content">
 				<table class="table" width="100%" cellspacing="1" cellpadding="3" border="0" align="center">
@@ -66,8 +66,11 @@
 				<!--内容end-->
 				<div class="cl"></div>
 				<div id="handleListDiv" style="display:none;">
-					<table class="table" width="100%" cellspacing="1" cellpadding="3" border="0" align="center">
-						<thead><tr><td colspan="8" align="center" class="bg_c">处理记录</td></tr></thead>
+					<table id="handleTable" class="table" width="100%" cellspacing="1" cellpadding="3" border="0" align="center">
+						<thead><tr><td colspan="8" align="center" class="bg_c">处理记录</td></tr>
+						<tr><td>处理部门</td><td>处理人</td><td>处理意见</td><td>处理时间</td>
+						<td>受理部门</td><td>受理人</td><td>受理时间</td></tr></thead>
+						<tbody></tbody>
 					</table>
 				</div>
 				<div class="cl" style="height:10px;"></div>
@@ -76,13 +79,19 @@
 						<thead><tr><td colspan="8" align="center" class="bg_c">工单处理</td></tr></thead>
 						<tbody>
 							<tr><td class="bg_c" width="10%">处理方式：</td>
-							<td width="10%" class="no_rborder" align="left">
-								<span style="float:left;"><input type="radio" name="handType"/><span style="margin-left:5px;">回复发起人</span></span></td>
 							<td width="6%"class="no_rborder" align="left">
-								<span style="float:left;"><input type="radio" name="handType"/><span style="margin-left:5px;">完成</span></span></td>
-							<td style="align:left;">
-							<span style="float:left;"><input type="radio" name="handType"/><span style="margin-left:5px;">转给其他人</span>
-							 <select></select></span></td></tr>
+								<span style="float:left;"><input type="radio" checked="checked" value="1002" name="handType"/><span style="margin-left:5px;">完成</span></span></td>
+							<td style="align:left;" class="no_rborder" width="10%" >
+							<span style="float:left;"><input value="1001" type="radio" name="handType"/><span style="margin-left:5px;">转给其他人</span></span>
+							</td>
+							<td><span style="margin-left:10px;"> 
+							 <select class="select-company" id="depSel" style="width:120px;">
+							 </select> <select class="select-company" style="width:120px;" id="peoSel">
+							 	<option value="-1">--请选择部门--</option>
+							 </select></span></td></tr>
+							 <tr><td class="bg_c" width="10%">处理意见：</td>
+							 <td colspan="8"><textarea id="content" rows="5" cols="200" style="text-log-data"></textarea></td></tr>
+							 <tr><td colspan="8"><input class="btn-n" type="button" value="确认处理" id="confirmHanBtn"/></td></tr>
 						</tbody>
 					</table>
 				</div>
@@ -97,19 +106,23 @@
 	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
 	<script type="text/javascript" src="static/js/mission/mission_info.js"></script>
 	<script type="text/javascript" src="static/js/mission/mission_utils.js"></script>
+	<script type="text/javascript" src="static/js/mission/weibo.js"></script>
 	<script type="text/javascript">
 		var status = '${missionInfo.status }'; 
+		var fqId = '${missionInfo.sponsorId}';
+		var fqName = '${missionInfo.sponsorName}';
+		var fqDep = '${missionInfo.sponsorDep}';
+		var missionId = '${missionInfo.id}';
 		var currId = '${currUser.id}';
+		var currName = '${currUser.name}';
+		var currDep = '${currUser.department.name}';
+		var handlerId = '${missionInfo.handlerId}';
+		var sponsorId = '${missionInfo.sponsorId}';
+		var handleInfoStr = '${handleInfo}';
+		if(handleInfoStr){
+			var handleInfos = JSON.parse(handleInfoStr);
+		}
 		$("#statusTd").text(getStatus(status));
-		$(function(){
-			if(status == 3){
-				$("#handleDiv").remove();
-			}else if(status == 1){
-				if(currId == '${missionInfo.handlerId}'){
-					$("#handleDiv").show();
-				}
-			}
-		});
 	</script>
 </body>
 </html>

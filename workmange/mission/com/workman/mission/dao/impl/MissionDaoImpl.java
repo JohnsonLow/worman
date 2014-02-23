@@ -1,6 +1,5 @@
 package com.workman.mission.dao.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +27,12 @@ public class MissionDaoImpl implements MissionDao {
 
 	
 	@Override
-	public Map<String,Object> getMission(int missionId) {
-		// TODO Auto-generated method stub
-		Map<String,Object> result = new HashMap<String, Object>();
-		result.put("missionInfo", missionMapper.getMission(missionId));
-		result.put("handleInfo", handleMapper.getList(missionId));
-		return result;
+	public MissionModel getMission(int missionId) {
+		return  missionMapper.getMission(missionId);
+	}
+
+	public List<MissionHandleModel> getMissionHandles(int missionId) {
+		return handleMapper.getList(missionId);
 	}
 
 	@Override
@@ -43,13 +42,16 @@ public class MissionDaoImpl implements MissionDao {
 
 	@Override
 	public void commitMission(int missionId) {
-		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("id", missionId);
+		map.put("currDt", new Date());
+		missionMapper.commit(map);
 	}
 
 	@Override
-	public void handle(MissionHandleModel handel) {
-		
-		
+	public void handle(MissionHandleModel handle) {
+		handleMapper.commitHandle(handle.getMissionId());
+		handleMapper.add(handle);
 	}
 
 	@Override
@@ -80,7 +82,7 @@ public class MissionDaoImpl implements MissionDao {
 			break;
 		}
 		if(count > 0){
-			List<Object> missionList = parsetDate(missions);
+			List<Map<String,Object>> missionList = ObjectToMapUtils.listToMap(missions);
 			response.setData(missionList);
 		}
 		response.setPageCount(PageUtils.getPageCount(count, size));
@@ -88,19 +90,24 @@ public class MissionDaoImpl implements MissionDao {
 		return response;
 	}
 	
-	private List<Object> parsetDate(List<MissionModel> missions) throws Exception {
-		List<Object> missionList = new ArrayList<Object>();
-		for(int i=0,len=missions.size();i<len;i++){
-			missionList.add(ObjectToMapUtils.toMap(missions.get(i)));
-		}
-		return missionList;
+
+	@Override
+	public List<Map<String,Object>> getMissions(Integer handlerId) throws Exception {
+		List<MissionModel> missions =missionMapper.getPendingMissions(handlerId);
+		return ObjectToMapUtils.listToMap(missions);
 	}
 
 	@Override
-	public List<Object> getMissions(Integer handlerId) throws Exception {
-		List<MissionModel> missions =missionMapper.getPendingMissions(handlerId);
-		return parsetDate(missions);
+	public void updateHandTime(int missionId) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("id", missionId);
+		map.put("currDt", new Date());
+		missionMapper.updateMissionStatu(map);
 	}
-	
+
+	@Override
+	public MissionHandleModel getMissionHandle(int handleId) {
+		return handleMapper.get(handleId);
+	}
 
 }

@@ -14,7 +14,7 @@ public interface MissionDao {
 	 * @param missionId
 	 * @return
 	 */
-	Map<String,Object> getMission(int missionId);
+	MissionModel getMission(int missionId);
 	/**
 	 * 创建任务
 	 * @param mission
@@ -54,5 +54,14 @@ public interface MissionDao {
 	 * @param handlerId
 	 * @return
 	 */
-	List<Object> getMissions(Integer handlerId) throws Exception ;
+	List<Map<String,Object>> getMissions(Integer handlerId) throws Exception ;
+	/**
+	 * 更新该任务的受理时间
+	 * @param missionId
+	 */
+	void updateHandTime(int missionId);
+	
+	public List<MissionHandleModel> getMissionHandles(int missionId) ;
+	
+	public MissionHandleModel getMissionHandle(int handleId);
 }

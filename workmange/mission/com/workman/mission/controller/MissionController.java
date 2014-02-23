@@ -1,7 +1,7 @@
 package com.workman.mission.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,30 +37,37 @@ public class MissionController {
 		SessionUtils.putMainUrlInSession(req, "/mission/goAddMissionPage.do");
 		return "mission/add_mission";
 	}
-	@SuppressWarnings("unchecked")
 	@RequestMapping("goMissionInfoPage.do")
 	public String goMissionInfoPage(int id,
 			HttpServletRequest req,ModelMap model){
 		SessionUtils.putMainUrlInSession(req, "/mission/goMissionInfoPage.do?id="+id);
 		try {
-			Map<String,Object> result = mDao.getMission(id);
-			model.addAttribute("missionInfo", ObjectToMapUtils.toMap(result.get("missionInfo")));
-			Object handleInfo = result.get("handleInfo");
-			if(handleInfo != null){
-				List<MissionHandleModel> handles = (List<MissionHandleModel>)handleInfo;
-				if(handles.size()>0){
-					List<Object> handleMaps = new ArrayList<Object>();
-					for(int i=0,len=handles.size();i<len;i++){
-						handleMaps.add( ObjectToMapUtils.toMap(handles.get(i)));
-					}
-					model.addAttribute("handleInfo",JSONUtils.getJSONString(handleMaps));
-				}
-				
+			MissionModel mission = mDao.getMission(id);
+			model.addAttribute("missionInfo", ObjectToMapUtils.toMap(mission));
+			List<MissionHandleModel> handleInfo = mDao.getMissionHandles(id);
+			if(handleInfo != null && handleInfo.size()>0){
+				model.addAttribute("handleInfo",JSONUtils.getJSONString(ObjectToMapUtils.listToMap(handleInfo)));
 			}
 		} catch (Exception e) {
 			SysLogUtils.error(MissionController.class, e, "查询任务信息出错");
 		}
 		return "mission/mission_info";
+	}
+	@RequestMapping("getMission.do")
+	@ResponseBody
+	public Map<String,Object> getMission(int id){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			MissionModel mission = mDao.getMission(id);
+			result.put("missionInfo", ObjectToMapUtils.toMap(mission));
+			List<MissionHandleModel> handleInfo = mDao.getMissionHandles(id);
+			if(handleInfo != null && handleInfo.size()>0){
+				result.put("handleInfo",ObjectToMapUtils.listToMap(handleInfo));
+			}
+		} catch (Exception e) {
+			SysLogUtils.error(MissionController.class, e, "查询任务信息出错");
+		}
+		return result;
 	}
 	@RequestMapping("createMission")
 	@ResponseBody
@@ -131,5 +138,35 @@ public class MissionController {
 				SysLogUtils.error(MissionController.class, e, "查询任务列表出错");
 			}
 		return result;
+	}
+	@RequestMapping("handleMission.do")
+	@ResponseBody
+	public Integer handleMission(@RequestBody MissionHandleModel handleInfo){
+		int type = handleInfo.getHandleType();
+		Date d = new Date();
+		handleInfo.setAddTime(d);
+		int missionId = handleInfo.getMissionId();
+		if(handleInfo.getHandleTime() == null){
+			mDao.updateHandTime(handleInfo.getMissionId());
+		}
+		try {
+			switch (type) {
+			case MissionConstant.HANDLE_TYPE_TRAN:
+				handleInfo.setStatus(0);
+				mDao.handle(handleInfo);
+				break;
+			case MissionConstant.HANDLE_TYPE_COMMIT:
+				handleInfo.setStatus(1);
+				handleInfo.setHandleTime(d);
+				mDao.commitMission(missionId);
+				mDao.handle(handleInfo);
+				break;
+			}
+				
+			return handleInfo.getId();
+		} catch (Exception e) {
+			SysLogUtils.error(MissionController.class, e, "处理任务失败");
+			return -1;
+		}
 	}
 }

@@ -1,15 +1,22 @@
 package com.workman.mission.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.workman.mission.model.MissionModel;
 import com.workman.mission.persistence.wrapper.MissionWrapper;
 
 public interface MissionMapper {
+	/**
+	 * 我发起的任务的条数
+	 * @param wrapper
+	 * @return
+	 */
 	int getSponCount(MissionWrapper wrapper);
 	List<MissionModel> getSponMissions(MissionWrapper wrapper);
 	
 	int getHanCount (MissionWrapper wrapper);
+	
 	List<MissionModel> getHanMissions(MissionWrapper wrapper);
 	
 	List<MissionModel> getPendingMissions(int handlerId);
@@ -18,7 +25,6 @@ public interface MissionMapper {
 	
 	void create(MissionModel mission);
 	
-	void update(MissionModel mission);
-	
-	void commitMission(int missionId);
+	void commit(Map<String,Object> map);
+	void updateMissionStatu(Map<String,Object> map);
 }

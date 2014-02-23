@@ -50,8 +50,7 @@
 			  	</if>
 	  		</otherwise>
 	  	</choose>
-	  	AND M.SPONSOR_ID = #{handler} OR
-		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handler})
+	  	AND M.SPONSOR_ID = #{handler}
 	  	LIMIT #{start},#{end}
   </select>
   <select id="getPendingMissions" resultType="com.workman.mission.model.MissionModel">
@@ -117,8 +116,7 @@
 			  	</if>
 	  		</otherwise>
 	  	</choose>
-	  	AND M.SPONSOR_ID = #{handler} OR
-		 EXISTS (SELECT 1 FROM MISSION_HANDLE MH WHERE M.ID = MH.MISSIONID AND MH.HANDLER_ID = #{handler})
+	  	AND M.SPONSOR_ID = #{handler}
 	  	LIMIT #{start},#{end}
   </select>
   
@@ -170,7 +168,7 @@
 	  	HANDLER_NAME AS handlerName,
 	  	HANDLER_DEP AS handlerDep
 	  	FROM MISSION M
-	  	WHERE 1=1
+	  	WHERE 1=1 AND M.STATUS > 1
 	  	<choose>
 	  		<when test="missionCode != null">
 	  			ID = #{missionCode}
@@ -210,16 +208,14 @@
    		SELECT LAST_INSERT_ID()
    	</selectKey>
   </insert>
-  <update id="update" parameterType="com.workman.mission.model.MissionModel">
+  <update id="commit" parameterType="java.util.Map">
     UPDATE MISSION SET
-    	<if test="commitTime != null">
-    		COMMITTIME = #{commitTime},
-    	</if>
-    	<if test="handleTime != null">
-    		HANDLETIME = #{handleTime},
-    	</if>
-      STATUS = #{status}
-    WHERE CODE = #{code}
+		COMMITTIME=#{currDt},STATUS = 3
+    WHERE id = #{id}
   </update>
-  
+   <update id="updateMissionStatu" parameterType="java.util.Map">
+    UPDATE MISSION SET
+ 		HANDLETIME=#{currDt},STATUS = 2
+    WHERE id = #{id}
+  </update>
 </mapper>

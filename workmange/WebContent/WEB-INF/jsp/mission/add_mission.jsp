@@ -71,6 +71,7 @@
 	<script type="text/javascript" src="static/js/jquery-1.4.2.js"></script>
 	<jsp:include page="/WEB-INF/jsp/inc/preload.jsp"></jsp:include>
 	<script type="text/javascript" src="static/js/mission/add_mission.js"></script>
+	<script type="text/javascript" src="static/js/mission/weibo.js"></script>
 	<script type="text/javascript">
 		var accessUrl = '${accessUrl}';
 		var currId = '<%=SessionUtils.getUser(request).getId()%>';
