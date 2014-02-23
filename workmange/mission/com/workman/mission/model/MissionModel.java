@@ -2,7 +2,6 @@ package com.workman.mission.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class MissionModel implements Serializable{
 	/**
@@ -74,7 +73,6 @@ public class MissionModel implements Serializable{
 		this.status = status;
 	}
 	
-	private List<MissionHandleModel> handls;
 	
 	public String getType() {
 		return type;
@@ -82,13 +80,6 @@ public class MissionModel implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public List<MissionHandleModel> getHandls() {
-		return handls;
-	}
-	public void setHandls(List<MissionHandleModel> handls) {
-		this.handls = handls;
-	}
-	
 	public int getId() {
 		return id;
 	}
