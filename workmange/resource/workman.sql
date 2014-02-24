@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50512
 File Encoding         : 65001
 
-Date: 2014-02-19 17:21:26
+Date: 2014-02-24 10:40:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,10 +26,6 @@ CREATE TABLE `access_token` (
   PRIMARY KEY (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微博认证信息';
 
--- ----------------------------
--- Records of access_token
--- ----------------------------
-INSERT INTO access_token VALUES ('2045532365', '2.00V6q7OC9hdppDf0be6022e0tVNJpC', '1', '蒼白_2013');
 
 -- ----------------------------
 -- Table structure for `account`
@@ -38,12 +34,12 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `username` varchar(100) NOT NULL COMMENT '登陆账号',
-  `password` varchar(50) NOT NULL COMMENT 'm密码',
+  `password` varchar(50) NOT NULL COMMENT '密码',
   `auth_level` int(1) DEFAULT NULL COMMENT '权限类别',
   `department_code` int(4) DEFAULT NULL COMMENT '部门编号，纯数字',
   `name` varchar(50) NOT NULL COMMENT '员工姓名',
   `phone` char(11) DEFAULT NULL COMMENT '联系电话',
-  `weibo` varchar(50) NOT NULL COMMENT '微博账号',
+  `weibo` varchar(50) DEFAULT NULL COMMENT '微博账号',
   `postion` int(4) DEFAULT NULL COMMENT '职位',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_account_username` (`username`),
@@ -52,13 +48,8 @@ CREATE TABLE `account` (
   KEY `pk_account_pos_code` (`postion`),
   CONSTRAINT `pk_account_dep_code` FOREIGN KEY (`department_code`) REFERENCES `department` (`code`),
   CONSTRAINT `pk_account_pos_code` FOREIGN KEY (`postion`) REFERENCES `position` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='员工账号表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='员工账号表';
 
--- ----------------------------
--- Records of account
--- ----------------------------
-INSERT INTO account VALUES ('1', 'sdf', 'c984aed014aec7623a54f0591da07a85fd4b762d', null, '1002', '测试人员', '18601235215', 'lyw1223@163.com', '1001');
-INSERT INTO account VALUES ('2', 'test002', 'c984aed014aec7623a54f0591da07a85fd4b762d', null, '1002', '测试2', '', 'luochen13@sina.cn', '1002');
 
 -- ----------------------------
 -- Table structure for `auth`
@@ -71,12 +62,6 @@ CREATE TABLE `auth` (
   PRIMARY KEY (`level`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='权限表';
 
--- ----------------------------
--- Records of auth
--- ----------------------------
-INSERT INTO auth VALUES ('1', '超级管理员', '超级管理员，可以访问所有菜单');
-INSERT INTO auth VALUES ('2', '普通管理员', '可以新建任务');
-INSERT INTO auth VALUES ('3', '普通人员', '普通人员');
 
 -- ----------------------------
 -- Table structure for `department`
@@ -91,12 +76,6 @@ CREATE TABLE `department` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门表';
 
 -- ----------------------------
--- Records of department
--- ----------------------------
-INSERT INTO department VALUES ('1001', '人事管理部', '人事管理部');
-INSERT INTO department VALUES ('1002', '财务部', '财务部');
-
--- ----------------------------
 -- Table structure for `handle_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `handle_type`;
@@ -106,40 +85,30 @@ CREATE TABLE `handle_type` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='处理类型表';
 
--- ----------------------------
--- Records of handle_type
--- ----------------------------
-INSERT INTO handle_type VALUES ('1', '回复上一级');
-INSERT INTO handle_type VALUES ('2', '回复下一级');
-INSERT INTO handle_type VALUES ('3', '转发');
-INSERT INTO handle_type VALUES ('4', '完成');
 
 -- ----------------------------
 -- Table structure for `mission`
 -- ----------------------------
 DROP TABLE IF EXISTS `mission`;
 CREATE TABLE `mission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `content` varchar(5000) NOT NULL,
-  `sponsor_id` int(11) NOT NULL COMMENT '������id',
-  `sponsor_name` varchar(50) DEFAULT NULL,
-  `sponsor_dep` varchar(50) DEFAULT NULL,
-  `handler_id` int(11) NOT NULL COMMENT '������id',
-  `handler_name` varchar(50) DEFAULT NULL,
-  `handler_dep` varchar(50) DEFAULT NULL,
-  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '����ʱ��',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '任务id',
+  `title` varchar(50) NOT NULL COMMENT '任务主题',
+  `content` varchar(5000) NOT NULL COMMENT '任务内容',
+  `sponsor_id` int(11) NOT NULL COMMENT '发起人id',
+  `sponsor_name` varchar(50) DEFAULT NULL COMMENT '发起人姓名',
+  `sponsor_dep` varchar(50) DEFAULT NULL COMMENT '发起人部门',
+  `handler_id` int(11) NOT NULL COMMENT '受理人id',
+  `handler_name` varchar(50) DEFAULT NULL COMMENT '受理人姓名',
+  `handler_dep` varchar(50) DEFAULT NULL COMMENT '受理人所在部门',
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `handletime` timestamp NULL DEFAULT NULL COMMENT '受理时间',
   `committime` timestamp NULL DEFAULT NULL COMMENT '完成时间',
   `type` varchar(10) NOT NULL COMMENT '任务紧急程度',
   `status` int(1) DEFAULT NULL COMMENT '任务状态 1：未受理； 2：已受理未完成；3：完成 ',
   `notes` varchar(100) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of mission
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `mission_handle`
@@ -158,6 +127,7 @@ CREATE TABLE `mission_handle` (
   `to_name` varchar(50) DEFAULT NULL COMMENT '处理人姓名',
   `to_dep` varchar(50) DEFAULT NULL COMMENT '处理人部门',
   `handletype` int(11) NOT NULL COMMENT '处理类型',
+  `status` tinyint(4) DEFAULT NULL COMMENT '0为未处理，1为已处理',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务处理表';
 
