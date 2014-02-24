@@ -69,11 +69,13 @@ public class WeiboController {
 				result = "<script>alert('认证失败，登陆微博与用户绑定微博不一致！');window.location.href='../internal/welcome.do';</script>";
 			}else{
 				AccessTokenModel tokenModel = weiboDao.addOrUpdateToken(tok, user,account);
+				//TODO 此处有待更改
 				if(account.getWeibo() == null){
-					account = accountDao.updateAccount(account,tokenModel.getWeiboName());
+					
 				}else if(!account.getWeibo().equals(tokenModel.getWeiboName())){
 					result = "<script>alert('请注意，当前授权账号与历史授权有变动。若要更改授权，请收回当前授权后重新进行授权');window.location.href='../internal/welcome.do';</script>";
 				}
+				account = accountDao.updateAccount(account,tokenModel.getWeiboName());
 				SessionUtils.putAccessToken(req, tokenModel);
 				SessionUtils.putUserInSession(req, account);
 				result = "<script>alert('认证成功！');window.location.href='../internal/welcome.do';</script>";
