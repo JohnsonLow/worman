@@ -44,4 +44,14 @@ public class WeiboDaoImpl implements WeiboDao {
 		return mapper.getByAccountId(accountId);
 	}
 
+	@Override
+	public AccessTokenModel getToken(String wbId) {
+		return mapper.getByWeibId(wbId);
+	}
+
+	@Override
+	public void add(AccessTokenModel token) {
+		mapper.add(token);
+	}
+
 }

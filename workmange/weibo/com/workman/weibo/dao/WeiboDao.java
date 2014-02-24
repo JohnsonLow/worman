@@ -11,5 +11,9 @@ public interface WeiboDao {
 	AccessTokenModel addOrUpdateToken(AccessToken token , User user, AccountModel account);
 	
 	AccessTokenModel getToken(int accountId);
+	
+	AccessTokenModel getToken(String wbId);
+
+	void add(AccessTokenModel token);
 
 }

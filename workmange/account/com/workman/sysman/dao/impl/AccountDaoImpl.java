@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.workman.commons.po.ResponseModel;
+import com.workman.commons.util.PageUtils;
 import com.workman.commons.util.StringUtility;
 import com.workman.sysman.dao.AccountDao;
 import com.workman.sysman.model.AccountModel;
 import com.workman.sysman.persistence.AccountMapper;
 import com.workman.sysman.persistence.wrapper.AccountWrapper;
-import com.workman.sysman.util.PageUtils;
 
 @Service
 public class AccountDaoImpl implements AccountDao {
@@ -100,6 +100,13 @@ public class AccountDaoImpl implements AccountDao {
 		wrapper.setDepCode(depCode);
 		wrapper.setCurrId(currId);
 		return mapper.getByDep(wrapper);
+	}
+
+	@Override
+	public AccountModel updateAccount(AccountModel account, String weiboName) {
+		account.setWeibo(weiboName);
+		mapper.updateWeibo(account);
+		return account;
 	}
 
 }

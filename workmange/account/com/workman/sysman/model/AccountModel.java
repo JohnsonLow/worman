@@ -43,6 +43,9 @@ public class AccountModel implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	/**
+	 * 此字段暂为保留字段
+	 */
 	private String weibo;
 	public String getPassword() {
 		return password;

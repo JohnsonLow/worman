@@ -16,6 +16,16 @@
 	    WHERE ACCOUNT_ID = #{accountId}
   </select>
   
+  <select id="getByWeibId" parameterType="string" resultType="com.workman.weibo.model.AccessTokenModel">
+	    SELECT
+	      UID,
+	      TOKEN,
+	      ACCOUNT_ID AS accountId,
+	      WEIBO_NAME as weiboName
+	    FROM ACCESS_TOKEN
+	    WHERE UID = #{wbId}
+  </select>
+  
    <insert id="add" parameterType="com.workman.weibo.model.AccessTokenModel">
     INSERT INTO ACCESS_TOKEN
       (UID,TOKEN, ACCOUNT_ID,WEIBO_NAME)

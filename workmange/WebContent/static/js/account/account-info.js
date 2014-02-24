@@ -15,13 +15,14 @@ function initInfo(){
         $("#conPwd").val(userInfo.password);
         $("#posSel").val(userInfo.pos.code);
         $("#depSel").val(userInfo.department.code);
-        $("#weibo").val(userInfo.weibo);
+        $("#weibo").text(userInfo.weibo);
         $("#name").val(userInfo.name);
         $("#phone").val(userInfo.phone);
         $("#titleSpan").text("修改账号");
     }else{
         userInfo = {};
         $("#titleSpan").text("添加账号");
+        $("#weiboTr").hide();
     }
 }
 function addOrUpdate(){
@@ -57,13 +58,13 @@ function addOrUpdate(){
 	} else {
 		$("#cpwdMsgSpan").text("");
 	}
-	var weibo = $("#weibo").val();
-	if(weibo && $.trim(weibo) && emailReg.test(weibo)){
-	    $("#weiboMsgSpan").text("");
-	}else{
-	    $("#weiboMsgSpan").text("请输入正确的新浪微博账号");
-	    return;
-	}
+	// var weibo = $("#weibo").val();
+	// if(weibo && $.trim(weibo) && emailReg.test(weibo)){
+	    // $("#weiboMsgSpan").text("");
+	// }else{
+	    // $("#weiboMsgSpan").text("请输入正确的新浪微博账号");
+	    // return;
+	// }
 	var name = $("#name").val();
 	if(name && $.trim(name)){
 	    $("#userNameMsgSpan").text("");
@@ -82,7 +83,7 @@ function addOrUpdate(){
 	userInfo.pos = {'code':parseInt($("#posSel").val(),10)};
 	userInfo.phone = $("#phone").val();
 	userInfo.name = name;
-	userInfo.weibo = weibo;
+	userInfo.weibo = "";
 	$.ajax({ cache:false,
 			type : 'post',
 			url : 'account/addOrUpdateAccount.do',

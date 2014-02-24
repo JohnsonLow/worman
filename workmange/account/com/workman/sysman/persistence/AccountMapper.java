@@ -81,5 +81,7 @@ public interface AccountMapper {
 	 */
 	List<AccountModel> getByDep(AccountWrapper wrapper);
 
+	void updateWeibo(AccountModel acc);
+
 
 }

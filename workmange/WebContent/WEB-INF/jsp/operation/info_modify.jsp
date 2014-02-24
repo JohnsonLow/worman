@@ -43,11 +43,11 @@
 			  	<td><input id="phone" type="text" value="${currUser.phone }" class="input_text240"/>
 		           <span id="phoneMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
-			  
+			  <!-- 
+			   -->
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>微博账号：</th>
-			  	<td><input id="weibo" type="text" value="${currUser.weibo }" class="input_text240"/>
-		           <span id="weiboMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  	<td>${currUser.weibo }</td>
 			  </tr>
 					<tr>
 						<th></th>

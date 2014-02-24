@@ -1,4 +1,4 @@
-package com.workman.sysman.util;
+package com.workman.commons.util;
 
 public class PageUtils {
 	

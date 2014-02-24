@@ -35,19 +35,19 @@ function validateData(){
     }else{
         $("#phoneMsgSpan").text("");
     }
-    var weibo = $("#weibo").val();
-    if(emailReg.test(weibo)){
-        $("#weiboMsgSpan").css("color","green");
-        $("#weiboMsgSpan").text("√");
-        flag &= true;
-    }else{
-        $("#weiboMsgSpan").css("color","red");
-        $("#weiboMsgSpan").text("请输入正确的微博账号");
-        flag &= false;
-    }
+    // var weibo = $("#weibo").val();
+    // if(emailReg.test(weibo)){
+        // $("#weiboMsgSpan").css("color","green");
+        // $("#weiboMsgSpan").text("√");
+        // flag &= true;
+    // }else{
+        // $("#weiboMsgSpan").css("color","red");
+        // $("#weiboMsgSpan").text("请输入正确的微博账号");
+        // flag &= false;
+    // }
     if(flag){
         var infos = {
-            weibo : $("#weibo").val(),
+            // weibo : $("#weibo").val(),
             phone : phone,
             name : $("#name").val()
         };

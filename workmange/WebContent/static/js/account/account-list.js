@@ -52,8 +52,7 @@ function getInfo(page){
                                     '<td>'+pos+'</td>'+
                                     '<td>'+user.phone+'</td>'+
                                     '<td>'+user.weibo+'</td>'+
-                                    '<td>'+
-                                        '<span><a href="'+editUrl+'">编辑</a></span><span style="margin:0 10px; cursor:auto;">/</span>'+
+                                    '<td><span><a href="'+editUrl+'">编辑</a></span><span style="margin:0 10px; cursor:auto;">/</span>'+
                                         '<span><a href="javascript:;" onclick="delUser(\''+user.id+'\')">删除</a></span>'+
                                         '<span style="width:65px; height:10px;"></span>'+
                                     '</td></tr>';

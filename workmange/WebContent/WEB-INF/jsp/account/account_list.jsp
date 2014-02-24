@@ -65,7 +65,7 @@
            		<table id="userList" width="100%" border="0" cellpadding="0"cellspacing="1" bgcolor="#CCCCCC" class="frame_table">
            			<thead>
            				<tr>
-           					<th>账号</th><th>姓名</th><th>所在部门</th><th>职位类别</th><th>联系电话</th><th>微博账号</th><th>管理</th>
+           					<th>账号</th><th>姓名</th><th>所在部门</th><th>职位类别</th><th>联系电话</th><th>新浪微博</th><th>管理</th>
            				</tr>
            			</thead>
            			<tbody>

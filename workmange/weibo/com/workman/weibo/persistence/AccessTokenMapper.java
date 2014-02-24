@@ -17,4 +17,6 @@ public interface AccessTokenMapper {
 	 * @return
 	 */
 	AccessTokenModel getByAccountId(Integer accountId);
+
+	AccessTokenModel getByWeibId(String wbId);
 }

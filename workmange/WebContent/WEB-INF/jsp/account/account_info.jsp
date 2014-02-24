@@ -63,10 +63,9 @@
 			  	</select>
 		           <span id="authLevelNameMsgSpan" style="margin-left:5px; color:red;"></span></td>
 			  </tr>
-			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>新浪微博账号：</th>
-			  	<td><input id="weibo" type="text" value="" class="input_text240"/>
-		           <span id="weiboMsgSpan" style="margin-left:5px; color:red;"></span></td>
+			  <tr id="weiboTr">
+			  	<th width="25%">新浪微博：</th>
+			  	<td id="weibo"></td>
 			  </tr>
 			  <tr>
 			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>姓名：</th>

@@ -137,15 +137,13 @@
 	</select>
 	<insert id="insert" parameterType="com.workman.sysman.model.AccountModel">
 		INSERT INTO ACCOUNT
-		(USERNAME,NAME, PASSWORD,POSTION,DEPARTMENT_CODE,PHONE,WEIBO)VALUES(
-		#{userName},#{name},#{password},#{pos.code},#{department.code},#{phone},#{weibo}
-		)
+		(USERNAME,NAME, PASSWORD,POSTION,DEPARTMENT_CODE,PHONE)VALUES(
+		#{userName},#{name},#{password},#{pos.code},#{department.code},#{phone})
 	</insert>
 	<update id="update" parameterType="com.workman.sysman.model.AccountModel">
 		UPDATE ACCOUNT SET
 		NAME = #{name},
 		PHONE = #{phone},
-		WEIBO = #{weibo},
 		PASSWORD = #{password},
 		POSTION = #{pos.code},
 		DEPARTMENT_CODE = #{department.code}
@@ -153,6 +151,10 @@
 	</update>
 	<update id="updatePwd" parameterType="map">
 		UPDATE ACCOUNT SET PASSWORD=#{password}
+		WHERE ID=#{id}
+	</update>
+	<update id="updateWeibo" parameterType="com.workman.sysman.model.AccountModel">
+		UPDATE ACCOUNT SET WEIBO=#{weibo}
 		WHERE ID=#{id}
 	</update>
 	<delete id="delete" parameterType="int">

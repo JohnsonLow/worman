@@ -81,4 +81,11 @@ public interface AccountDao {
 	 * @return 账号列表
 	 */
 	List<AccountModel> getAccountByDep(Integer depCode,int currId);
+	
+	/**
+	 * 更新该用户的微博
+	 * @param account
+	 * @param weiboName
+	 */
+	AccountModel updateAccount(AccountModel account, String weiboName);
 }

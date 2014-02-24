@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.workman.commons.util.StringUtility;
 import com.workman.commons.util.SysLogUtils;
 import com.workman.commons.util.WeiboUtils;
 import com.workman.mission.dao.MissionDao;
@@ -32,7 +33,7 @@ import weibo4j.model.User;
 import weibo4j.model.WeiboException;
 
 /**
- * 
+ * 处理与微博相关的操作
  * @author lyw
  *
  */
@@ -68,7 +69,13 @@ public class WeiboController {
 				result = "<script>alert('认证失败，登陆微博与用户绑定微博不一致！');window.location.href='../internal/welcome.do';</script>";
 			}else{
 				AccessTokenModel tokenModel = weiboDao.addOrUpdateToken(tok, user,account);
+				if(account.getWeibo() == null){
+					account = accountDao.updateAccount(account,tokenModel.getWeiboName());
+				}else if(!account.getWeibo().equals(tokenModel.getWeiboName())){
+					result = "<script>alert('请注意，当前授权账号与历史授权有变动。若要更改授权，请收回当前授权后重新进行授权');window.location.href='../internal/welcome.do';</script>";
+				}
 				SessionUtils.putAccessToken(req, tokenModel);
+				SessionUtils.putUserInSession(req, account);
 				result = "<script>alert('认证成功！');window.location.href='../internal/welcome.do';</script>";
 			}
 		} catch (WeiboException e) {
@@ -106,6 +113,78 @@ public class WeiboController {
 				return -2;
 			}
 		}
+	}
+	/**
+	 * 验证手机客户端是否已绑定站内用户
+	 * @param id 微博id
+	 * @param weiboName 微博名称
+	 * @return
+	 */
+	@RequestMapping("sysClient.do")
+	@ResponseBody
+	public Integer sysClient(@RequestParam(required=false)String id,
+			@RequestParam(required=false)String weiboName){
+		int result = 0;
+		if(StringUtility.isNotBlank(weiboName)){
+			AccountModel account = accountDao.getAccount(weiboName, 2);
+			if(account != null){
+				result =  account.getId();
+			}else{
+				result = -1;
+			}
+		}else if(StringUtility.isNotBlank(id)){
+			AccessTokenModel token = weiboDao.getToken(id);
+			if(token != null){
+				result =  token.getAccountId();
+			}else{
+				result = -1;
+			}
+		}else{
+			result =  -400;
+		}
+		return result;
+	}
+	/**
+	 * 绑定站内用户
+	 * @param userName 用户名
+	 * @param password 密码
+	 * @param uid 微博id
+	 * @param weiboName 微博名称
+	 * @return 绑定用户id 
+	 *  返回-1 不存在的用户 返回-2 密码错误 返回-3 已绑定微博 -4操作异常
+	 */
+	@RequestMapping("bindAccount.do")
+	@ResponseBody
+	public Integer bindAccount(String userName,String password,
+			String uid,String weiboName){
+		int result = 0;
+		try {
+			AccountModel account = accountDao.getAccount(userName, 1);
+			if(account != null){
+				if(account.getPassword().equals(password)){
+					account = accountDao.updateAccount(account, weiboName);
+					AccessTokenModel token = weiboDao.getToken(account.getId());
+					if(token != null){
+						result = -3;
+					}else{
+						token = new AccessTokenModel();
+						token.setAccountId(account.getId());
+						token.setUid(uid);
+						token.setWeiboName(weiboName);
+						weiboDao.add(token);
+						result = account.getId();
+					}
+				}else{
+					result = -2;
+				}
+			}else{
+				result = -1;
+			}
+		} catch (Exception e) {
+			SysLogUtils.error(WeiboController.class, e, "操作异常");
+			result = -4;
+		}
+		return result;
 	}
 	
 	@RequestMapping("goAccessPage.do")
