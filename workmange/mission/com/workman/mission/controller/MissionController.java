@@ -63,6 +63,8 @@ public class MissionController {
 			List<MissionHandleModel> handleInfo = mDao.getMissionHandles(id);
 			if(handleInfo != null && handleInfo.size()>0){
 				result.put("handleInfo",ObjectToMapUtils.listToMap(handleInfo));
+			}else{
+				result.put("handleInfo","{}");
 			}
 		} catch (Exception e) {
 			SysLogUtils.error(MissionController.class, e, "查询任务信息出错");
