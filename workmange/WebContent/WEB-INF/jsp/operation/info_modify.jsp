@@ -46,8 +46,12 @@
 			  <!-- 
 			   -->
 			  <tr>
-			  	<th width="25%"><img align="absmiddle" src="static/images/news/icon_xing.gif"/>微博账号：</th>
-			  	<td>${currUser.weibo }</td>
+			  	<th width="25%">微博账号：</th>
+			  	<td>
+			  	<c:choose>
+		  			${currUser.weibo}
+			  	</c:choose>
+			  	</td>
 			  </tr>
 					<tr>
 						<th></th>

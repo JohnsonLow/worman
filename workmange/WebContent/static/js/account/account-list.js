@@ -45,13 +45,17 @@ function getInfo(page){
                         if(user.department){
                             dep = user.department.name;
                         }
+                        var weibo = user.weibo;
+                        if(!weibo){
+                            weibo = '';
+                        }
                         var res = '<tr>'+
                                     '<td>'+user.userName+'</td>'+
                                     '<td>'+user.name+'&nbsp;</td>'+
                                     '<td>'+dep+'</td>'+
                                     '<td>'+pos+'</td>'+
                                     '<td>'+user.phone+'</td>'+
-                                    '<td>'+user.weibo+'</td>'+
+                                    '<td>'+weibo+'</td>'+
                                     '<td><span><a href="'+editUrl+'">编辑</a></span><span style="margin:0 10px; cursor:auto;">/</span>'+
                                         '<span><a href="javascript:;" onclick="delUser(\''+user.id+'\')">删除</a></span>'+
                                         '<span style="width:65px; height:10px;"></span>'+
