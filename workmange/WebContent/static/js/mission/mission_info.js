@@ -40,6 +40,11 @@ $(function() {
         }
         handleMission();
     });
+    $("#sendWbBtn").find("a").click(function(){
+        var url = contextPath + '/mission/goMissionInfoPage.do?id=' + currId;
+        sendWeiboInfo(currId,missionId,handlerId,url);
+    });
+    
 });
 function handleMission(){
     var handleType = $("input[name='handType']:checked").val();
