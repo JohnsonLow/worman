@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50512
 File Encoding         : 65001
 
-Date: 2014-02-24 10:40:48
+Date: 2014-03-18 18:16:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,8 @@ CREATE TABLE `access_token` (
   `token` varchar(100) NOT NULL COMMENT '授权token',
   `account_id` int(8) NOT NULL COMMENT '站内账号ID',
   `weibo_name` varchar(50) NOT NULL COMMENT '微博账号',
-  PRIMARY KEY (`account_id`)
+  PRIMARY KEY (`account_id`),
+  UNIQUE KEY `uk_acc_tok_uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微博认证信息';
 
 
@@ -75,6 +76,7 @@ CREATE TABLE `department` (
   UNIQUE KEY `uk_dep_code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门表';
 
+
 -- ----------------------------
 -- Table structure for `handle_type`
 -- ----------------------------
@@ -107,7 +109,7 @@ CREATE TABLE `mission` (
   `status` int(1) DEFAULT NULL COMMENT '任务状态 1：未受理； 2：已受理未完成；3：完成 ',
   `notes` varchar(100) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -129,11 +131,8 @@ CREATE TABLE `mission_handle` (
   `handletype` int(11) NOT NULL COMMENT '处理类型',
   `status` tinyint(4) DEFAULT NULL COMMENT '0为未处理，1为已处理',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务处理表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='任务处理表';
 
--- ----------------------------
--- Records of mission_handle
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `position`
@@ -147,11 +146,6 @@ CREATE TABLE `position` (
   UNIQUE KEY `uk_pos_code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='职位表';
 
--- ----------------------------
--- Records of position
--- ----------------------------
-INSERT INTO position VALUES ('1001', '部门经理', '部门经理');
-INSERT INTO position VALUES ('1002', '普通员工', '普通员工');
 
 -- ----------------------------
 -- Table structure for `weiboinfo`

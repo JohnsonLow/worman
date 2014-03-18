@@ -132,14 +132,14 @@ public class WeiboController {
 			if(account != null){
 				result =  account.getId();
 			}else{
-				result = -1;
+				result = -4;
 			}
 		}else if(StringUtility.isNotBlank(id)){
 			AccessTokenModel token = weiboDao.getToken(id);
 			if(token != null){
 				result =  token.getAccountId();
 			}else{
-				result = -1;
+				result = -4;
 			}
 		}else{
 			result =  -400;
